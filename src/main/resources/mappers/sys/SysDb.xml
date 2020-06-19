@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.guodu.mapper.sys.SysDbMapper">
+    <resultMap id="entityMap" type="com.guodu.pojo.sys.SysDb">
+        <result column="KEYCODE" jdbcType="VARCHAR" property="keycode"/>
+        <result column="KEYVALUE" jdbcType="VARCHAR" property="keyvalue"/>
+        <result column="KEYMEMO" jdbcType="VARCHAR" property="keymemo"/>
+    </resultMap>
+    <sql id="sqlColumn">
+        KEYCODE,
+        KEYVALUE,
+        KEYMEMO
+    </sql>
+    <sql id="variableSql">
+        #{keycode, jdbcType=VARCHAR},
+        #{keyvalue, jdbcType=VARCHAR},
+        #{keymemo, jdbcType=VARCHAR}
+    </sql>
+
+    <select id="selectList" parameterType="java.util.Map" resultMap="entityMap">
+        select keycode,keyvalue,keymemo from sys_db where keycode=#{keycode} order by keyvalue
+    </select>
+
+</mapper>

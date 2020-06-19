@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.guodu.mapper.ftu.FtuBzHbdyMapper">
+    <resultMap id="entityMap" type="com.guodu.pojo.ftu.FtuBzHbdy">
+        <id column="ID" jdbcType="VARCHAR" property="id"/>
+        <result column="SSQY" jdbcType="VARCHAR" property="ssqy"/>
+        <result column="JCNR" jdbcType="VARCHAR" property="jcnr"/>
+    </resultMap>
+    <sql id="sqlColumn">
+        ID,
+        SSQY,
+        JCNR
+    </sql>
+    <sql id="variableSql">
+        #{id, jdbcType=VARCHAR},
+        #{ssqy, jdbcType=VARCHAR},
+        #{jcnr, jdbcType=VARCHAR}
+    </sql>
+
+    <insert id="insert" parameterType="com.guodu.pojo.ftu.FtuBzHbdy">
+        insert into ftu_bz_hbdy (
+        <include refid="sqlColumn"/>
+        ) values (
+        <include refid="variableSql"/>
+        )
+    </insert>
+
+    <update id="update" parameterType="com.guodu.pojo.ftu.FtuBzHbdy">
+        update ftu_bz_hbdy set id=#{id}
+        <if test="ssqy!=null and ssqy!=''">, SSQY=#{ssqy, jdbcType=VARCHAR}</if>
+        where id=#{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.String">
+        delete from ftu_bz_hbdy where 1=1
+        <if test="id != -1">and ID=#{id}</if>
+    </delete>
+
+    <select id="selectById" parameterType="java.lang.String" resultMap="entityMap">
+        select * from ftu_bz_hbdy where id = #{id}
+    </select>
+
+    <select id="selectList" resultMap="entityMap" parameterType="java.util.Map">
+        select
+        <include refid="sqlColumn"/>
+        from ftu_bz_hbdy
+        where 1=1
+        <if test="id!=null and id!=''">and ID=#{id, jdbcType=VARCHAR}</if>
+        <if test="ssqy!=null and ssqy!=''">and SSQY=#{ssqy, jdbcType=VARCHAR}</if>
+    </select>
+
+    <resultMap id="BaseResultMap" type="com.guodu.pojo.ftu.FtuBzHbdy">
+        <!--@mbg.generated-->
+        <!--@Table ftu_bz_hbdy-->
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="ssqy" jdbcType="VARCHAR" property="ssqy"/>
+        <result column="jcnr" jdbcType="VARCHAR" property="jcnr"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, ssqy, jcnr
+    </sql>
+    <insert id="insert2" parameterType="com.guodu.pojo.ftu.FtuBzHbdy">
+        <!--@mbg.generated-->
+        insert into ftu_bz_hbdy (id, ssqy, jcnr
+        )
+        values (#{id,jdbcType=VARCHAR}, #{ssqy,jdbcType=VARCHAR}, #{jcnr,jdbcType=VARCHAR}
+        )
+    </insert>
+    <select id="selectByAll" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from ftu_bz_hbdy
+        <where>
+            <if test="id != null and id != ''">
+                and id=#{id,jdbcType=VARCHAR}
+            </if>
+            <if test="ssqy != null and ssqy != ''">
+                and ssqy=#{ssqy,jdbcType=VARCHAR}
+            </if>
+            <if test="jcnr != null and jcnr != ''">
+                and jcnr=#{jcnr,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+</mapper>

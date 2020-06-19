@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.guodu.mapper.dtu.JbxxMapper">
+	<resultMap id="entityMap" type="com.guodu.pojo.dtu.Jbxx">
+		<result property="tsid" column="TSID" jdbcType="VARCHAR"/>
+		<result property="ssqy" column="SSQY" jdbcType="VARCHAR"/>
+		<result property="tssj" column="TSSJ" jdbcType="TIMESTAMP"/>
+		<result property="azddDdh" column="AZDD_DDH" jdbcType="VARCHAR"/>
+		<result property="zdmc" column="ZDMC" jdbcType="VARCHAR"/>
+		<result property="ssxl" column="SSXL" jdbcType="VARCHAR"/>
+		<result property="txmkcj" column="TXMKCJ" jdbcType="VARCHAR"/>
+		<result property="ipdz" column="IPDZ" jdbcType="VARCHAR"/>
+		<result property="wlwkh" column="WLWKH" jdbcType="VARCHAR"/>
+		<result property="rtudz" column="RTUDZ" jdbcType="VARCHAR"/>
+		<result property="dkh" column="DKH" jdbcType="VARCHAR"/>
+		<result property="sccs" column="SCCS" jdbcType="VARCHAR"/>
+		<result property="scrq" column="SCRQ" jdbcType="TIMESTAMP"/>
+		<result property="zzxh" column="ZZXH" jdbcType="VARCHAR"/>
+		<result property="zzbh" column="ZZBH" jdbcType="VARCHAR"/>
+		<result property="zzlx" column="ZZLX" jdbcType="VARCHAR"/>
+		<result property="rjbbJym" column="RJBB_JYM" jdbcType="VARCHAR"/>
+		<result property="yjbb" column="YJBB" jdbcType="VARCHAR"/>
+		<result property="sccsYcg" column="SCCS_YCG" jdbcType="VARCHAR"/>
+		<result property="zbxhYcg" column="ZBXH_YCG" jdbcType="VARCHAR"/>
+		<result property="tsryxmYcg" column="TSRYXM_YCG" jdbcType="VARCHAR"/>
+		<result property="sccsYs" column="SCCS_YS" jdbcType="VARCHAR"/>
+		<result property="zbxhYs" column="ZBXH_YS" jdbcType="VARCHAR"/>
+		<result property="tsryxmYs" column="TSRYXM_YS" jdbcType="VARCHAR"/>
+		<result property="sccsXf" column="SCCS_XF" jdbcType="VARCHAR"/>
+		<result property="zbxhXf" column="ZBXH_XF" jdbcType="VARCHAR"/>
+		<result property="tsryxmXf" column="TSRYXM_XF" jdbcType="VARCHAR"/>
+		<result property="jd" column="JD" jdbcType="VARCHAR"/>
+		<result property="wd" column="WD" jdbcType="VARCHAR"/>
+		<result property="xxwz" column="XXWZ" jdbcType="VARCHAR"/>
+		<result property="tsryxm" column="TSRYXM" jdbcType="VARCHAR"/>
+		<result property="czr" column="CZR" jdbcType="VARCHAR"/>
+		<result property="czsj" column="CZSJ" jdbcType="TIMESTAMP"/>
+		<result property="beizhu" column="BEIZHU" jdbcType="VARCHAR"/>
+		<result property="upload" column="UPLOAD" jdbcType="VARCHAR"/>
+	</resultMap>
+
+	<sql id="sqlColumn">
+		TSID,
+		SSQY,
+		TSSJ,
+		AZDD_DDH,
+		ZDMC,
+		SSXL,
+		TXMKCJ,
+		IPDZ,
+		WLWKH,
+		RTUDZ,
+		DKH,
+		SCCS,
+		SCRQ,
+		ZZXH,
+		ZZBH,
+		ZZLX,
+		RJBB_JYM,
+		YJBB,
+		SCCS_YCG,
+		ZBXH_YCG,
+		TSRYXM_YCG,
+		SCCS_YS,
+		ZBXH_YS,
+		TSRYXM_YS,
+		SCCS_XF,
+		ZBXH_XF,
+		TSRYXM_XF,
+		JD,
+		WD,
+		XXWZ,
+		TSRYXM,
+		CZR,
+		CZSJ,
+		BEIZHU,
+		UPLOAD
+	</sql>
+
+	<sql id="variableSql">
+		#{tsid, jdbcType=VARCHAR},
+		#{ssqy, jdbcType=VARCHAR},
+		str_to_date(#{tssj},'%Y-%m-%d'),
+		#{azddDdh, jdbcType=VARCHAR},
+		#{zdmc, jdbcType=VARCHAR},
+		#{ssxl, jdbcType=VARCHAR},
+		#{txmkcj, jdbcType=VARCHAR},
+		#{ipdz, jdbcType=VARCHAR},
+		#{wlwkh, jdbcType=VARCHAR},
+		#{rtudz, jdbcType=VARCHAR},
+		#{dkh, jdbcType=VARCHAR},
+		#{sccs, jdbcType=VARCHAR},
+		str_to_date(#{scrq},'%Y-%m-%d'),
+		#{zzxh, jdbcType=VARCHAR},
+		#{zzbh, jdbcType=VARCHAR},
+		#{zzlx, jdbcType=VARCHAR},
+		#{rjbbJym, jdbcType=VARCHAR},
+		#{yjbb, jdbcType=VARCHAR},
+		#{sccsYcg, jdbcType=VARCHAR},
+		#{zbxhYcg, jdbcType=VARCHAR},
+		#{tsryxmYcg, jdbcType=VARCHAR},
+		#{sccsYs, jdbcType=VARCHAR},
+		#{zbxhYs, jdbcType=VARCHAR},
+		#{tsryxmYs, jdbcType=VARCHAR},
+		#{sccsXf, jdbcType=VARCHAR},
+		#{zbxhXf, jdbcType=VARCHAR},
+		#{tsryxmXf, jdbcType=VARCHAR},
+		#{jd, jdbcType=VARCHAR},
+		#{wd, jdbcType=VARCHAR},
+		#{xxwz, jdbcType=VARCHAR},
+		#{tsryxm, jdbcType=VARCHAR},
+		#{czr, jdbcType=VARCHAR},
+		#{czsj, jdbcType=TIMESTAMP},
+		#{beizhu, jdbcType=VARCHAR},
+		#{upload, jdbcType=VARCHAR}
+	</sql>
+
+	<insert id="insert" parameterType="com.guodu.pojo.dtu.Jbxx" >
+		insert into jbxx ( <include refid="sqlColumn" /> ) values ( <include refid="variableSql" /> )
+	</insert>
+
+	<select id="selectById" parameterType="java.lang.String" resultMap="entityMap">
+		select * from jbxx where tsid = #{tsid}
+	</select>
+
+	<select id="selectList" resultMap="entityMap" parameterType="java.util.Map">
+		select
+			<include refid="sqlColumn" />
+		from jbxx
+		where 1=1
+		<if test="tsid!=null and tsid!=''"> and TSID=#{tsid, jdbcType=VARCHAR}</if>
+		<if test="ssqy!=null and ssqy!=''"> and SSQY=#{ssqy, jdbcType=VARCHAR}</if>
+		<if test="tssj!=null and tssj!=''"> and TSSJ=#{tssj, jdbcType=TIMESTAMP}</if>
+		<if test="azddDdh!=null and azddDdh!=''"> and AZDD_DDH=#{azddDdh, jdbcType=VARCHAR}</if>
+		<if test="ipdz!=null and ipdz!=''"> and IPDZ=#{ipdz, jdbcType=VARCHAR}</if>
+		<if test="wlwkh!=null and wlwkh!=''"> and WLWKH=#{wlwkh, jdbcType=VARCHAR}</if>
+		<if test="rtudz!=null and rtudz!=''"> and RTUDZ=#{rtudz, jdbcType=VARCHAR}</if>
+		<if test="dkh!=null and dkh!=''"> and DKH=#{dkh, jdbcType=VARCHAR}</if>
+		<if test="sccs!=null and sccs!=''"> and SCCS=#{sccs, jdbcType=VARCHAR}</if>
+		<if test="scrq!=null and scrq!=''"> and SCRQ=#{scrq, jdbcType=TIMESTAMP}</if>
+		<if test="zzxh!=null and zzxh!=''"> and ZZXH=#{zzxh, jdbcType=VARCHAR}</if>
+		<if test="zzbh!=null and zzbh!=''"> and ZZBH=#{zzbh, jdbcType=VARCHAR}</if>
+		<if test="zzlx!=null and zzlx!=''"> and ZZLX=#{zzlx, jdbcType=VARCHAR}</if>
+		<if test="rjbbJym!=null and rjbbJym!=''"> and RJBB_JYM=#{rjbbJym, jdbcType=VARCHAR}</if>
+		<if test="yjbb!=null and yjbb!=''"> and YJBB=#{yjbb, jdbcType=VARCHAR}</if>
+		<if test="tsryxm!=null and tsid!=''"> and TSRYXM=#{tsryxm, jdbcType=VARCHAR}</if>
+		<if test="czr!=null and czr!=''"> and CZR=#{czr, jdbcType=VARCHAR}</if>
+		<if test="czsj!=null and czsj!=''"> and CZSJ=#{czsj, jdbcType=TIMESTAMP}</if>
+		<if test="beizhu!=null and beizhu!=''"> and BEIZHU=#{beizhu, jdbcType=VARCHAR}</if>
+	</select>
+
+	<update id="update" parameterType="com.guodu.pojo.dtu.Jbxx">
+		update jbxx set tsid=#{tsid}
+		<if test="ssqy!=null and ssqy!=''"> , SSQY=#{ssqy, jdbcType=VARCHAR}</if>
+		<if test="tssj!=null"> , TSSJ = str_to_date(#{tssj},'%Y-%m-%d')</if>
+		<if test="azddDdh!=null and azddDdh!=''"> , AZDD_DDH=#{azddDdh, jdbcType=VARCHAR}</if>
+		<if test="zdmc!=null and zdmc!=''"> , ZDMC=#{zdmc, jdbcType=VARCHAR}</if>
+		<if test="ssxl!=null and ssxl!=''"> , SSXL=#{ssxl, jdbcType=VARCHAR}</if>
+		<if test="txmkcj!=null and txmkcj!=''"> , TXMKCJ=#{txmkcj, jdbcType=VARCHAR}</if>
+		<if test="ipdz!=null and ipdz!=''"> , IPDZ=#{ipdz, jdbcType=VARCHAR}</if>
+		<if test="wlwkh!=null and wlwkh!=''"> , WLWKH=#{wlwkh, jdbcType=VARCHAR}</if>
+		<if test="rtudz!=null and rtudz!=''"> , RTUDZ=#{rtudz, jdbcType=VARCHAR}</if>
+		<if test="dkh!=null and dkh!=''"> , DKH=#{dkh, jdbcType=VARCHAR}</if>
+		<if test="sccs!=null and sccs!=''"> , SCCS=#{sccs, jdbcType=VARCHAR}</if>
+		<if test="scrq!=null"> ,SCRQ=str_to_date(#{scrq},'%Y-%m-%d')</if>
+		<if test="zzxh!=null and zzxh!=''"> , ZZXH=#{zzxh, jdbcType=VARCHAR}</if>
+		<if test="zzbh!=null and zzbh!=''"> , ZZBH=#{zzbh, jdbcType=VARCHAR}</if>
+		<if test="zzlx!=null and zzlx!=''"> , ZZLX=#{zzlx, jdbcType=VARCHAR}</if>
+		<if test="rjbbJym!=null and rjbbJym!=''"> , RJBB_JYM=#{rjbbJym, jdbcType=VARCHAR}</if>
+		<if test="yjbb!=null and yjbb!=''"> , YJBB=#{yjbb, jdbcType=VARCHAR}</if>
+		<if test="sccsYcg!=null and sccsYcg!=''"> , SCCS_YCG=#{sccsYcg, jdbcType=VARCHAR}</if>
+		<if test="zbxhYcg!=null and zbxhYcg!=''"> , ZBXH_YCG=#{zbxhYcg, jdbcType=VARCHAR}</if>
+		<if test="tsryxmYcg!=null and tsryxmYcg!=''"> , TSRYXM_YCG=#{tsryxmYcg, jdbcType=VARCHAR}</if>
+		<if test="sccsYs!=null and sccsYs!=''"> , SCCS_YS=#{sccsYs, jdbcType=VARCHAR}</if>
+		<if test="zbxhYs!=null and zbxhYs!=''"> , ZBXH_YS=#{zbxhYs, jdbcType=VARCHAR}</if>
+		<if test="tsryxmYs!=null and tsryxmYs!=''"> , TSRYXM_YS=#{tsryxmYs, jdbcType=VARCHAR}</if>
+		<if test="sccsXf!=null and sccsXf!=''"> , SCCS_XF=#{sccsXf, jdbcType=VARCHAR}</if>
+		<if test="zbxhXf!=null and zbxhXf!=''"> , ZBXH_XF=#{zbxhXf, jdbcType=VARCHAR}</if>
+		<if test="tsryxmXf!=null and tsryxmXf!=''"> , TSRYXM_XF=#{tsryxmXf, jdbcType=VARCHAR}</if>
+		<if test="jd!=null and jd!=''"> , JD=#{jd, jdbcType=VARCHAR}</if>
+		<if test="wd!=null and wd!=''"> , WD=#{wd, jdbcType=VARCHAR}</if>
+		<if test="xxwz!=null and xxwz!=''"> , XXWZ=#{xxwz, jdbcType=VARCHAR}</if>
+		<if test="tsryxm!=null and tsid!=''"> , TSRYXM=#{tsryxm, jdbcType=VARCHAR}</if>
+		<if test="czr!=null and czr!=''"> , CZR=#{czr, jdbcType=VARCHAR}</if>
+		<if test="czsj!=null"> , CZSJ=#{czsj, jdbcType=TIMESTAMP	}</if>
+		<if test="beizhu!=null and beizhu!=''"> , BEIZHU=#{beizhu, jdbcType=VARCHAR}</if>
+		where  tsid=#{tsid}
+	</update>
+
+	<delete id="delete" parameterType="java.lang.String">
+		delete from jbxx where TSID = #{id}
+	</delete>
+
+	<select id="selectPage" resultType="java.util.Map" parameterType="java.util.Map">
+		select
+			j.TSID,
+			j.SSQY,
+			j.TSSJ,
+			j.AZDD_DDH,
+			j.ZZXH,
+			j.SCCS,
+			j.SSXL,
+			case
+			when
+			j.ZZLX='1' THEN '开闭站'
+			when j.ZZLX='2' THEN '开闭器'
+			when j.ZZLX='3' THEN '分界室'
+			when j.ZZLX='4' THEN '箱变'
+			when j.ZZLX='5' THEN '配电室'
+			ELSE j.ZZLX
+			END as ZZLX,
+			case
+			when
+			j.UPLOAD='0' THEN '未上传'
+			when j.UPLOAD='1' THEN '已上传'
+			ELSE j.UPLOAD
+			END as UPLOAD,
+			j.TSRYXM
+		from jbxx j
+		left join sys_ssxl s on j.ssxl = s.id
+		where 1=1
+		<if test="ssqy!=null and ssqy!=''">and j.SSQY=#{ssqy} </if>
+		<if test="startTssj!=null and startTssj!=''">
+		 <![CDATA[
+		 	and j.TSSJ >= str_to_date(#{startTssj},'%Y-%m-%d')
+		 ]]>
+		</if>
+		<if test="endTssj!=null and endTssj!=''">
+			<![CDATA[
+		 	and j.TSSJ <= str_to_date(#{endTssj},'%Y-%m-%d')
+		 ]]>
+		</if>
+		<if test="azddDdh!=null and azddDdh!=''"> and j.AZDD_DDH like '%${azddDdh}%'</if>
+		<if test='zzlx!=null and zzlx!="-1"'> and j.ZZLX = #{zzlx}</if>
+		<if test='upload!=null and upload!="-1"'> and j.UPLOAD = #{upload}</if>
+		/*挖坑操作*/
+		<if test='xlmc!=null and xlmc!=""'> and j.ssxl = #{xlmc}</if>
+		<if test='bdz!=null and bdz!=""'> and   s.bdz = #{bdz}</if>
+
+		order by TSSJ desc
+	</select>
+
+<!-- 分割线	-->
+
+	<resultMap id="BaseResultMap" type="com.guodu.pojo.dtu.Jbxx">
+		<!--@mbg.generated-->
+		<!--@Table jbxx-->
+		<id column="tsid" jdbcType="VARCHAR" property="tsid" />
+		<result column="ssqy" jdbcType="VARCHAR" property="ssqy" />
+		<result column="tssj" jdbcType="TIMESTAMP" property="tssj" />
+		<result column="azdd_ddh" jdbcType="VARCHAR" property="azddDdh" />
+		<result column="ipdz" jdbcType="VARCHAR" property="ipdz" />
+		<result column="wlwkh" jdbcType="VARCHAR" property="wlwkh" />
+		<result column="rtudz" jdbcType="VARCHAR" property="rtudz" />
+		<result column="dkh" jdbcType="VARCHAR" property="dkh" />
+		<result column="sccs" jdbcType="VARCHAR" property="sccs" />
+		<result column="scrq" jdbcType="TIMESTAMP" property="scrq" />
+		<result column="zzxh" jdbcType="VARCHAR" property="zzxh" />
+		<result column="zzbh" jdbcType="VARCHAR" property="zzbh" />
+		<result column="zzlx" jdbcType="VARCHAR" property="zzlx" />
+		<result column="rjbb_jym" jdbcType="VARCHAR" property="rjbbJym" />
+		<result column="yjbb" jdbcType="VARCHAR" property="yjbb" />
+		<result column="tsryxm" jdbcType="VARCHAR" property="tsryxm" />
+		<result column="upload" jdbcType="VARCHAR" property="upload" />
+		<result column="czr" jdbcType="VARCHAR" property="czr" />
+		<result column="czsj" jdbcType="TIMESTAMP" property="czsj" />
+		<result column="beizhu" jdbcType="VARCHAR" property="beizhu" />
+
+		<result property="zdmc" column="zdmc" jdbcType="VARCHAR"/>
+		<result property="ssxl" column="ssxl" jdbcType="VARCHAR"/>
+		<result property="txmkcj" column="txmkcj" jdbcType="VARCHAR"/>
+		<result property="sccsYcg" column="sccs_ycg" jdbcType="VARCHAR"/>
+		<result property="zbxhYcg" column="zbxh_ycg" jdbcType="VARCHAR"/>
+		<result property="tsryxmYcg" column="tsryxm_ycg" jdbcType="VARCHAR"/>
+		<result property="sccsYs" column="sccs_ys" jdbcType="VARCHAR"/>
+		<result property="zbxhYs" column="zbxh_ys" jdbcType="VARCHAR"/>
+		<result property="tsryxmYs" column="tsryxm_ys" jdbcType="VARCHAR"/>
+		<result property="sccsXf" column="sccs_xf" jdbcType="VARCHAR"/>
+		<result property="zbxhXf" column="zbxh_xf" jdbcType="VARCHAR"/>
+		<result property="tsryxmXf" column="tsryxm_xf" jdbcType="VARCHAR"/>
+		<result property="jd" column="jd" jdbcType="VARCHAR"/>
+		<result property="wd" column="wd" jdbcType="VARCHAR"/>
+		<result property="xxwz" column="xxwz" jdbcType="VARCHAR"/>
+	</resultMap>
+	<sql id="Base_Column_List">
+		<!--@mbg.generated-->
+		tsid, ssqy, tssj, azdd_ddh, ipdz, wlwkh, rtudz, dkh, sccs, scrq, zzxh, zzbh, zzlx,
+		rjbb_jym, yjbb, tsryxm, upload, czr, czsj, beizhu,
+		zdmc,ssxl,txmkcj,sccs_ycg,zbxh_ycg,tsryxm_ycg,sccs_ys,zbxh_ys,tsryxm_ys,sccs_xf,
+		zbxh_xf,tsryxm_xf,jd,wd,xxwz
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+		<!--@mbg.generated-->
+		select
+		j.*, ss.bdz, ss.xlmc
+		from jbxx j
+		left join sys_ssxl ss on ss.id = j.ssxl
+		where tsid = #{tsid,jdbcType=VARCHAR}
+	</select>
+	<update id="updateByPrimaryKey" parameterType="com.guodu.pojo.dtu.Jbxx">
+		<!--@mbg.generated-->
+		update jbxx
+		<set>
+			<if test="ssqy != null and ssqy != ''">
+				ssqy = #{ssqy,jdbcType=VARCHAR},
+			</if>
+			<if test="tssj != null">
+				tssj = #{tssj,jdbcType=TIMESTAMP},
+			</if>
+			<if test="azddDdh != null and azddDdh != ''">
+				azdd_ddh = #{azddDdh,jdbcType=VARCHAR},
+			</if>
+			<if test="ipdz != null and ipdz != ''">
+				ipdz = #{ipdz,jdbcType=VARCHAR},
+			</if>
+			<if test="wlwkh != null and wlwkh != ''">
+				wlwkh = #{wlwkh,jdbcType=VARCHAR},
+			</if>
+			<if test="rtudz != null and rtudz != ''">
+				rtudz = #{rtudz,jdbcType=VARCHAR},
+			</if>
+			<if test="dkh != null and dkh != ''">
+				dkh = #{dkh,jdbcType=VARCHAR},
+			</if>
+			<if test="sccs != null and sccs != ''">
+				sccs = #{sccs,jdbcType=VARCHAR},
+			</if>
+			<if test="scrq != null">
+				scrq = #{scrq,jdbcType=TIMESTAMP},
+			</if>
+			<if test="zzxh != null and zzxh != ''">
+				zzxh = #{zzxh,jdbcType=VARCHAR},
+			</if>
+			<if test="zzbh != null and zzbh != ''">
+				zzbh = #{zzbh,jdbcType=VARCHAR},
+			</if>
+			<if test="zzlx != null and zzlx != ''">
+				zzlx = #{zzlx,jdbcType=VARCHAR},
+			</if>
+			<if test="rjbbJym != null and rjbbJym != ''">
+				rjbb_jym = #{rjbbJym,jdbcType=VARCHAR},
+			</if>
+			<if test="yjbb != null and yjbb != ''">
+				yjbb = #{yjbb,jdbcType=VARCHAR},
+			</if>
+			<if test="tsryxm != null and tsryxm != ''">
+				tsryxm = #{tsryxm,jdbcType=VARCHAR},
+			</if>
+			<if test="upload != null and upload != ''">
+				upload = #{upload,jdbcType=VARCHAR},
+			</if>
+			<if test="czr != null and czr != ''">
+				czr = #{czr,jdbcType=VARCHAR},
+			</if>
+			<if test="czsj != null">
+				czsj = #{czsj,jdbcType=TIMESTAMP},
+			</if>
+			<if test="beizhu != null and beizhu != ''">
+				beizhu = #{beizhu,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where tsid = #{tsid,jdbcType=VARCHAR}
+	</update>
+</mapper>

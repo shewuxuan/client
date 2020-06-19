@@ -1,0 +1,9 @@
+spring:
+  # devtools
+  devtools:
+    restart:
+      enabled: false
+      additional-paths: src/main/java
+      exclude: WEB-INF/**
+    livereload:
+      port: 35731
