@@ -40,7 +40,7 @@
         <li class="current">
             <a href="/jbxx/toJbxxView.action" target='mainFrame'  onmousedown="test(this)"  class="current left_hover"  >
                 <img src="/images/top06.png" />
-                <p>传动调试</p>
+                <p>DTU调试</p>
             </a>
         </li>
         <li class="current">

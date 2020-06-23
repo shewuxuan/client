@@ -491,7 +491,7 @@ public class WithSeverActive {
             pwbhBzLpjyServiceImpl.insert(bzLpjy);
         }
 
-        List<PwbhBzSgjc> bzSgjcList = JSON.parseObject(param.get("bzBhct"), new TypeReference< List<PwbhBzSgjc>>() {});
+        List<PwbhBzSgjc> bzSgjcList = JSON.parseObject(param.get("bzSgjc"), new TypeReference< List<PwbhBzSgjc>>() {});
         pwbhBzSgjcServiceImpl.deleteByPrimaryKey("-1");
         for(PwbhBzSgjc bzSgjc:bzSgjcList){
             pwbhBzSgjcServiceImpl.insert(bzSgjc);

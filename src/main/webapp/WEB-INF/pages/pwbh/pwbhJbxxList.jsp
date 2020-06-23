@@ -189,7 +189,7 @@ $(function(){
 					return xlmc;
 				}},
 				{field:'LM',align:"left",title:'路名',width:30},
-				{field:'trans',align:"left",title:'操作',width:90,formatter:function(value,row,index){
+				{field:'trans',align:"left",title:'操作',width:60,formatter:function(value,row,index){
 						var txt = '<button href="javascript:void(0);" onclick="ts(\'' + row.TSID + '\')" class="iput_m" style="width: 40px; height: 20px;">' + '调试' + '</button>';
 						var txt2 = '&nbsp;<button href="javascript:void(0);" onclick="editJbxx(\'' + row.TSID + '\')" class="iput_m" style="width: 40px; height: 20px;">' + '修改' + '</button>';
 						var txt3 = '&nbsp;<button href="javascript:void(0);" onclick="seeJbxx(\'' + row.TSID + '\')" class="iput_m" style="width: 40px; height: 20px;">' + '查看' + '</button>';

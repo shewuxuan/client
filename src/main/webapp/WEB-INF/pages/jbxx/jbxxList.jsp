@@ -219,8 +219,8 @@ $(function(){
                         var d = date.getDate();
                         return y + '-' +m + '-' + d;
                     }},
-				{field:'AZDD_DDH',align:"left",title:'设备调度号',width:30},
-				{field:'SSXL',align:"left",title:'所属线路',width:30,formatter:function(value,row,index){
+				{field:'AZDD_DDH',align:"left",title:'设备调度号',width:50},
+				{field:'SSXL',align:"left",title:'所属线路',width:50,formatter:function(value,row,index){
 					var xlmc = "";
 					$.ajax({
 						url: '/ssxl/selectByPrimaryKey/'+value,
@@ -244,7 +244,7 @@ $(function(){
 				{field:'ZZXH',align:"left",title:'装置型号',width:30},
 				{field:'SCCS',align:"left",title:'生产厂商',width:30},
 				{field:'ZZLX',align:"left",title:'装置类型',width:30},
-				{field:'TSRYXM',align:"left",title:'调试人员',width:30},
+				{field:'TSRYXM',align:"left",title:'调试人员',width:50},
 				{field:'STATE',align:"left",title:'状态',width:30,formatter:function(value,row,index){
 					var context="";
 					var formdata = new FormData();

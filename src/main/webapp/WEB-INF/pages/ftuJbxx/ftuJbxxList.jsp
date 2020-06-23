@@ -174,13 +174,22 @@ $(function(){
 						var d = date.getDate();
 						return y + '-' +m + '-' + d;
 					}},
-				{field:'DDBH',align:"center",title:'调度编号',width:30},
+				{field:'DDBH',align:"center",title:'调度编号',width:40},
 				{field:'FTU_CJ',align:"left",title:'FTU厂家',width:30},
 				{field:'FTU_XH',align:"left",title:'FTU型号',width:30},
 				{field:'ZZLX',align:"left",title:'装置类型',width:30},
-				{field:'TSRYXM',align:"left",title:'调试人员',width:30},
-				{field:'UPLOAD',align:"left",title:'是否上传',width:30},
-				{field:'trans',align:"left",title:'操作',width:90,formatter:function(value,row,index){
+				{field:'TSRYXM',align:"left",title:'调试人员',width:40},
+				{field:'UPLOAD',align:"left",title:'是否上传',width:30,formatter:function(value,row,index){
+						var context="";
+						if(value==0){
+							context="未上传";
+						}
+						if(value==1){
+							context="已上传";
+						}
+						return context;
+					}},
+				{field:'trans',align:"left",title:'操作',width:80,formatter:function(value,row,index){
 						var txt = '<button href="javascript:void(0);" onclick="ts(\'' + row.TSID + '\')" class="iput_m" style="width: 40px; height: 20px;">' + '调试' + '</button>';
 						var txt2 = '&nbsp;&nbsp;&nbsp;<button href="javascript:void(0);" onclick="editFtuJbxx(\'' + row.TSID + '\')" class="iput_m" style="width: 40px; height: 20px;">' + '编辑' + '</button>';
 						var txt3 = '&nbsp;&nbsp;&nbsp;<button href="javascript:void(0);" onclick="delFtuJbxx(\'' + row.TSID + '\')" class="iput_m" style="width: 40px; height: 20px;">' + '删除' + '</button>';
