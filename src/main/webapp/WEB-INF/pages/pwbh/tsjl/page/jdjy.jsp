@@ -12,7 +12,7 @@
 </head>
 <body>
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-    <legend id="mao7">8、电流、电压精度检验</legend>
+    <legend id="mao8">8、电流、电压精度检验</legend>
 </fieldset>
 <div class="layui-field-box">
     <blockquote class="layui-elem-quote" style="width: 90%; margin: auto;">
@@ -115,11 +115,11 @@
         function editbz() {
             let beizhu = {
                 tsid: tsid,
-                pwbhJlLpjy: $("#jdjybeizhu").val()
+                pwbhJlJdjy: $("#jdjybeizhu").val()
             };
             $.ajax({
                 type: "POST",
-                url: "${basePath}/beizhu/updateByPrimaryKey",
+                url: "${basePath}/pwbh_beizhu/updateByPrimaryKey",
                 data: JSON.stringify(beizhu),//必须
                 contentType: "application/json;charsetset=UTF-8",//必须
                 dataType: "json",//必须

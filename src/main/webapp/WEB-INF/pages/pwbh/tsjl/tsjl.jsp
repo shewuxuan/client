@@ -85,22 +85,22 @@
         <div style="padding: 15px;">
             <%-- 1、基本信息 --%>
             <%@include file="page/jbxx.jsp" %>
-<%--            <%@include file="page/yqyb.jsp" %>--%>
-<%--            <%@include file="page/wgjc.jsp" %>--%>
-<%--            <%@include file="page/jxdx.jsp" %>--%>
-<%--            <%@include file="page/jdsz.jsp" %>--%>
-<%--            <%@include file="page/jycs.jsp" %>--%>
-<%--            <%@include file="page/dzdjc.jsp" %>--%>
-<%--            <%@include file="page/lpjy.jsp" %>--%>
-<%--            <%@include file="page/jdjy.jsp" %>--%>
-<%--            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">--%>
-<%--                <legend id="mao9">9、保护CT参数、变比试验</legend>--%>
-<%--            </fieldset>--%>
-<%--            <%@include file="page/bhctjx.jsp" %>--%>
-<%--            <%@include file="page/bhctbh.jsp" %>--%>
+            <%@include file="page/yqyb.jsp" %>
+            <%@include file="page/wgjc.jsp" %>
+            <%@include file="page/jxdx.jsp" %>
+            <%@include file="page/jdsz.jsp" %>
+            <%@include file="page/jycs.jsp" %>
+            <%@include file="page/dzdjc.jsp" %>
+            <%@include file="page/lpjy.jsp" %>
+            <%@include file="page/jdjy.jsp" %>
+            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+                <legend id="mao9">9、保护CT参数、变比试验</legend>
+            </fieldset>
+            <%@include file="page/bhctjx.jsp" %>
+            <%@include file="page/bhctbh.jsp" %>
 <%--            <%@include file="page/dzjc.jsp" %>--%>
-<%--            <%@include file="page/zzsy.jsp" %>--%>
-<%--            <%@include file="page/bhcthl.jsp" %>--%>
+            <%@include file="page/zzsy.jsp" %>
+            <%@include file="page/bhcthl.jsp" %>
             <%@include file="page/sgjc.jsp" %>
             <br>
             <%--            <span>测试完毕后，注意要退出保护装置跳闸功能。</span>--%>

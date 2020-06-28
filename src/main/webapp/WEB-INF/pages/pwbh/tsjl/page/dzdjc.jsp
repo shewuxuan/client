@@ -12,19 +12,19 @@
 </head>
 <body>
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-    <legend id="mao2">6、定值单检查</legend>
+    <legend id="mao6">6、定值单检查</legend>
 </fieldset>
 <div class="layui-field-box">
     <blockquote class="layui-elem-quote" style="width: 90%; margin: auto;">
         <table id="dzdjc" lay-filter="dzdjc"></table>
-        <form class="layui-form layui-form-pane" action="">
-            <div class="layui-form-item layui-form-text">
-                <label class="layui-form-label">备注</label>
-                <div class="layui-input-block">
-                    <textarea id="dzdjcbeizhu" placeholder="" class="layui-textarea"></textarea>
-                </div>
-            </div>
-        </form>
+<%--        <form class="layui-form layui-form-pane" action="">--%>
+<%--            <div class="layui-form-item layui-form-text">--%>
+<%--                <label class="layui-form-label">备注</label>--%>
+<%--                <div class="layui-input-block">--%>
+<%--                    <textarea id="dzdjcbeizhu" placeholder="" class="layui-textarea"></textarea>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </form>--%>
     </blockquote>
 </div>
 

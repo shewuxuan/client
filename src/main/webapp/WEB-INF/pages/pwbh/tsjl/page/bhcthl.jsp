@@ -110,7 +110,7 @@
             };
             $.ajax({
                 type: "POST",
-                url: "${basePath}/beizhu/updateByPrimaryKey",
+                url: "${basePath}/pwbh_beizhu/updateByPrimaryKey",
                 data: JSON.stringify(beizhu),//必须
                 contentType: "application/json;charsetset=UTF-8",//必须
                 dataType: "json",//必须

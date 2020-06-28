@@ -11,42 +11,21 @@
     <title>Title</title>
 </head>
 <body>
-<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-    <legend id="mao3">3、紧线及对线</legend>
-</fieldset>
-<div class="layui-field-box">
-    <blockquote class="layui-elem-quote" style="width: 90%; margin: auto;">
-        <table id="jxdx" lay-filter="jxdx"></table>
-        <form class="layui-form layui-form-pane" action="">
-            <div class="layui-form-item layui-form-text">
-                <label class="layui-form-label">备注</label>
-                <div class="layui-input-block">
-                    <textarea id="jxdxbeizhu" placeholder="" class="layui-textarea"></textarea>
-                </div>
-            </div>
-        </form>
-    </blockquote>
-</div>
+<table id="dzjclx" lay-filter="dzjclx"></table>
 
-<%-- 5、电流、电压零漂校验（测量值在0.1%以内） --%>
 <script>
     layui.use('table', function () {
         let table = layui.table;
         let record = [];
         let autosave = null;
         let tableReload = table.render({
-            elem: '#jxdx'                           // 改
+            elem: '#dzjclx'                           // 改
             , page: false
             , skin: 'row,line' //行边框风格
             , even: false //开启隔行背景
-            , url: '${basePath}/pwbh_jl_jxdx/selectByAll?tsid=' + tsid //数据接口      改
+            , url: '${basePath}/pwbh_jl_dzjc/selectByAll?tsid=' + tsid //数据接口      改
             , toolbar: true
             , defaultToolbar: [
-                // {
-                //     title: '删除' //标题
-                //     , layEvent: 'DEL' //事件名，用于 toolbar 事件中使用
-                //     , icon: 'layui-icon-delete'
-                // },
                 {
                     title: '添加' //标题
                     , layEvent: 'ADD' //事件名，用于 toolbar 事件中使用
@@ -59,15 +38,21 @@
                 }
             ]
             , cols: [[ //表头
-                {field: 'id', title: 'ID', type: 'numbers', width: '5%', fixed: 'left', sort: true}
-                , {field: 'nr', title: '内容', width: '77%', align: 'center', sort: true
-                    , templet: function (d) {
-                        return '<div style="text-align: left">' + d.nr + '</div>';
-                    }
-                }
-                , {field: 'jcjg', title: '检查结果', width: '10%', align: 'center', templet: '#jxdxjg'}
-                , {title: '操作', width: '8%', align: 'center', toolbar: '#barDemo'}
-            ]]
+                {field: 'id', title: 'ID', type: 'numbers', width: '5%', fixed: 'left', sort: true, rowspan: 2}
+                , {field: 'jg', title: '间隔', width: '11%', align: 'center', fixed: 'left', sort: true, rowspan: 2}
+                , {field: 'l1', title: '零序I段整定值', width: '10%', align: 'center', edit: 'text', rowspan: 2}
+                , {title: '实际通电0.95倍定值／1.05倍定值', align: 'center', colspan: 2}
+                , {field: 'l2', title: '零序II段整定值', width: '10%', align: 'center', edit: 'text', rowspan: 2}
+                , {title: '实际通电0.95倍定值／1.05倍定值', align: 'center', colspan: 2}
+                , {title: '操作', width: '8%', align: 'center', toolbar: '#barDemo', rowspan: 2}
+            ],
+                [
+                    {field: 'l11', title: '不动作(A)', width: '14%', align: 'center', edit: 'text'}
+                    , {field: 'l12', title: '动作(A)', width: '14%', align: 'center', edit: 'text'}
+                    , {field: 'l21', title: '不动作(A)', width: '14%', align: 'center', edit: 'text'}
+                    , {field: 'l22', title: '动作(A)', width: '14%', align: 'center', edit: 'text'}
+
+                ]]
             , done: function (res) {
                 let resdata = res.data;
                 // 开启自动保存（自动保存记录/备注）
@@ -78,19 +63,19 @@
                     }
                     $.ajax({
                         type: "POST",
-                        url: "${basePath}/pwbh_jl_jxdx/updateBatch",              // 改
+                        url: "${basePath}/pwbh_jl_dzjc/updateBatch",              // 改
                         data: JSON.stringify(record),//必须
                         contentType: "application/json;charsetset=UTF-8",//必须
                         dataType: "json",//必须
                         success: function (data) {
                             if (data.code !== 0) {
-                                console.log("jxdx automatically saved failed!");
+                                console.log("dzjclx automatically saved failed!");
                             }
                         }
                     });
                 }, 10000);
                 record = resdata;
-                $("[name='select4jxdx']").change(function () {
+                $("[name='select4dzjclx']").change(function () {
                     let elem = $(this).parents('tr');
                     let dataindex = elem.attr("data-index");
                     $.each(record, (i, value) => {
@@ -101,28 +86,33 @@
                 });
                 $.each(resdata, function (i) {
                     if (resdata[i].jcjg == null || resdata[i].jcjg === "" || resdata[i].jcjg == -1) {
-                        $("#li_jxdx").css({"background-color": ""});
+                        $("#li_dzjc").css({"background-color": ""});
                         return;
                     }
-                    $("#li_jxdx").css({"background-color": "#009688"});
+                    $("#li_dzjc").css({"background-color": "#009688"});
                 })
             }
         });
 
         // 编辑
-        table.on('edit(jxdx)', function (obj) {         // 改
+        table.on('edit(dzjclx)', function (obj) {         // 改
             let data = obj.data;
-            // $.each(record, function (i) {
-            //     if (record[i].id === data.id) {
-            //         record[i].zzds = data.zzds;
-            //     }
-            // });
+            $.each(record, function (i) {
+                if (record[i].id === data.id) {
+                    record[i].l1 = data.l1;
+                    record[i].l11 = data.l11;
+                    record[i].l12 = data.l12;
+                    record[i].l2 = data.l2;
+                    record[i].l21 = data.l21;
+                    record[i].l22 = data.l22;
+                }
+            });
         });
 
         function editbz() {
             let beizhu = {
                 tsid: tsid,
-                pwbhJlJxdx: $("#jxdxbeizhu").val()
+                pwbhJlJxdx: $("#dzjcbeizhu").val()
             };
             $.ajax({
                 type: "POST",
@@ -145,7 +135,7 @@
             $.ajax({
                 type: "POST",
                 async: false,
-                url: "${basePath}/pwbh_jl_jxdx/updateBatch",              // 改
+                url: "${basePath}/pwbh_jl_dzjc/updateBatch",              // 改
                 data: JSON.stringify(record),//必须
                 contentType: "application/json;charsetset=UTF-8",//必须
                 dataType: "json",//必须
@@ -160,7 +150,7 @@
         }
 
         //监听事件
-        table.on('toolbar(jxdx)', function (obj) {      // 改
+        table.on('toolbar(dzjclx)', function (obj) {      // 改
             switch (obj.event) {
                 // 添加
                 case 'ADD':
@@ -195,7 +185,7 @@
                     }
                     $.ajax({
                         type: "POST",
-                        url: "${basePath}/pwbh_jl_jxdx/updateBatch",              // 改
+                        url: "${basePath}/pwbh_jl_dzjc/updateBatch",              // 改
                         data: JSON.stringify(record),//必须
                         contentType: "application/json;charsetset=UTF-8",//必须
                         dataType: "json",//必须
@@ -211,60 +201,18 @@
                         }
                     });
                     break;
-                <%--// 删除--%>
-                <%--case 'DEL':--%>
-                <%--    if (${requestScope.userType != 0}) {--%>
-                <%--        layer.msg("权限不足！", {time: 1500, icon: 4});--%>
-                <%--        return;--%>
-                <%--    }--%>
-                <%--    let checkStatus = table.checkStatus('jxdx')--%>
-                <%--        , data = checkStatus.data--%>
-                <%--        , ids = [];--%>
-                <%--    $.each(data, function (i) {--%>
-                <%--        ids.push(data[i].id);--%>
-                <%--    });--%>
-                <%--    if (ids.length === 0) {--%>
-                <%--        layer.msg('未选中要删除的行',function () {});--%>
-                <%--        return;--%>
-                <%--    }--%>
-                <%--    layer.confirm('真的删除吗？', function () {--%>
-                <%--        if (submitJl(record)) {--%>
-                <%--            // 删除--%>
-                <%--            $.ajax({--%>
-                <%--                type: "POST",--%>
-                <%--                url: "${basePath}/pwbh_jl_jxdx/batchDeleteByPrimaryKey",              // 改--%>
-                <%--                data: JSON.stringify(ids),//必须--%>
-                <%--                contentType: "application/json;charsetset=UTF-8",//必须--%>
-                <%--                dataType: "json",//必须--%>
-                <%--                success: function (result) {--%>
-                <%--                    if (result.code === 0) {--%>
-                <%--                        layer.msg(result.msg, {time: 1500, icon: 1});--%>
-                <%--                    } else {--%>
-                <%--                        layer.msg(result.msg, {time: 2000, icon: 5});--%>
-                <%--                    }--%>
-                <%--                    // 清除定时器--%>
-                <%--                    clearTimeout(autosave);--%>
-                <%--                    // 刷新表格--%>
-                <%--                    tableReload.reload();--%>
-                <%--                }--%>
-                <%--            });--%>
-                <%--        } else {--%>
-                <%--            layer.msg("删除前提交失败，请刷新重试！", {time: 2000, icon: 5});--%>
-                <%--        }--%>
-                <%--    });--%>
-                <%--    break;--%>
             }
         });
 
         //监听行操作
-        table.on('tool(jxdx)', function (obj) {
+        table.on('tool(dzjclx)', function (obj) {
             let that = obj.data;
             if (obj.event === 'del') {
                 layer.confirm('真的删除吗？', function () {
                     // 删除前提交
                     if (submitJl(record)) {
                         // 删除
-                        $.get("${basePath}/pwbh_jl_jxdx/deleteByPrimaryKey/" + that.id, function (result) {
+                        $.get("${basePath}/pwbh_jl_dzjc/deleteByPrimaryKey/" + that.id, function (result) {
                             clearTimeout(autosave);
                             tableReload.reload();
                             result = JSON.parse(result);
@@ -284,8 +232,8 @@
 </script>
 
 <%-- 结果状态列(正常/异常)--%>
-<script type="text/html" id="jxdxjg">
-    <select name='select4jxdx' lay-ignore lay-filter="jxdx" lay-search=''>
+<script type="text/html" id="dzjclxjg">
+    <select name='select4dzjclx' lay-ignore lay-filter="dzjclx" lay-search=''>
         <option value="-1" {{ d.jcjg== -1 ? 'selected' : '' }}></option>
         <option value="1" {{ d.jcjg== 1 ? 'selected' : '' }}>是</option>
         <option value="0" {{ d.jcjg== 0 ? 'selected' : '' }}>否</option>

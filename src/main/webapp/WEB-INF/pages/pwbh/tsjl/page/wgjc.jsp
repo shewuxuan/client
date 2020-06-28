@@ -42,11 +42,6 @@
             , url: '${basePath}/pwbh_jl_wgjc/selectByAll?tsid=' + tsid //数据接口      改
             , toolbar: true
             , defaultToolbar: [
-                // {
-                //     title: '删除' //标题
-                //     , layEvent: 'DEL' //事件名，用于 toolbar 事件中使用
-                //     , icon: 'layui-icon-delete'
-                // },
                 {
                     title: '添加' //标题
                     , layEvent: 'ADD' //事件名，用于 toolbar 事件中使用
@@ -126,7 +121,7 @@
             };
             $.ajax({
                 type: "POST",
-                url: "${basePath}/beizhu/updateByPrimaryKey",
+                url: "${basePath}/pwbh_beizhu/updateByPrimaryKey",
                 data: JSON.stringify(beizhu),//必须
                 contentType: "application/json;charsetset=UTF-8",//必须
                 dataType: "json",//必须
@@ -211,48 +206,6 @@
                         }
                     });
                     break;
-                <%--// 删除--%>
-                <%--case 'DEL':--%>
-                <%--    if (${requestScope.userType != 0}) {--%>
-                <%--        layer.msg("权限不足！", {time: 1500, icon: 4});--%>
-                <%--        return;--%>
-                <%--    }--%>
-                <%--    let checkStatus = table.checkStatus('wgjc')--%>
-                <%--        , data = checkStatus.data--%>
-                <%--        , ids = [];--%>
-                <%--    $.each(data, function (i) {--%>
-                <%--        ids.push(data[i].id);--%>
-                <%--    });--%>
-                <%--    if (ids.length === 0) {--%>
-                <%--        layer.msg('未选中要删除的行',function () {});--%>
-                <%--        return;--%>
-                <%--    }--%>
-                <%--    layer.confirm('真的删除吗？', function () {--%>
-                <%--        if (submitJl(record)) {--%>
-                <%--            // 删除--%>
-                <%--            $.ajax({--%>
-                <%--                type: "POST",--%>
-                <%--                url: "${basePath}/pwbh_jl_wgjc/batchDeleteByPrimaryKey",              // 改--%>
-                <%--                data: JSON.stringify(ids),//必须--%>
-                <%--                contentType: "application/json;charsetset=UTF-8",//必须--%>
-                <%--                dataType: "json",//必须--%>
-                <%--                success: function (result) {--%>
-                <%--                    if (result.code === 0) {--%>
-                <%--                        layer.msg(result.msg, {time: 1500, icon: 1});--%>
-                <%--                    } else {--%>
-                <%--                        layer.msg(result.msg, {time: 2000, icon: 5});--%>
-                <%--                    }--%>
-                <%--                    // 清除定时器--%>
-                <%--                    clearTimeout(autosave);--%>
-                <%--                    // 刷新表格--%>
-                <%--                    tableReload.reload();--%>
-                <%--                }--%>
-                <%--            });--%>
-                <%--        } else {--%>
-                <%--            layer.msg("删除前提交失败，请刷新重试！", {time: 2000, icon: 5});--%>
-                <%--        }--%>
-                <%--    });--%>
-                <%--    break;--%>
             }
         });
 

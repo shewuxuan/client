@@ -94,7 +94,7 @@
                     });
                 });
                 $.each(resdata, function (i, value) {
-                    if (value.jcjg == null || value.jcjg === "" || value.jcjg === -1) {
+                    if (value.jcjg == null || value.jcjg === "" || value.jcjg == -1) {
                         $("#li_sgjc").css({"background-color": ""});
                         return false;
                     }
@@ -115,7 +115,7 @@
             };
             $.ajax({
                 type: "POST",
-                url: "${basePath}/beizhu/updateByPrimaryKey",
+                url: "${basePath}/pwbh_beizhu/updateByPrimaryKey",
                 data: JSON.stringify(beizhu),//必须
                 contentType: "application/json;charsetset=UTF-8",//必须
                 dataType: "json",//必须

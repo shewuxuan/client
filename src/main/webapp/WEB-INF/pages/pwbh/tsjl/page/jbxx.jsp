@@ -73,10 +73,22 @@
         $.ajaxSettings.async = true;            // 取消同步， ajax改成异步
 
         // 查询备注信息
-        <%--$.get("${basePath}/beizhu/selectBeizhuByPrimaryKey/" + tsid, function (data) {--%>
-        <%--    let beizhu = $.parseJSON(data);--%>
-        <%--    $("#ctgybeizhu").val(beizhu.jlCtgy);--%>
-        <%--});--%>
+        $.get("${basePath}/pwbh_beizhu/selectByPrimaryKey/" + tsid, function (data) {
+            data = $.parseJSON(data);
+            $("#bhctbhbeizhu").val(data.pwbhJlBhctbh);
+            $("#bhcthlbeizhu").val(data.pwbhJlBhcthl);
+            $("#bhctjxbeizhu").val(data.pwbhJlBhctjx);
+            $("#dzdjcbeizhu").val(data.pwbhJlDzdjc);
+            $("#jdjybeizhu").val(data.pwbhJlJdjy);
+            $("#jdszbeizhu").val(data.pwbhJlJdsz);
+            $("#jxdxbeizhu").val(data.pwbhJlJxdx);
+            $("#jycsbeizhu").val(data.pwbhJlJycs);
+            $("#lpjybeizhu").val(data.pwbhJlLpjy);
+            $("#sgjcbeizhu").val(data.pwbhJlSgjc);
+            $("#wgjcbeizhu").val(data.pwbhJlWgjc);
+            $("#yqybbeizhu").val(data.pwbhJlYqyb);
+            $("#zzsybeizhu").val(data.pwbhJlZzsy);
+        });
 
         // 查询告警定值
         <%--$.get("${basePath}/gjdz/selectByPrimaryKey/" + tsid, function (data) {--%>
