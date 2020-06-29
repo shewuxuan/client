@@ -6,6 +6,7 @@ import java.util.List;
 import com.guodu.mapper.pwbh.PwbhJlDzjcMapper;
 import com.guodu.pojo.pwbh.PwbhJlDzjc;
 import com.guodu.service.pwbh.PwbhJlDzjcService;
+
 /**
  * @ClassName: PwbhJlDzjcServiceImpl
  * @Description: TODO
@@ -13,7 +14,7 @@ import com.guodu.service.pwbh.PwbhJlDzjcService;
  * @Date: 2020/6/11 4:03 下午
  */
 @Service
-public class PwbhJlDzjcServiceImpl implements PwbhJlDzjcService{
+public class PwbhJlDzjcServiceImpl implements PwbhJlDzjcService {
 
     @Resource
     private PwbhJlDzjcMapper pwbhJlDzjcMapper;
@@ -69,3 +70,4 @@ public class PwbhJlDzjcServiceImpl implements PwbhJlDzjcService{
     }
 
 }
+

@@ -47,6 +47,8 @@ public class PwbhTsjlServiceImpl implements PwbhTsjlService {
     @Autowired
     private PwbhJlDzdjcService pwbhJlDzdjcServiceImpl;
     @Autowired
+    private PwbhDzService pwbhDzServiceImpl;
+    @Autowired
     private PwbhJlDzjcService pwbhJlDzjcServiceImpl;
     @Autowired
     private PwbhJlJdjyService pwbhJlJdjyServiceImpl;
@@ -85,7 +87,7 @@ public class PwbhTsjlServiceImpl implements PwbhTsjlService {
         pwbhBzWgjc.setSsqy(ssqy);
         List<PwbhBzWgjc> pwbhBzWgjcs = pwbhBzWgjcServiceImpl.selectByAll(pwbhBzWgjc);
         for (PwbhBzWgjc bzWgjc : pwbhBzWgjcs) {
-            PwbhJlWgjc pwbhJlWgjc = new PwbhJlWgjc(IDUtil.getStrId(), tsid, ssqy, bzWgjc.getNr(), null, czr, new Date(), null);
+            PwbhJlWgjc pwbhJlWgjc = new PwbhJlWgjc(IDUtil.getStrId(), tsid, ssqy, bzWgjc.getNr(), "1", czr, new Date(), null);
             pwbhJlWgjcServiceImpl.insert(pwbhJlWgjc);
         }
 
@@ -117,7 +119,7 @@ public class PwbhTsjlServiceImpl implements PwbhTsjlService {
         pwbhBzJdjy.setSsqy(ssqy);
         List<PwbhBzJdjy> pwbhBzJdjies = pwbhBzJdjyServiceImpl.selectByAll(pwbhBzJdjy);
         for (PwbhBzJdjy bzJdjy : pwbhBzJdjies) {
-            PwbhJlJdjy pwbhJlJdjy = new PwbhJlJdjy(IDUtil.getStrId(), tsid, ssqy, bzJdjy.getCsjg(), bzJdjy.getTryq(), null, null, czr, new Date(), null);
+            PwbhJlJdjy pwbhJlJdjy = new PwbhJlJdjy(IDUtil.getStrId(), tsid, ssqy, bzJdjy.getCsjg(), bzJdjy.getTryq(), null, "1", czr, new Date(), null);
             pwbhJlJdjyServiceImpl.insert(pwbhJlJdjy);
         }
 
@@ -133,11 +135,15 @@ public class PwbhTsjlServiceImpl implements PwbhTsjlService {
             pwbhJlBhcthlServiceImpl.insert(pwbhJlBhcthl);
         }
 
+        PwbhDz pwbhDz = new PwbhDz();
+        pwbhDz.setTsid(tsid);
+        pwbhDzServiceImpl.insert(pwbhDz);
+
         PwbhBzDzjc pwbhBzDzjc = new PwbhBzDzjc();
         pwbhBzDzjc.setSsqy(ssqy);
         List<PwbhBzDzjc> pwbhBzDzjcs = pwbhBzDzjcServiceImpl.selectByAll(pwbhBzDzjc);
         for (PwbhBzDzjc bzDzjc : pwbhBzDzjcs) {
-            PwbhJlDzjc pwbhJlDzjc = new PwbhJlDzjc(IDUtil.getStrId(), tsid, ssqy, bzDzjc.getJg(), null, null, null, null, null, null, null, null, null, null, null, null, czr, new Date(), null);
+            PwbhJlDzjc pwbhJlDzjc = new PwbhJlDzjc(IDUtil.getStrId(), tsid, ssqy, bzDzjc.getJg(), null, null, null, null, null, null, czr, new Date(), null);
             pwbhJlDzjcServiceImpl.insert(pwbhJlDzjc);
         }
 
@@ -146,7 +152,7 @@ public class PwbhTsjlServiceImpl implements PwbhTsjlService {
         pwbhBzZzsy.setSsqy(ssqy);
         List<PwbhBzZzsy> pwbhBzZzsies = pwbhBzZzsyServiceImpl.selectByAll(pwbhBzZzsy);
         for (PwbhBzZzsy bzZzsy : pwbhBzZzsies) {
-            PwbhJlZzsy pwbhJlZzsy = new PwbhJlZzsy(IDUtil.getStrId(), tsid, ssqy, bzZzsy.getJyxm(), null, null, null, null, null, czr, new Date(), null);
+            PwbhJlZzsy pwbhJlZzsy = new PwbhJlZzsy(IDUtil.getStrId(), tsid, ssqy, bzZzsy.getJyxm(), null, "1", "1", "1", "1", czr, new Date(), null);
             pwbhJlZzsyServiceImpl.insert(pwbhJlZzsy);
         }
 
@@ -154,7 +160,7 @@ public class PwbhTsjlServiceImpl implements PwbhTsjlService {
         pwbhBzSgjc.setSsqy(ssqy);
         List<PwbhBzSgjc> pwbhBzSgjcs = pwbhBzSgjcServiceImpl.selectByAll(pwbhBzSgjc);
         for (PwbhBzSgjc bzSgjc : pwbhBzSgjcs) {
-            PwbhJlSgjc pwbhJlSgjc = new PwbhJlSgjc(IDUtil.getStrId(), tsid, ssqy, bzSgjc.getNr(), null, czr, new Date(), null);
+            PwbhJlSgjc pwbhJlSgjc = new PwbhJlSgjc(IDUtil.getStrId(), tsid, ssqy, bzSgjc.getNr(), "1", czr, new Date(), null);
             pwbhJlSgjcServiceImpl.insert(pwbhJlSgjc);
         }
 

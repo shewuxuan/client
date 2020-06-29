@@ -1,23 +1,23 @@
 package com.guodu.mapper.pwbh;
 
-import com.guodu.pojo.pwbh.PwbhJlDzjc;
-import org.apache.ibatis.annotations.Mapper;import org.apache.ibatis.annotations.Param;import java.util.List;
+import com.guodu.pojo.pwbh.PwbhDz;
+import org.apache.ibatis.annotations.Mapper;import java.util.List;
 
 /**
- * @ClassName: PwbhJlDzjcMapper
+ * @ClassName: PwbhDzMapper
  * @Description: TODO
  * @Author: 2Uli
  * @Date: 2020/6/29 4:31 下午
  */
 @Mapper
-public interface PwbhJlDzjcMapper {
+public interface PwbhDzMapper {
     /**
      * delete by primary key
      *
-     * @param id primaryKey
+     * @param tsid primaryKey
      * @return deleteCount
      */
-    int deleteByPrimaryKey(String id);
+    int deleteByPrimaryKey(String tsid);
 
     /**
      * insert record to table
@@ -25,7 +25,7 @@ public interface PwbhJlDzjcMapper {
      * @param record the record
      * @return insert count
      */
-    int insert(PwbhJlDzjc record);
+    int insert(PwbhDz record);
 
     /**
      * insert record to table selective
@@ -33,15 +33,15 @@ public interface PwbhJlDzjcMapper {
      * @param record the record
      * @return insert count
      */
-    int insertSelective(PwbhJlDzjc record);
+    int insertSelective(PwbhDz record);
 
     /**
      * select by primary key
      *
-     * @param id primary key
+     * @param tsid primary key
      * @return object by primary key
      */
-    PwbhJlDzjc selectByPrimaryKey(String id);
+    PwbhDz selectByPrimaryKey(String tsid);
 
     /**
      * update record selective
@@ -49,7 +49,7 @@ public interface PwbhJlDzjcMapper {
      * @param record the updated record
      * @return update count
      */
-    int updateByPrimaryKeySelective(PwbhJlDzjc record);
+    int updateByPrimaryKeySelective(PwbhDz record);
 
     /**
      * update record
@@ -57,13 +57,7 @@ public interface PwbhJlDzjcMapper {
      * @param record the updated record
      * @return update count
      */
-    int updateByPrimaryKey(PwbhJlDzjc record);
+    int updateByPrimaryKey(PwbhDz record);
 
-    List<PwbhJlDzjc> selectByAll(PwbhJlDzjc pwbhJlDzjc);
-
-    int updateBatch(List<PwbhJlDzjc> list);
-
-    int updateBatchSelective(List<PwbhJlDzjc> list);
-
-    int batchInsert(@Param("list") List<PwbhJlDzjc> list);
+    List<PwbhDz> selectByAll(PwbhDz pwbhDz);
 }

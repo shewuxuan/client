@@ -14,20 +14,13 @@
     <result column="g2" jdbcType="VARCHAR" property="g2" />
     <result column="g21" jdbcType="VARCHAR" property="g21" />
     <result column="g22" jdbcType="VARCHAR" property="g22" />
-    <result column="l1" jdbcType="VARCHAR" property="l1" />
-    <result column="l11" jdbcType="VARCHAR" property="l11" />
-    <result column="l12" jdbcType="VARCHAR" property="l12" />
-    <result column="l2" jdbcType="VARCHAR" property="l2" />
-    <result column="l21" jdbcType="VARCHAR" property="l21" />
-    <result column="l22" jdbcType="VARCHAR" property="l22" />
     <result column="czr" jdbcType="VARCHAR" property="czr" />
     <result column="czsj" jdbcType="TIMESTAMP" property="czsj" />
     <result column="beizhu" jdbcType="VARCHAR" property="beizhu" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    id, tsid, ssqy, jg, g1, g11, g12, g2, g21, g22, l1, l11, l12, l2, l21, l22, czr, 
-    czsj, beizhu
+    id, tsid, ssqy, jg, g1, g11, g12, g2, g21, g22, czr, czsj, beizhu
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     <!--@mbg.generated-->
@@ -45,16 +38,12 @@
     <!--@mbg.generated-->
     insert into pwbh_jl_dzjc (id, tsid, ssqy, 
       jg, g1, g11, g12, 
-      g2, g21, g22, l1, 
-      l11, l12, l2, l21, 
-      l22, czr, czsj, beizhu
-      )
+      g2, g21, g22, czr, 
+      czsj, beizhu)
     values (#{id,jdbcType=VARCHAR}, #{tsid,jdbcType=VARCHAR}, #{ssqy,jdbcType=VARCHAR}, 
       #{jg,jdbcType=VARCHAR}, #{g1,jdbcType=VARCHAR}, #{g11,jdbcType=VARCHAR}, #{g12,jdbcType=VARCHAR}, 
-      #{g2,jdbcType=VARCHAR}, #{g21,jdbcType=VARCHAR}, #{g22,jdbcType=VARCHAR}, #{l1,jdbcType=VARCHAR}, 
-      #{l11,jdbcType=VARCHAR}, #{l12,jdbcType=VARCHAR}, #{l2,jdbcType=VARCHAR}, #{l21,jdbcType=VARCHAR}, 
-      #{l22,jdbcType=VARCHAR}, #{czr,jdbcType=VARCHAR}, #{czsj,jdbcType=TIMESTAMP}, #{beizhu,jdbcType=VARCHAR}
-      )
+      #{g2,jdbcType=VARCHAR}, #{g21,jdbcType=VARCHAR}, #{g22,jdbcType=VARCHAR}, #{czr,jdbcType=VARCHAR}, 
+      #{czsj,jdbcType=TIMESTAMP}, #{beizhu,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.guodu.pojo.pwbh.PwbhJlDzjc">
     <!--@mbg.generated-->
@@ -89,24 +78,6 @@
       </if>
       <if test="g22 != null and g22 != ''">
         g22,
-      </if>
-      <if test="l1 != null and l1 != ''">
-        l1,
-      </if>
-      <if test="l11 != null and l11 != ''">
-        l11,
-      </if>
-      <if test="l12 != null and l12 != ''">
-        l12,
-      </if>
-      <if test="l2 != null and l2 != ''">
-        l2,
-      </if>
-      <if test="l21 != null and l21 != ''">
-        l21,
-      </if>
-      <if test="l22 != null and l22 != ''">
-        l22,
       </if>
       <if test="czr != null and czr != ''">
         czr,
@@ -148,24 +119,6 @@
       </if>
       <if test="g22 != null and g22 != ''">
         #{g22,jdbcType=VARCHAR},
-      </if>
-      <if test="l1 != null and l1 != ''">
-        #{l1,jdbcType=VARCHAR},
-      </if>
-      <if test="l11 != null and l11 != ''">
-        #{l11,jdbcType=VARCHAR},
-      </if>
-      <if test="l12 != null and l12 != ''">
-        #{l12,jdbcType=VARCHAR},
-      </if>
-      <if test="l2 != null and l2 != ''">
-        #{l2,jdbcType=VARCHAR},
-      </if>
-      <if test="l21 != null and l21 != ''">
-        #{l21,jdbcType=VARCHAR},
-      </if>
-      <if test="l22 != null and l22 != ''">
-        #{l22,jdbcType=VARCHAR},
       </if>
       <if test="czr != null and czr != ''">
         #{czr,jdbcType=VARCHAR},
@@ -209,24 +162,6 @@
       <if test="g22 != null and g22 != ''">
         g22 = #{g22,jdbcType=VARCHAR},
       </if>
-      <if test="l1 != null and l1 != ''">
-        l1 = #{l1,jdbcType=VARCHAR},
-      </if>
-      <if test="l11 != null and l11 != ''">
-        l11 = #{l11,jdbcType=VARCHAR},
-      </if>
-      <if test="l12 != null and l12 != ''">
-        l12 = #{l12,jdbcType=VARCHAR},
-      </if>
-      <if test="l2 != null and l2 != ''">
-        l2 = #{l2,jdbcType=VARCHAR},
-      </if>
-      <if test="l21 != null and l21 != ''">
-        l21 = #{l21,jdbcType=VARCHAR},
-      </if>
-      <if test="l22 != null and l22 != ''">
-        l22 = #{l22,jdbcType=VARCHAR},
-      </if>
       <if test="czr != null and czr != ''">
         czr = #{czr,jdbcType=VARCHAR},
       </if>
@@ -251,332 +186,9 @@
       g2 = #{g2,jdbcType=VARCHAR},
       g21 = #{g21,jdbcType=VARCHAR},
       g22 = #{g22,jdbcType=VARCHAR},
-      l1 = #{l1,jdbcType=VARCHAR},
-      l11 = #{l11,jdbcType=VARCHAR},
-      l12 = #{l12,jdbcType=VARCHAR},
-      l2 = #{l2,jdbcType=VARCHAR},
-      l21 = #{l21,jdbcType=VARCHAR},
-      l22 = #{l22,jdbcType=VARCHAR},
       czr = #{czr,jdbcType=VARCHAR},
       czsj = #{czsj,jdbcType=TIMESTAMP},
       beizhu = #{beizhu,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <select id="selectByAll" resultMap="BaseResultMap">
-        <!--@mbg.generated-->
-        select
-        <include refid="Base_Column_List"/>
-        from pwbh_jl_dzjc
-        <where>
-            <if test="id != null and id != ''">
-                and id=#{id,jdbcType=VARCHAR}
-            </if>
-            <if test="tsid != null and tsid != ''">
-                and tsid=#{tsid,jdbcType=VARCHAR}
-            </if>
-            <if test="ssqy != null and ssqy != ''">
-                and ssqy=#{ssqy,jdbcType=VARCHAR}
-            </if>
-            <if test="jg != null and jg != ''">
-                and jg=#{jg,jdbcType=VARCHAR}
-            </if>
-            <if test="g1 != null and g1 != ''">
-                and g1=#{g1,jdbcType=VARCHAR}
-            </if>
-            <if test="g11 != null and g11 != ''">
-                and g11=#{g11,jdbcType=VARCHAR}
-            </if>
-            <if test="g12 != null and g12 != ''">
-                and g12=#{g12,jdbcType=VARCHAR}
-            </if>
-            <if test="g2 != null and g2 != ''">
-                and g2=#{g2,jdbcType=VARCHAR}
-            </if>
-            <if test="g21 != null and g21 != ''">
-                and g21=#{g21,jdbcType=VARCHAR}
-            </if>
-            <if test="g22 != null and g22 != ''">
-                and g22=#{g22,jdbcType=VARCHAR}
-            </if>
-            <if test="l1 != null and l1 != ''">
-                and l1=#{l1,jdbcType=VARCHAR}
-            </if>
-            <if test="l11 != null and l11 != ''">
-                and l11=#{l11,jdbcType=VARCHAR}
-            </if>
-            <if test="l12 != null and l12 != ''">
-                and l12=#{l12,jdbcType=VARCHAR}
-            </if>
-            <if test="l2 != null and l2 != ''">
-                and l2=#{l2,jdbcType=VARCHAR}
-            </if>
-            <if test="l21 != null and l21 != ''">
-                and l21=#{l21,jdbcType=VARCHAR}
-            </if>
-            <if test="l22 != null and l22 != ''">
-                and l22=#{l22,jdbcType=VARCHAR}
-            </if>
-            <if test="czr != null and czr != ''">
-                and czr=#{czr,jdbcType=VARCHAR}
-            </if>
-            <if test="czsj != null">
-                and czsj=#{czsj,jdbcType=TIMESTAMP}
-            </if>
-            <if test="beizhu != null and beizhu != ''">
-                and beizhu=#{beizhu,jdbcType=VARCHAR}
-            </if>
-        </where>
-    </select>
-  <update id="updateBatch" parameterType="java.util.List">
-    <!--@mbg.generated-->
-    update pwbh_jl_dzjc
-    <trim prefix="set" suffixOverrides=",">
-      <trim prefix="tsid = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=VARCHAR} then #{item.tsid,jdbcType=VARCHAR}
-        </foreach>
-      </trim>
-      <trim prefix="ssqy = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=VARCHAR} then #{item.ssqy,jdbcType=VARCHAR}
-        </foreach>
-      </trim>
-      <trim prefix="jg = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=VARCHAR} then #{item.jg,jdbcType=VARCHAR}
-        </foreach>
-      </trim>
-      <trim prefix="g1 = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=VARCHAR} then #{item.g1,jdbcType=VARCHAR}
-        </foreach>
-      </trim>
-      <trim prefix="g11 = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=VARCHAR} then #{item.g11,jdbcType=VARCHAR}
-        </foreach>
-      </trim>
-      <trim prefix="g12 = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=VARCHAR} then #{item.g12,jdbcType=VARCHAR}
-        </foreach>
-      </trim>
-      <trim prefix="g2 = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=VARCHAR} then #{item.g2,jdbcType=VARCHAR}
-        </foreach>
-      </trim>
-      <trim prefix="g21 = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=VARCHAR} then #{item.g21,jdbcType=VARCHAR}
-        </foreach>
-      </trim>
-      <trim prefix="g22 = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=VARCHAR} then #{item.g22,jdbcType=VARCHAR}
-        </foreach>
-      </trim>
-      <trim prefix="l1 = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=VARCHAR} then #{item.l1,jdbcType=VARCHAR}
-        </foreach>
-      </trim>
-      <trim prefix="l11 = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=VARCHAR} then #{item.l11,jdbcType=VARCHAR}
-        </foreach>
-      </trim>
-      <trim prefix="l12 = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=VARCHAR} then #{item.l12,jdbcType=VARCHAR}
-        </foreach>
-      </trim>
-      <trim prefix="l2 = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=VARCHAR} then #{item.l2,jdbcType=VARCHAR}
-        </foreach>
-      </trim>
-      <trim prefix="l21 = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=VARCHAR} then #{item.l21,jdbcType=VARCHAR}
-        </foreach>
-      </trim>
-      <trim prefix="l22 = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=VARCHAR} then #{item.l22,jdbcType=VARCHAR}
-        </foreach>
-      </trim>
-      <trim prefix="czr = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=VARCHAR} then #{item.czr,jdbcType=VARCHAR}
-        </foreach>
-      </trim>
-      <trim prefix="czsj = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=VARCHAR} then #{item.czsj,jdbcType=TIMESTAMP}
-        </foreach>
-      </trim>
-      <trim prefix="beizhu = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=VARCHAR} then #{item.beizhu,jdbcType=VARCHAR}
-        </foreach>
-      </trim>
-    </trim>
-    where id in
-    <foreach close=")" collection="list" item="item" open="(" separator=", ">
-      #{item.id,jdbcType=VARCHAR}
-    </foreach>
-  </update>
-  <update id="updateBatchSelective" parameterType="java.util.List">
-    <!--@mbg.generated-->
-    update pwbh_jl_dzjc
-    <trim prefix="set" suffixOverrides=",">
-      <trim prefix="tsid = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.tsid != null">
-            when id = #{item.id,jdbcType=VARCHAR} then #{item.tsid,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="ssqy = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.ssqy != null">
-            when id = #{item.id,jdbcType=VARCHAR} then #{item.ssqy,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="jg = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.jg != null">
-            when id = #{item.id,jdbcType=VARCHAR} then #{item.jg,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="g1 = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.g1 != null">
-            when id = #{item.id,jdbcType=VARCHAR} then #{item.g1,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="g11 = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.g11 != null">
-            when id = #{item.id,jdbcType=VARCHAR} then #{item.g11,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="g12 = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.g12 != null">
-            when id = #{item.id,jdbcType=VARCHAR} then #{item.g12,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="g2 = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.g2 != null">
-            when id = #{item.id,jdbcType=VARCHAR} then #{item.g2,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="g21 = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.g21 != null">
-            when id = #{item.id,jdbcType=VARCHAR} then #{item.g21,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="g22 = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.g22 != null">
-            when id = #{item.id,jdbcType=VARCHAR} then #{item.g22,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="l1 = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.l1 != null">
-            when id = #{item.id,jdbcType=VARCHAR} then #{item.l1,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="l11 = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.l11 != null">
-            when id = #{item.id,jdbcType=VARCHAR} then #{item.l11,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="l12 = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.l12 != null">
-            when id = #{item.id,jdbcType=VARCHAR} then #{item.l12,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="l2 = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.l2 != null">
-            when id = #{item.id,jdbcType=VARCHAR} then #{item.l2,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="l21 = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.l21 != null">
-            when id = #{item.id,jdbcType=VARCHAR} then #{item.l21,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="l22 = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.l22 != null">
-            when id = #{item.id,jdbcType=VARCHAR} then #{item.l22,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="czr = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.czr != null">
-            when id = #{item.id,jdbcType=VARCHAR} then #{item.czr,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="czsj = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.czsj != null">
-            when id = #{item.id,jdbcType=VARCHAR} then #{item.czsj,jdbcType=TIMESTAMP}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="beizhu = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.beizhu != null">
-            when id = #{item.id,jdbcType=VARCHAR} then #{item.beizhu,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-    </trim>
-    where id in
-    <foreach close=")" collection="list" item="item" open="(" separator=", ">
-      #{item.id,jdbcType=VARCHAR}
-    </foreach>
-  </update>
-  <insert id="batchInsert" parameterType="map">
-    <!--@mbg.generated-->
-    insert into pwbh_jl_dzjc
-    (id, tsid, ssqy, jg, g1, g11, g12, g2, g21, g22, l1, l11, l12, l2, l21, l22, czr, 
-      czsj, beizhu)
-    values
-    <foreach collection="list" item="item" separator=",">
-      (#{item.id,jdbcType=VARCHAR}, #{item.tsid,jdbcType=VARCHAR}, #{item.ssqy,jdbcType=VARCHAR}, 
-        #{item.jg,jdbcType=VARCHAR}, #{item.g1,jdbcType=VARCHAR}, #{item.g11,jdbcType=VARCHAR}, 
-        #{item.g12,jdbcType=VARCHAR}, #{item.g2,jdbcType=VARCHAR}, #{item.g21,jdbcType=VARCHAR}, 
-        #{item.g22,jdbcType=VARCHAR}, #{item.l1,jdbcType=VARCHAR}, #{item.l11,jdbcType=VARCHAR}, 
-        #{item.l12,jdbcType=VARCHAR}, #{item.l2,jdbcType=VARCHAR}, #{item.l21,jdbcType=VARCHAR}, 
-        #{item.l22,jdbcType=VARCHAR}, #{item.czr,jdbcType=VARCHAR}, #{item.czsj,jdbcType=TIMESTAMP}, 
-        #{item.beizhu,jdbcType=VARCHAR})
-    </foreach>
-  </insert>
 </mapper>
