@@ -54,5 +54,20 @@ public class PwbhDzServiceImpl implements PwbhDzService {
         return pwbhDzMapper.selectByAll(pwbhDz);
     }
 
+    @Override
+    public int updateBatch(List<PwbhDz> list) {
+        return pwbhDzMapper.updateBatch(list);
+    }
+
+    @Override
+    public int updateBatchSelective(List<PwbhDz> list) {
+        return pwbhDzMapper.updateBatchSelective(list);
+    }
+
+    @Override
+    public int batchInsert(List<PwbhDz> list) {
+        return pwbhDzMapper.batchInsert(list);
+    }
 }
+
 

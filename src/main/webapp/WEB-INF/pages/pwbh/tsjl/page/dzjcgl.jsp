@@ -11,8 +11,16 @@
     <title>Title</title>
 </head>
 <body>
-<table id="dzjcgl" lay-filter="dzjcgl"></table>
-
+<script>
+    let dzjcgl, dzjclx = false;
+    function bgcolor(dzjcgl, dzjclx) {
+        if (dzjcgl && dzjclx) {
+            $("#li_dzjc").css({"background-color": "#009688"});
+            return;
+        }
+        $("#li_dzjc").css({"background-color": ""});
+    }
+</script>
 <script>
     layui.use('table', function () {
         let table = layui.table;
@@ -58,6 +66,7 @@
                 // 开启自动保存（自动保存记录/备注）
                 autosave = setInterval(function () {
                     editbz();
+                    submitDz();
                     if (record.length === 0) {
                         return;
                     }
@@ -75,21 +84,16 @@
                     });
                 }, 10000);
                 record = resdata;
-                $("[name='select4dzjcgl']").change(function () {
-                    let elem = $(this).parents('tr');
-                    let dataindex = elem.attr("data-index");
-                    $.each(record, (i, value) => {
-                        if (value.LAY_TABLE_INDEX == dataindex) {
-                            record[i].jcjg = $(this).val();
-                        }
-                    });
-                });
                 $.each(resdata, function (i) {
                     if (resdata[i].jcjg == null || resdata[i].jcjg === "" || resdata[i].jcjg == -1) {
-                        $("#li_dzjc").css({"background-color": ""});
+                        dzjcgl = false;
+                        bgcolor(dzjcgl, dzjclx);
+                        // $("#li_dzjc").css({"background-color": ""});
                         return;
                     }
-                    $("#li_dzjc").css({"background-color": "#009688"});
+                    dzjcgl = true;
+                    bgcolor(dzjcgl, dzjclx);
+                    // $("#li_dzjc").css({"background-color": "#009688"});
                 })
             }
         });
@@ -108,22 +112,6 @@
                 }
             });
         });
-
-        function editbz() {
-            let beizhu = {
-                tsid: tsid,
-                pwbhJlJxdx: $("#dzjcbeizhu").val()
-            };
-            $.ajax({
-                type: "POST",
-                url: "${basePath}/pwbh_beizhu/updateByPrimaryKey",
-                data: JSON.stringify(beizhu),//必须
-                contentType: "application/json;charsetset=UTF-8",//必须
-                dataType: "json",//必须
-                success: function (data) {
-                }
-            });
-        }
 
         // 提交记录(删除前)
         function submitJl(record) {
@@ -161,11 +149,11 @@
                     if (submitJl(record)) {
                         layer.open({
                             type: 2,
-                            title: '添加 --> 紧线及对线',
+                            title: '添加 --> 定值检查',
                             maxmin: true,
                             // shadeClose: true, //点击遮罩关闭层
                             area: ['800px', '520px'],
-                            content: '${basePath}/pwbh/tsjl/add/addJxdx/' + tsid + '/' + ssqy
+                            content: '${basePath}/pwbh/tsjl/add/addDzjc/' + tsid + '/' + ssqy
                             , end: function () {
                                 clearTimeout(autosave);
                                 tableReload.reload();
@@ -179,6 +167,7 @@
                 case 'SUBMIT':
                     // 修改备注
                     editbz();
+                    submitDz();
                     if (record.length === 0) {
                         layer.msg("无数据提交", {time: 1000, icon: 3});
                         return;
@@ -229,16 +218,6 @@
             }
         });
     });
-</script>
-
-<%-- 结果状态列(正常/异常)--%>
-<script type="text/html" id="dzjcgljg">
-    <select name='select4dzjcgl' lay-ignore lay-filter="dzjcgl" lay-search=''>
-        <option value="-1" {{ d.jcjg== -1 ? 'selected' : '' }}></option>
-        <option value="1" {{ d.jcjg== 1 ? 'selected' : '' }}>是</option>
-        <option value="0" {{ d.jcjg== 0 ? 'selected' : '' }}>否</option>
-        <option value="2" {{ d.jcjg== 2 ? 'selected' : '' }}>N/A</option>
-    </select>
 </script>
 </body>
 </html>

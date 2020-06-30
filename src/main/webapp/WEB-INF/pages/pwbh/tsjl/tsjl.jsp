@@ -98,7 +98,7 @@
             </fieldset>
             <%@include file="page/bhctjx.jsp" %>
             <%@include file="page/bhctbh.jsp" %>
-<%--            <%@include file="page/dzjc.jsp" %>--%>
+            <%@include file="page/dzjc.jsp" %>
             <%@include file="page/zzsy.jsp" %>
             <%@include file="page/bhcthl.jsp" %>
             <%@include file="page/sgjc.jsp" %>

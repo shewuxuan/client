@@ -17,8 +17,15 @@
 <div class="layui-field-box">
     <blockquote class="layui-elem-quote" style="width: 90%; margin: auto;">
         <span>检验要求: 将装置时钟校对至当前时钟，以便于系统故障时进行分析。</span><br>
-        <label for="szjcjg">检查结果: <input id="szjcjg" type="text"/></label>
-        <button id="commit" type="button" class="layui-btn layui-btn-sm">保存</button>
+        <label for="szjcjg">检查结果:
+<%--            <input id="szjcjg" type="text"/>--%>
+            <select id="szjcjg">
+                <option value="1" selected>正确</option>
+                <option value="0">错误</option>
+                <option value="2">N/A</option>
+            </select>
+        </label>
+        <button id="commit" type="button" class="layui-btn layui-btn-sm">提交</button>
     </blockquote>
 </div>
 </body>
@@ -44,9 +51,9 @@
                 url: '${basePath}/pwbh_beizhu/updateByPrimaryKey',			// 改
                 success: function (data) {
                     if (data.code === 0) {
-                        layer.msg(data.msg, {time: 1000, icon: 6});
+                        layer.msg('提交成功！', {time: 1000, icon: 6});
                     } else {
-                        layer.msg(data.msg, {time: 1000, icon: 5});
+                        layer.msg('提交失败！', {time: 1000, icon: 5});
                     }
                 }
             })

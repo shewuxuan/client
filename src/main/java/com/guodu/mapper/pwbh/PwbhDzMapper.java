@@ -1,13 +1,15 @@
 package com.guodu.mapper.pwbh;
 
 import com.guodu.pojo.pwbh.PwbhDz;
-import org.apache.ibatis.annotations.Mapper;import java.util.List;
+import java.util.List;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * @ClassName: PwbhDzMapper
  * @Description: TODO
  * @Author: 2Uli
- * @Date: 2020/6/29 4:31 下午
+ * @Date: 2020/6/30 1:39 下午
  */
 @Mapper
 public interface PwbhDzMapper {
@@ -60,4 +62,10 @@ public interface PwbhDzMapper {
     int updateByPrimaryKey(PwbhDz record);
 
     List<PwbhDz> selectByAll(PwbhDz pwbhDz);
+
+    int updateBatch(List<PwbhDz> list);
+
+    int updateBatchSelective(List<PwbhDz> list);
+
+    int batchInsert(@Param("list") List<PwbhDz> list);
 }

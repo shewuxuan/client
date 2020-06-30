@@ -79,6 +79,7 @@
             $("#bhcthlbeizhu").val(data.pwbhJlBhcthl);
             $("#bhctjxbeizhu").val(data.pwbhJlBhctjx);
             $("#dzdjcbeizhu").val(data.pwbhJlDzdjc);
+            $("#dzjcbeizhu").val(data.pwbhJlDzjc);
             $("#jdjybeizhu").val(data.pwbhJlJdjy);
             $("#jdszbeizhu").val(data.pwbhJlJdsz);
             $("#jxdxbeizhu").val(data.pwbhJlJxdx);
@@ -89,6 +90,23 @@
             $("#yqybbeizhu").val(data.pwbhJlYqyb);
             $("#zzsybeizhu").val(data.pwbhJlZzsy);
         });
+
+        <%--$.get("${basePath}/pwbh_dz/selectByPrimaryKey/" + tsid, function (data) {--%>
+        <%--    data = $.parseJSON(data).data;--%>
+        <%--    console.log(data);--%>
+        <%--    $("#l1").val(data.l1);--%>
+        <%--    $("#l11").val(data.l11);--%>
+        <%--    $("#l12").val(data.l12);--%>
+        <%--    $("#l2").val(data.l2);--%>
+        <%--    $("#l21").val(data.l21);--%>
+        <%--    $("#l22").val(data.l22);--%>
+        <%--    $("#g1").val(data.g1);--%>
+        <%--    $("#g11").val(data.g11);--%>
+        <%--    $("#g12").val(data.g12);--%>
+        <%--    $("#g2").val(data.g2);--%>
+        <%--    $("#g21").val(data.g21);--%>
+        <%--    $("#g22").val(data.g22);--%>
+        <%--});--%>
 
         // 查询告警定值
         <%--$.get("${basePath}/gjdz/selectByPrimaryKey/" + tsid, function (data) {--%>

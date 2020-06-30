@@ -26,5 +26,11 @@ public interface PwbhDzService {
 
     List<PwbhDz> selectByAll(PwbhDz pwbhDz);
 
+    int updateBatch(List<PwbhDz> list);
+
+    int updateBatchSelective(List<PwbhDz> list);
+
+    int batchInsert(List<PwbhDz> list);
 }
+
 

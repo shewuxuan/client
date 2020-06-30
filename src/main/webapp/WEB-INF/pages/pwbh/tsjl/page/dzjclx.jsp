@@ -11,7 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-<table id="dzjclx" lay-filter="dzjclx"></table>
 
 <script>
     layui.use('table', function () {
@@ -23,34 +22,28 @@
             , page: false
             , skin: 'row,line' //行边框风格
             , even: false //开启隔行背景
-            , url: '${basePath}/pwbh_jl_dzjc/selectByAll?tsid=' + tsid //数据接口      改
+            , url: '${basePath}/pwbh_dz/selectByAll?tsid=' + tsid //数据接口      改
             , toolbar: true
-            , defaultToolbar: [
-                {
-                    title: '添加' //标题
-                    , layEvent: 'ADD' //事件名，用于 toolbar 事件中使用
-                    , icon: 'layui-icon-addition'
-                }
-                , {
+            , defaultToolbar: [{
                     title: '提交' //标题
                     , layEvent: 'SUBMIT' //事件名，用于 toolbar 事件中使用
                     , icon: 'layui-icon-ok'
                 }
             ]
             , cols: [[ //表头
-                {field: 'id', title: 'ID', type: 'numbers', width: '5%', fixed: 'left', sort: true, rowspan: 2}
-                , {field: 'jg', title: '间隔', width: '11%', align: 'center', fixed: 'left', sort: true, rowspan: 2}
-                , {field: 'l1', title: '零序I段整定值', width: '10%', align: 'center', edit: 'text', rowspan: 2}
+                {title: '相别', width: '10%', align: 'center', fixed: 'left', rowspan: 2, templet: function () {
+                    return 'L-0';
+                    }}
+                , {field: 'lx1', title: '零序I段整定值', width: '13%', align: 'center', edit: 'text', rowspan: 2}
                 , {title: '实际通电0.95倍定值／1.05倍定值', align: 'center', colspan: 2}
-                , {field: 'l2', title: '零序II段整定值', width: '10%', align: 'center', edit: 'text', rowspan: 2}
+                , {field: 'lx2', title: '零序II段整定值', width: '13%', align: 'center', edit: 'text', rowspan: 2}
                 , {title: '实际通电0.95倍定值／1.05倍定值', align: 'center', colspan: 2}
-                , {title: '操作', width: '8%', align: 'center', toolbar: '#barDemo', rowspan: 2}
             ],
                 [
-                    {field: 'l11', title: '不动作(A)', width: '14%', align: 'center', edit: 'text'}
-                    , {field: 'l12', title: '动作(A)', width: '14%', align: 'center', edit: 'text'}
-                    , {field: 'l21', title: '不动作(A)', width: '14%', align: 'center', edit: 'text'}
-                    , {field: 'l22', title: '动作(A)', width: '14%', align: 'center', edit: 'text'}
+                    {field: 'lx11', title: '不动作(A)', width: '16%', align: 'center', edit: 'text'}
+                    , {field: 'lx12', title: '动作(A)', width: '16%', align: 'center', edit: 'text'}
+                    , {field: 'lx21', title: '不动作(A)', width: '16%', align: 'center', edit: 'text'}
+                    , {field: 'lx22', title: '动作(A)', width: '16%', align: 'center', edit: 'text'}
 
                 ]]
             , done: function (res) {
@@ -58,12 +51,13 @@
                 // 开启自动保存（自动保存记录/备注）
                 autosave = setInterval(function () {
                     editbz();
+                    submitDz();
                     if (record.length === 0) {
                         return;
                     }
                     $.ajax({
                         type: "POST",
-                        url: "${basePath}/pwbh_jl_dzjc/updateBatch",              // 改
+                        url: "${basePath}/pwbh_dz/updateByPrimaryKey",              // 改
                         data: JSON.stringify(record),//必须
                         contentType: "application/json;charsetset=UTF-8",//必须
                         dataType: "json",//必须
@@ -75,21 +69,16 @@
                     });
                 }, 10000);
                 record = resdata;
-                $("[name='select4dzjclx']").change(function () {
-                    let elem = $(this).parents('tr');
-                    let dataindex = elem.attr("data-index");
-                    $.each(record, (i, value) => {
-                        if (value.LAY_TABLE_INDEX == dataindex) {
-                            record[i].jcjg = $(this).val();
-                        }
-                    });
-                });
                 $.each(resdata, function (i) {
                     if (resdata[i].jcjg == null || resdata[i].jcjg === "" || resdata[i].jcjg == -1) {
-                        $("#li_dzjc").css({"background-color": ""});
+                        dzjclx = false;
+                        bgcolor(dzjcgl, dzjclx);
+                        // $("#li_dzjc").css({"background-color": ""});
                         return;
                     }
-                    $("#li_dzjc").css({"background-color": "#009688"});
+                    dzjclx = true;
+                    bgcolor(dzjcgl, dzjclx);
+                    // $("#li_dzjc").css({"background-color": "#009688"});
                 })
             }
         });
@@ -97,96 +86,36 @@
         // 编辑
         table.on('edit(dzjclx)', function (obj) {         // 改
             let data = obj.data;
-            $.each(record, function (i) {
-                if (record[i].id === data.id) {
-                    record[i].l1 = data.l1;
-                    record[i].l11 = data.l11;
-                    record[i].l12 = data.l12;
-                    record[i].l2 = data.l2;
-                    record[i].l21 = data.l21;
-                    record[i].l22 = data.l22;
+            $.each(record, function (i, value) {
+                if (value.tsid === data.tsid) {
+                    value.lx1 = data.lx1;
+                    value.lx11 = data.lx11;
+                    value.lx12 = data.lx12;
+                    value.lx2 = data.lx2;
+                    value.lx21 = data.lx21;
+                    value.lx22 = data.lx22;
                 }
             });
+            console.log(record)
         });
-
-        function editbz() {
-            let beizhu = {
-                tsid: tsid,
-                pwbhJlJxdx: $("#dzjcbeizhu").val()
-            };
-            $.ajax({
-                type: "POST",
-                url: "${basePath}/pwbh_beizhu/updateByPrimaryKey",
-                data: JSON.stringify(beizhu),//必须
-                contentType: "application/json;charsetset=UTF-8",//必须
-                dataType: "json",//必须
-                success: function (data) {
-                }
-            });
-        }
-
-        // 提交记录(删除前)
-        function submitJl(record) {
-            // 表格没有数据
-            if (record.length === 0) {
-                return true;
-            }
-            let data = null;
-            $.ajax({
-                type: "POST",
-                async: false,
-                url: "${basePath}/pwbh_jl_dzjc/updateBatch",              // 改
-                data: JSON.stringify(record),//必须
-                contentType: "application/json;charsetset=UTF-8",//必须
-                dataType: "json",//必须
-                success: function (result) {
-                    clearTimeout(autosave);
-                    tableReload.reload();
-                    record = [];
-                    data = result;
-                }
-            });
-            return data.code === 0;
-        }
 
         //监听事件
         table.on('toolbar(dzjclx)', function (obj) {      // 改
             switch (obj.event) {
-                // 添加
-                case 'ADD':
-                    if (${requestScope.userType != 0}) {
-                        layer.msg("权限不足！", {time: 1500, icon: 4});
-                        return;
-                    }
-                    if (submitJl(record)) {
-                        layer.open({
-                            type: 2,
-                            title: '添加 --> 紧线及对线',
-                            maxmin: true,
-                            // shadeClose: true, //点击遮罩关闭层
-                            area: ['800px', '520px'],
-                            content: '${basePath}/pwbh/tsjl/add/addJxdx/' + tsid + '/' + ssqy
-                            , end: function () {
-                                clearTimeout(autosave);
-                                tableReload.reload();
-                            }
-                        });
-                    } else {
-                        layer.msg("添加前提交失败，请刷新重试！", {time: 2000, icon: 5});
-                    }
-                    break;
                 // 提交
                 case 'SUBMIT':
                     // 修改备注
                     editbz();
+                    submitDz();
                     if (record.length === 0) {
                         layer.msg("无数据提交", {time: 1000, icon: 3});
                         return;
                     }
+                    console.log(record)
                     $.ajax({
                         type: "POST",
-                        url: "${basePath}/pwbh_jl_dzjc/updateBatch",              // 改
-                        data: JSON.stringify(record),//必须
+                        url: "${basePath}/pwbh_dz/updateByPrimaryKey",              // 改
+                        data: JSON.stringify(record[0]),//必须
                         contentType: "application/json;charsetset=UTF-8",//必须
                         dataType: "json",//必须
                         success: function (data) {
@@ -203,42 +132,7 @@
                     break;
             }
         });
-
-        //监听行操作
-        table.on('tool(dzjclx)', function (obj) {
-            let that = obj.data;
-            if (obj.event === 'del') {
-                layer.confirm('真的删除吗？', function () {
-                    // 删除前提交
-                    if (submitJl(record)) {
-                        // 删除
-                        $.get("${basePath}/pwbh_jl_dzjc/deleteByPrimaryKey/" + that.id, function (result) {
-                            clearTimeout(autosave);
-                            tableReload.reload();
-                            result = JSON.parse(result);
-                            if (result.code === 0) {
-                                layer.msg(result.msg, {time: 1500, icon: 1});
-                            } else {
-                                layer.msg(result.msg, {time: 2000, icon: 5});
-                            }
-                        });
-                    } else {
-                        layer.msg("删除前提交失败，请刷新重试！", {time: 2000, icon: 5});
-                    }
-                });
-            }
-        });
     });
-</script>
-
-<%-- 结果状态列(正常/异常)--%>
-<script type="text/html" id="dzjclxjg">
-    <select name='select4dzjclx' lay-ignore lay-filter="dzjclx" lay-search=''>
-        <option value="-1" {{ d.jcjg== -1 ? 'selected' : '' }}></option>
-        <option value="1" {{ d.jcjg== 1 ? 'selected' : '' }}>是</option>
-        <option value="0" {{ d.jcjg== 0 ? 'selected' : '' }}>否</option>
-        <option value="2" {{ d.jcjg== 2 ? 'selected' : '' }}>N/A</option>
-    </select>
 </script>
 </body>
 </html>
