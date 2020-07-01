@@ -23,7 +23,8 @@
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     <!--@mbg.generated-->
     delete from pwbh_bz_jycs
-    where id = #{id,jdbcType=VARCHAR}
+    where 1=1
+    <if test="id != -1"> and id = #{id}</if>
   </delete>
   <insert id="insert" parameterType="com.guodu.pojo.pwbh.PwbhBzJycs">
     <!--@mbg.generated-->

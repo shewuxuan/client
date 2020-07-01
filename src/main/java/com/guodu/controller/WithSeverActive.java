@@ -429,6 +429,8 @@ public class WithSeverActive {
     PwbhBzWgjcService pwbhBzWgjcServiceImpl;
     @Autowired
     PwbhBzYqybService pwbhBzYqybServiceImpl;
+    @Autowired
+    PwbhBzZzsyService pwbhBzZzsyServiceImpl;
     @Value("${pwbhUrl}")
     String pwbhUrl;
 
@@ -507,6 +509,12 @@ public class WithSeverActive {
         pwbhBzYqybServiceImpl.deleteByPrimaryKey("-1");
         for(PwbhBzYqyb bzYqyb:bzYqybList){
             pwbhBzYqybServiceImpl.insert(bzYqyb);
+        }
+
+        List<PwbhBzZzsy> bzZzsyList = JSON.parseObject(param.get("bzZzsy"), new TypeReference< List<PwbhBzZzsy>>() {});
+        pwbhBzZzsyServiceImpl.deleteByPrimaryKey("-1");
+        for(PwbhBzZzsy bzZzsy:bzZzsyList){
+            pwbhBzZzsyServiceImpl.insert(bzZzsy);
         }
     }
 
