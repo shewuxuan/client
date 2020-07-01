@@ -19,7 +19,7 @@ public interface PwbhBzJycsMapper {
      * @param id primaryKey
      * @return deleteCount
      */
-    int deleteByPrimaryKey(String id);
+    int deleteByPrimaryKey(@Param(value = "id") String id);
 
     /**
      * insert record to table

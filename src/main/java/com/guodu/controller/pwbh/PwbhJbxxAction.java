@@ -148,7 +148,7 @@ public class PwbhJbxxAction {
 		OutputStream os = null;
 		try {
 			PwbhJbxx pwbhJbxx = pwbhJbxxServiceImpl.selectById(tsid);
-			//doc = pwbhJbxxServiceImpl.exportToWordByWord(Auth.getAuth(request).getSsqy(),pwbhJbxx);
+			doc = pwbhJbxxServiceImpl.exportToWordByWord(Auth.getAuth(request).getSsqy(),pwbhJbxx);
 			os = response.getOutputStream();
 			response.setCharacterEncoding("utf-8");
 			response.setContentType("application/msword");
