@@ -84,7 +84,7 @@ public class PwbhDzController {
     public String updateByPrimaryKey(@RequestBody PwbhDz record) {
         map.clear();
         try {
-            serviceImpl.updateByPrimaryKey(record);
+            serviceImpl.updateByPrimaryKeySelective(record);
             map.put("code", 0);
             map.put("msg", "提交成功！");
         } catch (Exception e) {

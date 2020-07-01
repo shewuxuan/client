@@ -95,7 +95,7 @@ public class PwbhTsjlServiceImpl implements PwbhTsjlService {
         pwbhBzJxdx.setSsqy(ssqy);
         List<PwbhBzJxdx> pwbhBzJxdxes = pwbhBzJxdxServiceImpl.selectByAll(pwbhBzJxdx);
         for (PwbhBzJxdx bzJxdx : pwbhBzJxdxes) {
-            PwbhJlJxdx pwbhJlJxdx = new PwbhJlJxdx(IDUtil.getStrId(), tsid, ssqy, bzJxdx.getNr(), null, czr, new Date(), null);
+            PwbhJlJxdx pwbhJlJxdx = new PwbhJlJxdx(IDUtil.getStrId(), tsid, ssqy, bzJxdx.getNr(), "1", czr, new Date(), null);
             pwbhJlJxdxServiceImpl.insert(pwbhJlJxdx);
         }
 
@@ -169,7 +169,7 @@ public class PwbhTsjlServiceImpl implements PwbhTsjlService {
         pwbhJlDzdjcServiceImpl.insert(pwbhJlDzdjc);
 
         // 备注
-        PwbhJbxxBeizhu pwbhJbxxBeizhu = new PwbhJbxxBeizhu(tsid, null, null, null, null, null, null, null, null, null, null, null, null);
+        PwbhJbxxBeizhu pwbhJbxxBeizhu = new PwbhJbxxBeizhu(tsid, null, null, null, null, null, null, null, null, null, null, null, "1");
         pwbhJbxxBeizhuServiceImpl.insert(pwbhJbxxBeizhu);
     }
 

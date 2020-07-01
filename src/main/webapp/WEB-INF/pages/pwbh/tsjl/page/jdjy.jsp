@@ -57,7 +57,7 @@
                 {field: 'id', title: 'ID', type: 'numbers', width: '5%', fixed: 'left', sort: true}
                 , {field: 'csjg', title: '测试结果', width: '20%', align: 'center', sort: true}
                 , {field: 'tryq', title: '通入要求值', width: '20%', align: 'center', sort: true}
-                , {field: 'zzxs', title: '装置显示', width: '20%', align: 'center', edit: 'text'}
+                , {field: 'zzxs', title: '装置显示', width: '27%', align: 'center', edit: 'text'}
                 , {field: 'jcjg', title: '检查结果', width: '20%', align: 'center', templet: '#jdjyjg'}
                 , {title: '操作', width: '8%', align: 'center', toolbar: '#barDemo'}
             ]]

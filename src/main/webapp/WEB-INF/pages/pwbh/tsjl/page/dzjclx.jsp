@@ -15,7 +15,7 @@
 <script>
     layui.use('table', function () {
         let table = layui.table;
-        let record = [];
+        let record = null;
         let autosave = null;
         let tableReload = table.render({
             elem: '#dzjclx'                           // 改
@@ -47,14 +47,13 @@
 
                 ]]
             , done: function (res) {
-                let resdata = res.data;
+                let resdata = res.data[0];
                 // 开启自动保存（自动保存记录/备注）
                 autosave = setInterval(function () {
-                    editbz();
                     submitDz();
-                    if (record.length === 0) {
-                        return;
-                    }
+                    // if (record.length === 0) {
+                    //     return;
+                    // }
                     $.ajax({
                         type: "POST",
                         url: "${basePath}/pwbh_dz/updateByPrimaryKey",              // 改
@@ -69,34 +68,49 @@
                     });
                 }, 10000);
                 record = resdata;
-                $.each(resdata, function (i) {
-                    if (resdata[i].jcjg == null || resdata[i].jcjg === "" || resdata[i].jcjg == -1) {
-                        dzjclx = false;
-                        bgcolor(dzjcgl, dzjclx);
-                        // $("#li_dzjc").css({"background-color": ""});
-                        return;
-                    }
-                    dzjclx = true;
-                    bgcolor(dzjcgl, dzjclx);
-                    // $("#li_dzjc").css({"background-color": "#009688"});
-                })
+                // $.each(resdata, function (i) {
+                //     if (resdata[i].jcjg == null || resdata[i].jcjg === "" || resdata[i].jcjg == -1) {
+                //         dzjclx = false;
+                //         bgcolor(dzjcgl, dzjclx);
+                //         // $("#li_dzjc").css({"background-color": ""});
+                //         return;
+                //     }
+                //     dzjclx = true;
+                //     bgcolor(dzjcgl, dzjclx);
+                //     // $("#li_dzjc").css({"background-color": "#009688"});
+                // })
             }
         });
 
         // 编辑
         table.on('edit(dzjclx)', function (obj) {         // 改
             let data = obj.data;
-            $.each(record, function (i, value) {
-                if (value.tsid === data.tsid) {
-                    value.lx1 = data.lx1;
-                    value.lx11 = data.lx11;
-                    value.lx12 = data.lx12;
-                    value.lx2 = data.lx2;
-                    value.lx21 = data.lx21;
-                    value.lx22 = data.lx22;
-                }
-            });
-            console.log(record)
+            record = {
+                "tsid": data.tsid,
+                "lx22": data.lx22,
+                "lx21": data.lx21,
+                "lx2": data.lx2,
+                "lx12": data.lx12,
+                "lx11": data.lx11,
+                "lx1": data.lx1
+            }
+            console.log(record);
+            // record.lx1 = data.lx1;
+            // record.lx11 = data.lx11;
+            // record.lx12 = data.lx12;
+            // record.lx2 = data.lx2;
+            // record.lx21 = data.lx21;
+            // record.lx22 = data.lx22;
+            // $.each(record, function (i, value) {
+            //     if (value.tsid === tsid) {
+            //         value.lx1 = data.lx1;
+            //         value.lx11 = data.lx11;
+            //         value.lx12 = data.lx12;
+            //         value.lx2 = data.lx2;
+            //         value.lx21 = data.lx21;
+            //         value.lx22 = data.lx22;
+            //     }
+            // });
         });
 
         //监听事件
@@ -107,22 +121,21 @@
                     // 修改备注
                     editbz();
                     submitDz();
-                    if (record.length === 0) {
-                        layer.msg("无数据提交", {time: 1000, icon: 3});
-                        return;
-                    }
-                    console.log(record)
+                    // if (record.length === 0) {
+                    //     layer.msg("无数据提交", {time: 1000, icon: 3});
+                    //     return;
+                    // }
                     $.ajax({
                         type: "POST",
                         url: "${basePath}/pwbh_dz/updateByPrimaryKey",              // 改
-                        data: JSON.stringify(record[0]),//必须
+                        data: JSON.stringify(record),//必须
                         contentType: "application/json;charsetset=UTF-8",//必须
                         dataType: "json",//必须
                         success: function (data) {
                             if (data.code === 0) {
                                 clearTimeout(autosave);
                                 tableReload.reload();
-                                record = [];
+                                record = null;
                                 layer.msg(data.msg, {time: 1000, icon: 6});
                             } else {
                                 layer.msg(data.msg, {time: 2000, icon: 5})

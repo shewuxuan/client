@@ -54,10 +54,10 @@
             ]
             , cols: [[ //表头
                 {field: 'id', title: 'ID', type: 'numbers', width: '5%', fixed: 'left', sort: true}
-                , {field: 'xb', title: '相别', width: '20%', align: 'center', sort: true}
-                , {field: 'bhc', title: '保护侧', width: '20%', align: 'center', edit: 'text'}
-                , {field: 'ctc', title: 'CT侧', width: '20%', align: 'center', edit: 'text'}
-                , {title: '操作', width: '8%', align: 'center', toolbar: '#barDemo'}
+                , {field: 'xb', title: '相别', width: '28%', align: 'center', sort: true}
+                , {field: 'bhc', title: '保护侧', width: '28%', align: 'center', edit: 'text'}
+                , {field: 'ctc', title: 'CT侧', width: '28%', align: 'center', edit: 'text'}
+                , {title: '操作', width: '11%', align: 'center', toolbar: '#barDemo'}
             ]]
             , done: function (res) {
                 let resdata = res.data;

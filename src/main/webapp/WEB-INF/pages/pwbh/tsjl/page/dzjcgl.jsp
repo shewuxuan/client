@@ -66,7 +66,6 @@
                 // 开启自动保存（自动保存记录/备注）
                 autosave = setInterval(function () {
                     editbz();
-                    submitDz();
                     if (record.length === 0) {
                         return;
                     }
@@ -167,7 +166,6 @@
                 case 'SUBMIT':
                     // 修改备注
                     editbz();
-                    submitDz();
                     if (record.length === 0) {
                         layer.msg("无数据提交", {time: 1000, icon: 3});
                         return;

@@ -55,12 +55,12 @@
             ]
             , cols: [[ //表头
                 {field: 'id', title: 'ID', type: 'numbers', width: '5%', fixed: 'left', sort: true}
-                , {field: 'xb', title: '相别', width: '20%', align: 'center', sort: true}
-                , {field: 'xh', title: '型号', width: '20%', align: 'center', edit: 'text'}
-                , {field: 'xqh', title: '线圈号', width: '20%', align: 'center', edit: 'text'}
-                , {field: 'cs', title: '参数', width: '20%', align: 'center', edit: 'text'}
-                , {field: 'mybh', title: '名义变比', width: '20%', align: 'center', edit: 'text'}
-                , {field: 'sybh', title: '实验变比', width: '20%', align: 'center', edit: 'text'}
+                , {field: 'xb', title: '相别', width: '12%', align: 'center', sort: true}
+                , {field: 'xh', title: '型号', width: '15%', align: 'center', edit: 'text'}
+                , {field: 'xqh', title: '线圈号', width: '15%', align: 'center', edit: 'text'}
+                , {field: 'cs', title: '参数', width: '15%', align: 'center', edit: 'text'}
+                , {field: 'mybh', title: '名义变比', width: '15%', align: 'center', edit: 'text'}
+                , {field: 'sybh', title: '实验变比', width: '15%', align: 'center', edit: 'text'}
                 , {title: '操作', width: '8%', align: 'center', toolbar: '#barDemo'}
             ]]
             , done: function (res) {

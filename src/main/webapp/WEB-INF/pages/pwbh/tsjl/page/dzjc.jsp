@@ -12,7 +12,7 @@
 </head>
 <body>
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-    <legend id="mao3">10、定值检查</legend>
+    <legend id="mao10">10、定值检查</legend>
 </fieldset>
 <div class="layui-field-box">
     <blockquote class="layui-elem-quote" style="width: 90%; margin: auto;">

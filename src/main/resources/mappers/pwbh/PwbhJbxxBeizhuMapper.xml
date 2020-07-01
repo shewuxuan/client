@@ -138,37 +138,37 @@
     <!--@mbg.generated-->
     update pwbh_jbxx_beizhu
     <set>
-      <if test="pwbhJlWgjc != null and pwbhJlWgjc != ''">
+      <if test="pwbhJlWgjc != null">
         pwbh_jl_wgjc = #{pwbhJlWgjc,jdbcType=VARCHAR},
       </if>
-      <if test="pwbhJlJxdx != null and pwbhJlJxdx != ''">
+      <if test="pwbhJlJxdx != null">
         pwbh_jl_jxdx = #{pwbhJlJxdx,jdbcType=VARCHAR},
       </if>
-      <if test="pwbhJlJycs != null and pwbhJlJycs != ''">
+      <if test="pwbhJlJycs != null">
         pwbh_jl_jycs = #{pwbhJlJycs,jdbcType=VARCHAR},
       </if>
-      <if test="pwbhJlLpjy != null and pwbhJlLpjy != ''">
+      <if test="pwbhJlLpjy != null">
         pwbh_jl_lpjy = #{pwbhJlLpjy,jdbcType=VARCHAR},
       </if>
-      <if test="pwbhJlJdjy != null and pwbhJlJdjy != ''">
+      <if test="pwbhJlJdjy != null">
         pwbh_jl_jdjy = #{pwbhJlJdjy,jdbcType=VARCHAR},
       </if>
-      <if test="pwbhJlBhctjx != null and pwbhJlBhctjx != ''">
+      <if test="pwbhJlBhctjx != null">
         pwbh_jl_bhctjx = #{pwbhJlBhctjx,jdbcType=VARCHAR},
       </if>
-      <if test="pwbhJlBhctbh != null and pwbhJlBhctbh != ''">
+      <if test="pwbhJlBhctbh != null">
         pwbh_jl_bhctbh = #{pwbhJlBhctbh,jdbcType=VARCHAR},
       </if>
-      <if test="pwbhJlDzjc != null and pwbhJlDzjc != ''">
+      <if test="pwbhJlDzjc != null">
         pwbh_jl_dzjc = #{pwbhJlDzjc,jdbcType=VARCHAR},
       </if>
-      <if test="pwbhJlZzsy != null and pwbhJlZzsy != ''">
+      <if test="pwbhJlZzsy != null">
         pwbh_jl_zzsy = #{pwbhJlZzsy,jdbcType=VARCHAR},
       </if>
-      <if test="pwbhJlBhcthl != null and pwbhJlBhcthl != ''">
+      <if test="pwbhJlBhcthl != null">
         pwbh_jl_bhcthl = #{pwbhJlBhcthl,jdbcType=VARCHAR},
       </if>
-      <if test="pwbhJlSgjc != null and pwbhJlSgjc != ''">
+      <if test="pwbhJlSgjc != null">
         pwbh_jl_sgjc = #{pwbhJlSgjc,jdbcType=VARCHAR},
       </if>
       <if test="szjcjg != null and szjcjg != ''">

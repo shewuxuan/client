@@ -56,8 +56,8 @@
                 {field: 'id', title: 'ID', type: 'numbers', width: '5%', fixed: 'left', sort: true}
                 , {field: 'xb', title: '相别', width: '20%', align: 'center', sort: true}
                 , {field: 'mx1', title: '一次以母线为正', width: '20%', align: 'center', edit: 'text'}
-                , {field: 'mx2', title: '二次以母线为正', width: '20%', align: 'center', edit: 'text'}
-                , {field: 'bjzs', title: '表计指示', width: '20%', align: 'center', edit: 'text'}
+                , {field: 'mx2', title: '二次以S1为正', width: '20%', align: 'center', edit: 'text'}
+                , {field: 'bjzs', title: '表计指示', width: '27%', align: 'center', edit: 'text'}
                 , {title: '操作', width: '8%', align: 'center', toolbar: '#barDemo'}
             ]]
             , done: function (res) {
