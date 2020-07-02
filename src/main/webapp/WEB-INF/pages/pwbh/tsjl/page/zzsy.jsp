@@ -55,11 +55,11 @@
             , cols: [[ //表头
                 {field: 'id', title: 'ID', type: 'numbers', width: '5%', fixed: 'left', sort: true}
                 , {field: 'jyxm', title: '检验项目', width: '20%', align: 'center', sort: true}
-                , {field: 'gzmn', title: '故障模拟', width: '20%', align: 'center', edit: 'text'}
-                , {field: 'dlq', title: '断路器', width: '20%', align: 'center', edit: 'text'}
-                , {field: 'zzxh', title: '主站信号', width: '20%', align: 'center', edit: 'text'}
-                , {field: 'zzxs', title: '装置显示', width: '20%', align: 'center', edit: 'text'}
-                , {field: 'jcjg', title: '检查结果', width: '20%', align: 'center', templet: '#zzsyjg'}
+                , {field: 'gzmn', title: '故障模拟', width: '27%', align: 'center', edit: 'text'}
+                , {field: 'dlq', title: '断路器', width: '10%', align: 'center', templet: '#zzsydlq'}
+                , {field: 'zzxh', title: '主站信号', width: '10%', align: 'center', templet: '#zzsyzzxh'}
+                , {field: 'zzxs', title: '装置显示', width: '10%', align: 'center', templet: '#zzsyzzxs'}
+                , {field: 'jcjg', title: '检查结果', width: '10%', align: 'center', templet: '#zzsyjg'}
                 , {title: '操作', width: '8%', align: 'center', toolbar: '#barDemo'}
             ]]
             , done: function (res) {
@@ -89,15 +89,43 @@
                     let dataindex = elem.attr("data-index");
                     $.each(record, (i, value) => {
                         if (value.LAY_TABLE_INDEX == dataindex) {
-                            record[i].jcjg = $(this).val();
+                            value.jcjg = $(this).val();
+                        }
+                    });
+                });
+                $("[name='select4dlq']").change(function () {
+                    let elem = $(this).parents('tr');
+                    let dataindex = elem.attr("data-index");
+                    $.each(record, (i, value) => {
+                        if (value.LAY_TABLE_INDEX == dataindex) {
+                            value.dlq = $(this).val();
+                        }
+                    });
+                });
+                $("[name='select4zzxh']").change(function () {
+                    let elem = $(this).parents('tr');
+                    let dataindex = elem.attr("data-index");
+                    $.each(record, (i, value) => {
+                        if (value.LAY_TABLE_INDEX == dataindex) {
+                            value.zzxh = $(this).val();
+                        }
+                    });
+                });
+                $("[name='select4zzxs']").change(function () {
+                    let elem = $(this).parents('tr');
+                    let dataindex = elem.attr("data-index");
+                    $.each(record, (i, value) => {
+                        if (value.LAY_TABLE_INDEX == dataindex) {
+                            value.zzxs = $(this).val();
                         }
                     });
                 });
                 $.each(resdata, function (i, value) {
-                    if (value.dlq == null || value.dlq === ""
-                    || value.zzxh == null || value.zzxh === ""
-                    || value.zzxs == null || value.zzxs === ""
-                    || value.jcjg == null || value.jcjg === "" || value.jcjg === -1) {
+                    if (value.gzmn == null || value.gzmn === ""
+                    || value.dlq == null || value.dlq === "" || value.dlq == -1
+                    || value.zzxh == null || value.zzxh === "" || value.zzxh == -1
+                    || value.zzxs == null || value.zzxs === "" || value.zzxs == -1
+                    || value.jcjg == null || value.jcjg === "" || value.jcjg == -1) {
                         $("#li_zzsy").css({"background-color": ""});
                         return false;
                     }
@@ -109,13 +137,13 @@
         // 编辑
         table.on('edit(zzsy)', function (obj) {         // 改
             let data = obj.data;
-            $.each(record, function (i, value) {
-                if (value.id === data.id) {
-                    value.dlq = data.dlq;
-                    value.zzxh = data.zzxh;
-                    value.zzxs = data.zzxs;
-                }
-            });
+            // $.each(record, function (i, value) {
+            //     if (value.id === data.id) {
+            //         value.dlq = data.dlq;
+            //         value.zzxh = data.zzxh;
+            //         value.zzxs = data.zzxs;
+            //     }
+            // });
         });
 
         function editbz() {
@@ -244,9 +272,33 @@
 <script type="text/html" id="zzsyjg">
     <select name='select4zzsy' lay-ignore lay-filter="zzsy" lay-search=''>
         <option value="-1" {{ d.jcjg== -1 ? 'selected' : '' }}></option>
-        <option value="1" {{ d.jcjg== 1 ? 'selected' : '' }}>是</option>
-        <option value="0" {{ d.jcjg== 0 ? 'selected' : '' }}>否</option>
+        <option value="1" {{ d.jcjg== 1 ? 'selected' : '' }}>正确</option>
+        <option value="0" {{ d.jcjg== 0 ? 'selected' : '' }}>错误</option>
         <option value="2" {{ d.jcjg== 2 ? 'selected' : '' }}>N/A</option>
+    </select>
+</script>
+<script type="text/html" id="zzsydlq">
+    <select name='select4dlq' lay-ignore lay-filter="zzsydlq" lay-search=''>
+        <option value="-1" {{ d.dlq== -1 ? 'selected' : '' }}></option>
+        <option value="1" {{ d.dlq== 1 ? 'selected' : '' }}>正确</option>
+        <option value="0" {{ d.dlq== 0 ? 'selected' : '' }}>错误</option>
+        <option value="2" {{ d.dlq== 2 ? 'selected' : '' }}>N/A</option>
+    </select>
+</script>
+<script type="text/html" id="zzsyzzxh">
+    <select name='select4zzxh' lay-ignore lay-filter="zzsyzzxh" lay-search=''>
+        <option value="-1" {{ d.zzxh== -1 ? 'selected' : '' }}></option>
+        <option value="1" {{ d.zzxh== 1 ? 'selected' : '' }}>正确</option>
+        <option value="0" {{ d.zzxh== 0 ? 'selected' : '' }}>错误</option>
+        <option value="2" {{ d.zzxh== 2 ? 'selected' : '' }}>N/A</option>
+    </select>
+</script>
+<script type="text/html" id="zzsyzzxs">
+    <select name='select4zzxs' lay-ignore lay-filter="zzsyzzxs" lay-search=''>
+        <option value="-1" {{ d.zzxs== -1 ? 'selected' : '' }}></option>
+        <option value="1" {{ d.zzxs== 1 ? 'selected' : '' }}>正确</option>
+        <option value="0" {{ d.zzxs== 0 ? 'selected' : '' }}>错误</option>
+        <option value="2" {{ d.zzxs== 2 ? 'selected' : '' }}>N/A</option>
     </select>
 </script>
 </body>

@@ -79,12 +79,12 @@
                 }, 10000);
                 record = resdata;
                 // 导航栏背景色
-                $.each(resdata, function (i) {
-                    if (resdata[i].sbxh == null || resdata[i].sbxh === ""
-                        || resdata[i].bh == null || resdata[i].bh === ""
-                        || resdata[i].hgqx == null || resdata[i].hgqx === "") {
+                $.each(resdata, function (i, value) {
+                    if (value.sbxh == null || value.sbxh === ""
+                        || value.bh == null || value.bh === ""
+                        || value.hgqx == null || value.hgqx === "") {
                         $("#li_yqyb").css({"background-color": ""});
-                        return;
+                        return false;
                     }
                     $("#li_yqyb").css({"background-color": "#009688"});
                 });

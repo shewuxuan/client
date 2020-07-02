@@ -95,7 +95,7 @@
                     });
                 });
                 $.each(resdata, function (i, value) {
-                    if (value.jcjg == null || value.jcjg === "" || value.jcjg === -1) {
+                    if (value.jcjg == null || value.jcjg === "" || value.jcjg == -1) {
                         $("#li_wgjc").css({"background-color": ""});
                         return false;
                     }

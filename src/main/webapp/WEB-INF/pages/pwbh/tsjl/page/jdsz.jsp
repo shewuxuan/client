@@ -20,6 +20,7 @@
         <label for="szjcjg">检查结果:
 <%--            <input id="szjcjg" type="text"/>--%>
             <select id="szjcjg">
+                <option value="-1"></option>
                 <option value="1" selected>正确</option>
                 <option value="0">错误</option>
                 <option value="2">N/A</option>
@@ -34,22 +35,35 @@
         $.get("${basePath}/pwbh_beizhu/selectByPrimaryKey/" + tsid, function (data) {
                 data = JSON.parse(data);
                 $("#szjcjg").val(data.szjcjg);
+                if (data.szjcjg == null || data.szjcjg === "" || data.szjcjg == -1) {
+                    $("#li_jdsz").css({"background-color": ""});
+                } else {
+                    $("#li_jdsz").css({"background-color": "#009688"});
+                }
             }
         );
+    });
 
+    layui.use('layer', function(){
+        let layer = layui.layer;
         $("#commit").click(function () {
-            let data = {
+            let record = {
                 "tsid": tsid,
                 "szjcjg": $("#szjcjg").val()
             };
             $.ajax({
                 type: 'POST',
                 processData: false, // 告诉jquery不要处理数据
-                data: JSON.stringify(data),//必须
+                data: JSON.stringify(record),//必须
                 contentType: "application/json;charsetset=UTF-8",//必须
                 dataType: "json",//必须
                 url: '${basePath}/pwbh_beizhu/updateByPrimaryKey',			// 改
                 success: function (data) {
+                    if (record.szjcjg == null || record.szjcjg === "" || record.szjcjg == -1) {
+                        $("#li_jdsz").css({"background-color": ""});
+                    } else {
+                        $("#li_jdsz").css({"background-color": "#009688"});
+                    }
                     if (data.code === 0) {
                         layer.msg('提交成功！', {time: 1000, icon: 6});
                     } else {

@@ -102,7 +102,7 @@
                 $.each(resdata, function (i) {
                     if (resdata[i].jcjg == null || resdata[i].jcjg === "" || resdata[i].jcjg == -1) {
                         $("#li_jxdx").css({"background-color": ""});
-                        return;
+                        return false;
                     }
                     $("#li_jxdx").css({"background-color": "#009688"});
                 })

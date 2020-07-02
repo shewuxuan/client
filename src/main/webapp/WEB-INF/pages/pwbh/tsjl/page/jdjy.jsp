@@ -93,7 +93,8 @@
                     });
                 });
                 $.each(resdata, function (i, value) {
-                    if (value.zzxs == null || value.zzxs === "") {
+                    if (value.zzxs == null || value.zzxs === ""
+                    || value.jcjg == null || value.jcjg === "" || value.jcjg == -1) {
                         $("#li_jdjy").css({"background-color": ""});
                         return false;
                     }

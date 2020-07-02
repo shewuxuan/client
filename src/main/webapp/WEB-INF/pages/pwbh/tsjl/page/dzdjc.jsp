@@ -82,10 +82,15 @@
                     });
                 }, 10000);
                 record = resdata;
-                $.each(resdata, function (i) {
-                    if (resdata[i].jcjg == null || resdata[i].jcjg === "" || resdata[i].jcjg == -1) {
+                $.each(resdata, function (i, value) {
+                    if (value.cdrq == null || value.cdrq === ""
+                    || value.dzdh == null || value.dzdh === ""
+                    || value.bb == null || value.bb === ""
+                    || value.jym == null || value.jym === ""
+                    || value.cxsj == null || value.cxsj === ""
+                    ) {
                         $("#li_dzdjc").css({"background-color": ""});
-                        return;
+                        return false;
                     }
                     $("#li_dzdjc").css({"background-color": "#009688"});
                 })
