@@ -1,6 +1,7 @@
 package com.guodu.service.impl.pwbh;
 
 import com.guodu.pojo.pwbh.*;
+import com.guodu.pojo.sys.SysSsxl;
 import org.apache.poi.xwpf.usermodel.*;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.*;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ import java.util.List;
 public class ExportPwbhDocumentService {
 
     public PwbhJbxxBeizhu beizhu;
-    public XWPFDocument createDocument(PwbhJbxx pwbhJbxx,PwbhJbxxBeizhu beizhu)throws Exception {
+    public XWPFDocument createDocument(PwbhJbxx pwbhJbxx, PwbhJbxxBeizhu beizhu, SysSsxl sysSsxl)throws Exception {
         XWPFDocument document= new XWPFDocument();
         this.beizhu = beizhu;
         toParagraph(document);
@@ -32,7 +33,7 @@ public class ExportPwbhDocumentService {
         XWPFParagraph titleParagraph2 = document.createParagraph();
         titleParagraph2.setAlignment(ParagraphAlignment.CENTER);
         XWPFRun titleParagraphRun2 = titleParagraph2.createRun();
-        titleParagraphRun2.setText("  所属线路："+"_____"+returnString(pwbhJbxx.getSsxl())+"_____");
+        titleParagraphRun2.setText("  所属线路："+returnString(sysSsxl.getBdz()+sysSsxl.getXlmc()));
         titleParagraphRun2.setColor("000000");
         titleParagraphRun2.setFontSize(18);
         titleParagraphRun2.setBold(false);
@@ -40,7 +41,7 @@ public class ExportPwbhDocumentService {
         XWPFParagraph titleParagraph3 = document.createParagraph();
         titleParagraph3.setAlignment(ParagraphAlignment.CENTER);
         XWPFRun titleParagraphRun3 = titleParagraph3.createRun();
-        titleParagraphRun3.setText("    调度号："+"_____"+returnString(pwbhJbxx.getSsxl())+"_____");
+        titleParagraphRun3.setText("    调度号："+returnString(pwbhJbxx.getAzddDdh()));
         titleParagraphRun3.setColor("000000");
         titleParagraphRun3.setFontSize(18);
         titleParagraphRun3.setBold(false);
@@ -48,7 +49,7 @@ public class ExportPwbhDocumentService {
         XWPFParagraph titleParagraph4 = document.createParagraph();
         titleParagraph4.setAlignment(ParagraphAlignment.CENTER);
         XWPFRun titleParagraphRun4 = titleParagraph4.createRun();
-        titleParagraphRun4.setText("      路名："+"_____"+returnString(pwbhJbxx.getSsxl())+"_____");
+        titleParagraphRun4.setText("      路名："+returnString(pwbhJbxx.getLm()));
         titleParagraphRun4.setColor("000000");
         titleParagraphRun4.setFontSize(18);
         titleParagraphRun4.setBold(false);
@@ -59,25 +60,25 @@ public class ExportPwbhDocumentService {
         XWPFParagraph titleParagraph5 = document.createParagraph();
         titleParagraph5.setAlignment(ParagraphAlignment.LEFT);
         XWPFRun titleParagraphRun5 = titleParagraph5.createRun();
-        titleParagraphRun5.setText("工作负责人："+pwbhJbxx.getSsxl());
+        titleParagraphRun5.setText("工作负责人："+pwbhJbxx.getGzfzr());
         titleParagraphRun5.setFontSize(18);
 
         XWPFParagraph titleParagraph6 = document.createParagraph();
         titleParagraph6.setAlignment(ParagraphAlignment.LEFT);
         XWPFRun titleParagraphRun6 = titleParagraph6.createRun();
-        titleParagraphRun6.setText("工作人员："+pwbhJbxx.getSsxl());
+        titleParagraphRun6.setText("工作人员："+pwbhJbxx.getGzry());
         titleParagraphRun6.setFontSize(18);
 
         XWPFParagraph titleParagraph7 = document.createParagraph();
         titleParagraph7.setAlignment(ParagraphAlignment.LEFT);
         XWPFRun titleParagraphRun7 = titleParagraph7.createRun();
-        titleParagraphRun7.setText("路名："+pwbhJbxx.getSsxl());
+        titleParagraphRun7.setText("路名："+pwbhJbxx.getLm());
         titleParagraphRun7.setFontSize(18);
 
         XWPFParagraph titleParagraph8 = document.createParagraph();
         titleParagraph8.setAlignment(ParagraphAlignment.LEFT);
         XWPFRun titleParagraphRun8 = titleParagraph8.createRun();
-        titleParagraphRun8.setText("工作日期："+pwbhJbxx.getSsxl());
+        titleParagraphRun8.setText("工作日期："+pwbhJbxx.getTssj().substring(0,10));
         titleParagraphRun8.setFontSize(18);
 
         toParagraph(document);
@@ -198,7 +199,7 @@ public class ExportPwbhDocumentService {
         toParagraph(document);
         createTitle(document,"4、校对时钟");
         createTitle(document,"检验要求：将装置时钟校对至当前时钟，以便于系统故障时进行分析。");
-        createTitle(document,"检查结果：______"+(jcjg==null?"_":jcjg)+"______");
+        createTitle(document,"检查结果：______"+(jcjg==null?"_":switchJcjg("0",jcjg))+"______");
         return document;
     }
     /***
@@ -292,7 +293,7 @@ public class ExportPwbhDocumentService {
             XWPFTableRow infoTableRowTow = infoTable.createRow();
             infoTableRowTow.getCell(0).setText("");
             infoTableRowTow.getCell(1).setText(returnString(pwbhJlLpjy.getCsjg()));
-            infoTableRowTow.getCell(2).setText(returnString(pwbhJlLpjy.getCpu()));
+            infoTableRowTow.getCell(2).setText(switchJcjg("0",returnString(pwbhJlLpjy.getCpu())));
             setCellTextAlign(infoTableRowTow.getCell(0));
             setCellTextAlign(infoTableRowTow.getCell(1));
             setCellTextAlign(infoTableRowTow.getCell(2));
@@ -351,7 +352,7 @@ public class ExportPwbhDocumentService {
             infoTableRowTow.getCell(1).setText(returnString(pwbhJlJdjy.getJcjg()));
             infoTableRowTow.getCell(2).setText(returnString(pwbhJlJdjy.getTryq()));
             infoTableRowTow.getCell(3).setText(returnString(pwbhJlJdjy.getZzxs()));
-            infoTableRowTow.getCell(4).setText(switchJcjg("0",returnString(pwbhJlJdjy.getJcjg())));
+            infoTableRowTow.getCell(4).setText(switchJcjg("0",switchJcjg("0",returnString(pwbhJlJdjy.getJcjg()))));
 
             setCellWidth(infoTableRowTow.getCell(0),90);
             setCellWidth(infoTableRowTow.getCell(1),90);
@@ -617,7 +618,7 @@ public class ExportPwbhDocumentService {
         for(PwbhJlSgjc pwbhJlSgjc:pwbhJlSgjcs){
             XWPFTableRow infoTableRowTow = infoTable.createRow();
             infoTableRowTow.getCell(0).setText(returnString(pwbhJlSgjc.getNr()));
-            infoTableRowTow.getCell(1).setText(returnString(pwbhJlSgjc.getJcjg()));
+            infoTableRowTow.getCell(1).setText(switchJcjg("0",returnString(pwbhJlSgjc.getJcjg())));
             setCellTextAlign(infoTableRowTow.getCell(1));
         }
         createRemark(document,returnString(beizhu.getPwbhJlSgjc()));

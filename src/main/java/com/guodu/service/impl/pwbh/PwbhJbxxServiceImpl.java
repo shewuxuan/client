@@ -3,8 +3,10 @@ package com.guodu.service.impl.pwbh;
 import com.guodu.mapper.pwbh.PwbhJbxxMapper;
 import com.guodu.pojo.dtu.Jbxx;
 import com.guodu.pojo.pwbh.*;
+import com.guodu.pojo.sys.SysSsxl;
 import com.guodu.service.impl.BaseServiceImpl;
 import com.guodu.service.pwbh.*;
+import com.guodu.service.sys.SysSsxlService;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,6 +60,8 @@ public class PwbhJbxxServiceImpl extends BaseServiceImpl<PwbhJbxx> {
     PwbhJbxxBeizhuService pwbhJbxxBeizhuServiceImpl;
     @Autowired
     PwbhDzService PwbhDzServiceImpl;
+    @Autowired
+    SysSsxlService sysSsxlServiceImpl;
 
 
     public XWPFDocument exportToWordByWord(String ssqy, PwbhJbxx pwbhJbxx){
@@ -65,7 +69,8 @@ public class PwbhJbxxServiceImpl extends BaseServiceImpl<PwbhJbxx> {
         XWPFDocument document = null;
         try {
             PwbhJbxxBeizhu beizhu = pwbhJbxxBeizhuServiceImpl.selectByPrimaryKey(tsid);
-            document = exportPwbhDocumentService.createDocument(pwbhJbxx,beizhu);
+            SysSsxl sysSsxl = sysSsxlServiceImpl.selectByPrimaryKey(pwbhJbxx.getSsxl());
+            document = exportPwbhDocumentService.createDocument(pwbhJbxx,beizhu,sysSsxl);
         } catch (Exception e) {
             e.printStackTrace();
         }

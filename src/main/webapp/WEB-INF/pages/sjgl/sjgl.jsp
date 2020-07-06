@@ -60,7 +60,8 @@
 <div class="qh">
 	<div class="tab" style="">
     	 <a href="javascript:;" class="on" style="border-left:1px solid white;">数据下载</a>
-         <a href="javascript:;">数据上传</a>
+         <a href="javascript:;">DTU数据上传</a>
+		 <a href="javascript:;">配网保护数据上传</a>
     </div>
     <br/>
  <div class="content">
@@ -113,6 +114,37 @@
 						<div >
 								<table id="tableList"></table>
 								</div>
+					</div>
+				</div>
+			</li>
+
+			<!--  3 begin-->
+			<li style="display:none;">
+				<div>
+					<div  style="padding-left:10px;padding-right:10px;">
+						<div class="tj">
+							<form  method="post">
+								<span>日期</span>
+								<input class="easyui-datebox" name="startTssj2" id="startTssj2"
+									   data-options="required:true" style="width:120px"/>
+								&nbsp;至&nbsp;
+								<input class="easyui-datebox" name="endTssj2" id="endTssj2"
+									   data-options="required:true" style="width:120px"/>
+								&nbsp;<span>调度号</span>&nbsp;<input id="azddDdh2" type="text" class="right_ipu2"/>
+								&nbsp;<span>是否上传</span>&nbsp;
+								<select  name="upload2" id="upload2"  style="height:25px; border:1px solid #CCC;">
+									<option value="-1">全部</option>
+									<option value="0" selected>未上传</option>
+									<option value="1">已上传</option>
+								</select>
+								<input type="button" name="button"  value="查 询" class="iput_m" onclick="searchList2()"/>
+								<input type="button" name="button"  value="上 传" class="iput_m" onclick="uploadAllData2()"/>
+							</form>
+						</div>
+						<br>
+						<div >
+							<table id="tableList2"></table>
+						</div>
 					</div>
 				</div>
 			</li>
@@ -208,7 +240,7 @@
             });
         }
     }
-	/*上传*/
+	/*dtu上传*/
 	$(function(){
 		var formdata = new FormData(); // 模拟表单对象
 		$.ajax({
@@ -248,6 +280,46 @@
 		$('#tableList').datagrid('options').queryParams = getQueryParams();
 		$('#tableList').datagrid("load");
 	}
+
+	//配网保护
+	function getQueryParams2() {
+		var queryParams = new Object();
+		queryParams.startTssj = $('#startTssj2').datebox('getValue');
+		queryParams.endTssj = $('#endTssj2').datebox('getValue');
+		queryParams.azddDdh = $('#azddDdh2').val();
+		queryParams.upload = $('#upload2').val();
+		return queryParams;
+	}
+	function searchList2(){
+		flagAllArray=[];
+		$('#tableList2').datagrid('options').url = '${ctx}/pwbhJbxx/selectListPwbhJbxx.action';
+		$('#tableList2').datagrid('options').queryParams = getQueryParams2();
+		$('#tableList2').datagrid("load");
+	}
+	var flagArray2 = new Array();
+	var flagAllArray2 = new Array();
+	function uploadSingle2(tsid){
+		flagArray2=[];
+		flagArray2.push(tsid);
+		upload2(flagArray2);
+	}
+	function uploadAllData2(){
+		upload2(flagAllArray2);
+	}
+	function upload2(array){
+		$.ajax({
+			type: "POST",
+			url: "pwbh/uploadJl",
+			data: JSON.stringify(array),
+			contentType: "application/json;charsetset=UTF-8",
+			dataType: "json",
+			success: function (data) {
+				if(data.code==0) searchList2();
+				alert(data.msg);
+			}
+		});
+	}
+	//配网保护end
 
 	/*下载标准*/
 	var i=0;
@@ -435,6 +507,76 @@
 					]],
 				});
 				searchList();
+			}else if(index == 2) {
+				flagArray2 = [];
+				$('#tableList2').datagrid({
+					iconCls: 'icon-ok',
+					//queryParams: getQueryParams(),
+					nowrap: false,
+					striped: true,
+					collapsible: false,
+					fitColumns: true,
+					pagination: true,
+					singleSelect: true,
+					rownumbers: true,
+					remoteSort: true,
+					pageList: [10, 15, 30, 50],
+					pageSize: 10,//每页显示的记录条数，默认为10 
+					idField: 'ID',
+					columns: [[
+						{field: 'TSID', align: "left", title: '调试ID', width: 0, hidden: 'true'},
+						{
+							field: 'TSSJ', align: "left", title: '调试时间', width: 30, formatter: function (value) {
+								var date = new Date(value);
+								var y = date.getFullYear();
+								var m = date.getMonth() + 1;
+								var d = date.getDate();
+								return y + '-' + m + '-' + d;
+							}
+						},
+						{field: 'AZDD_DDH', align: "left", title: '设备调度号', width: 30},
+						{
+							field: 'SSXL',
+							align: "left",
+							title: '所属线路',
+							width: 30,
+							formatter: function (value, row, index) {
+								var xlmc = "";
+								$.ajax({
+									url: '/ssxl/selectByPrimaryKey/' + value,
+									type: 'GET',
+									async: false,
+									processData: false,
+									contentType: false,
+									beforeSend: function () {
+										console.log("正在加载，请稍候");
+									},
+									success: function (data) {
+										let data2 = JSON.parse(data);
+										xlmc = data2.bdz + "-" + data2.xlmc;
+									},
+									error: function () {
+										//alert("页面加载错误！");
+									}
+								});
+								return xlmc;
+							}
+						},
+						{field: 'LM', align: "left", title: '路名', width: 30},
+						{
+							field: 'trans',
+							align: "left",
+							title: '操作',
+							width: 60,
+							formatter: function (value, row, index) {
+								flagAllArray2.push(row.TSID);
+								var txt1 = '&nbsp;&nbsp;&nbsp;<button href="javascript:void(0);" onclick="uploadSingle2(\'' + row.TSID + '\')" class="iput_m" style="width: 40px; height: 20px;">' + '上传' + '</button>';
+								return txt1;
+							}
+						},
+					]],
+				});
+				searchList2();
 			}
 		});
 </script>
