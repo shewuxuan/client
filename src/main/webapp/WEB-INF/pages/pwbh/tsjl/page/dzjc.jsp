@@ -88,6 +88,7 @@
         }
         $.ajax({
             type: "POST",
+            async: false,
             url: "${basePath}/pwbh_dz/updateByPrimaryKey",
             data: JSON.stringify(data),//必须
             contentType: "application/json;charsetset=UTF-8",//必须
@@ -114,6 +115,17 @@
             success: function (data) {
             }
         });
+    }
+</script>
+
+<script>
+    var dzjcgl, dzjclx = false;
+    function bgcolor(dzjcgl, dzjclx) {
+        if (dzjcgl && dzjclx) {
+            $("#li_dzjc").css({"background-color": "#009688"});
+            return;
+        }
+        $("#li_dzjc").css({"background-color": ""});
     }
 </script>
 </body>

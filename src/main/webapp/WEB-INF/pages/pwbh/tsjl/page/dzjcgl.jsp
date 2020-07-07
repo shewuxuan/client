@@ -11,16 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-<script>
-    let dzjcgl, dzjclx = false;
-    function bgcolor(dzjcgl, dzjclx) {
-        if (dzjcgl && dzjclx) {
-            $("#li_dzjc").css({"background-color": "#009688"});
-            return;
-        }
-        $("#li_dzjc").css({"background-color": ""});
-    }
-</script>
+
 <script>
     layui.use('table', function () {
         let table = layui.table;
@@ -46,19 +37,18 @@
                 }
             ]
             , cols: [[ //表头
-                {field: 'id', title: 'ID', type: 'numbers', width: '5%', fixed: 'left', sort: true, rowspan: 2}
-                , {field: 'jg', title: '间隔', width: '11%', align: 'center', fixed: 'left', sort: true, rowspan: 2}
-                , {field: 'g1', title: '过流I段整定值', width: '10%', align: 'center', edit: 'text', rowspan: 2}
+                {field: 'jg', title: '相别', width: '10%', align: 'center', fixed: 'left', sort: true, rowspan: 2}
+                , {field: 'g1', title: '过流I段整定值', width: '11%', align: 'center', edit: 'text', rowspan: 2}
                 , {title: '实际通电0.95倍定值／1.05倍定值', align: 'center', colspan: 2}
-                , {field: 'g2', title: '过流II段整定值', width: '10%', align: 'center', edit: 'text', rowspan: 2}
+                , {field: 'g2', title: '过流II段整定值', width: '11%', align: 'center', edit: 'text', rowspan: 2}
                 , {title: '实际通电0.95倍定值／1.05倍定值', align: 'center', colspan: 2}
                 , {title: '操作', width: '8%', align: 'center', toolbar: '#barDemo', rowspan: 2}
             ],
                 [
-                    {field: 'g11', title: '不动作(A)', width: '14%', align: 'center', edit: 'text'}
-                    , {field: 'g12', title: '动作(A)', width: '14%', align: 'center', edit: 'text'}
-                    , {field: 'g21', title: '不动作(A)', width: '14%', align: 'center', edit: 'text'}
-                    , {field: 'g22', title: '动作(A)', width: '14%', align: 'center', edit: 'text'}
+                    {field: 'g11', title: '不动作(A)', width: '15%', align: 'center', edit: 'text'}
+                    , {field: 'g12', title: '动作(A)', width: '15%', align: 'center', edit: 'text'}
+                    , {field: 'g21', title: '不动作(A)', width: '15%', align: 'center', edit: 'text'}
+                    , {field: 'g22', title: '动作(A)', width: '15%', align: 'center', edit: 'text'}
 
                 ]]
             , done: function (res) {
@@ -66,6 +56,8 @@
                 // 开启自动保存（自动保存记录/备注）
                 autosave = setInterval(function () {
                     editbz();
+                    // 自动保存X dz      ***
+                    submitDz();
                     if (record.length === 0) {
                         return;
                     }
@@ -83,16 +75,19 @@
                     });
                 }, 10000);
                 record = resdata;
-                $.each(resdata, function (i) {
-                    if (resdata[i].jcjg == null || resdata[i].jcjg === "" || resdata[i].jcjg == -1) {
+                $.each(resdata, function (i, value) {
+                    if (value.g1 == null || value.g1 === ""
+                    || value.g11 == null || value.g11 === ""
+                    || value.g12 == null || value.g12 === ""
+                    || value.g2 == null || value.g2 === ""
+                    || value.g12 == null || value.g12 === ""
+                    || value.g22 == null || value.g22 === "") {
                         dzjcgl = false;
                         bgcolor(dzjcgl, dzjclx);
-                        // $("#li_dzjc").css({"background-color": ""});
                         return;
                     }
                     dzjcgl = true;
                     bgcolor(dzjcgl, dzjclx);
-                    // $("#li_dzjc").css({"background-color": "#009688"});
                 })
             }
         });
@@ -114,6 +109,7 @@
 
         // 提交记录(删除前)
         function submitJl(record) {
+            submitDz();
             // 表格没有数据
             if (record.length === 0) {
                 return true;
@@ -166,10 +162,11 @@
                 case 'SUBMIT':
                     // 修改备注
                     editbz();
-                    if (record.length === 0) {
-                        layer.msg("无数据提交", {time: 1000, icon: 3});
-                        return;
-                    }
+                    submitDz();
+                    // if (record.length === 0) {
+                    //     layer.msg("无数据提交", {time: 1000, icon: 3});
+                    //     return;
+                    // }
                     $.ajax({
                         type: "POST",
                         url: "${basePath}/pwbh_jl_dzjc/updateBatch",              // 改

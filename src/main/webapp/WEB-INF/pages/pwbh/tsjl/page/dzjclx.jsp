@@ -51,9 +51,6 @@
                 // 开启自动保存（自动保存记录/备注）
                 autosave = setInterval(function () {
                     submitDz();
-                    // if (record.length === 0) {
-                    //     return;
-                    // }
                     $.ajax({
                         type: "POST",
                         url: "${basePath}/pwbh_dz/updateByPrimaryKey",              // 改
@@ -68,6 +65,24 @@
                     });
                 }, 10000);
                 record = resdata;
+                if (record.l1 == null || record.l1 === ""
+                || record.l11 == null || record.l11 === ""
+                || record.l12 == null || record.l12 === ""
+                || record.l2 == null || record.l2 === ""
+                || record.l21 == null || record.l21 === ""
+                || record.l22 == null || record.l22 === ""
+                || record.lx1 == null || record.lx1 === ""
+                || record.lx11 == null || record.lx11 === ""
+                || record.lx12 == null || record.lx12 === ""
+                || record.lx2 == null || record.lx2 === ""
+                || record.lx21 == null || record.lx21 === ""
+                || record.lx22 == null || record.lx22 === "") {
+                    dzjclx = false;
+                    bgcolor(dzjcgl,dzjclx);
+                    return;
+                }
+                dzjclx = true;
+                bgcolor(dzjcgl, dzjclx);
                 // $.each(resdata, function (i) {
                 //     if (resdata[i].jcjg == null || resdata[i].jcjg === "" || resdata[i].jcjg == -1) {
                 //         dzjclx = false;
@@ -86,7 +101,7 @@
         table.on('edit(dzjclx)', function (obj) {         // 改
             let data = obj.data;
             record = {
-                "tsid": data.tsid,
+                "tsid": tsid,
                 "lx22": data.lx22,
                 "lx21": data.lx21,
                 "lx2": data.lx2,
@@ -94,23 +109,6 @@
                 "lx11": data.lx11,
                 "lx1": data.lx1
             }
-            console.log(record);
-            // record.lx1 = data.lx1;
-            // record.lx11 = data.lx11;
-            // record.lx12 = data.lx12;
-            // record.lx2 = data.lx2;
-            // record.lx21 = data.lx21;
-            // record.lx22 = data.lx22;
-            // $.each(record, function (i, value) {
-            //     if (value.tsid === tsid) {
-            //         value.lx1 = data.lx1;
-            //         value.lx11 = data.lx11;
-            //         value.lx12 = data.lx12;
-            //         value.lx2 = data.lx2;
-            //         value.lx21 = data.lx21;
-            //         value.lx22 = data.lx22;
-            //     }
-            // });
         });
 
         //监听事件
@@ -118,9 +116,9 @@
             switch (obj.event) {
                 // 提交
                 case 'SUBMIT':
+                    submitDz();
                     // 修改备注
                     editbz();
-                    submitDz();
                     // if (record.length === 0) {
                     //     layer.msg("无数据提交", {time: 1000, icon: 3});
                     //     return;
