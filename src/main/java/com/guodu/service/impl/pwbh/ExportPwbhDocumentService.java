@@ -199,7 +199,7 @@ public class ExportPwbhDocumentService {
         toParagraph(document);
         createTitle(document,"4、校对时钟");
         createTitle(document,"检验要求：将装置时钟校对至当前时钟，以便于系统故障时进行分析。");
-        createTitle(document,"检查结果：______"+(jcjg==null?"_":switchJcjg("0",jcjg))+"______");
+        createTitle(document,"检查结果：______"+(jcjg==null?"_":switchJcjg("1",jcjg))+"______");
         return document;
     }
     /***
@@ -280,7 +280,7 @@ public class ExportPwbhDocumentService {
         infoTableRowOne.addNewTableCell().setText("");
         infoTableRowOne.addNewTableCell().setText("CPU");
         setCellTextAlign(infoTableRowOne.getCell(0));
-        setCellTextAlign(infoTableRowOne.getCell(1));
+        setCellTextAlign(infoTableRowOne.getCell(2));
 
         mergeCellsHorizontal(infoTable,0,0,1);
         infoTable.getRow(0).getCell(0).getCTTc().addNewTcPr().addNewTcW()
@@ -524,6 +524,11 @@ public class ExportPwbhDocumentService {
         infoTableRowOne.addNewTableCell().setText("断路器动作情况（或信号动作情况）");
         infoTableRowOne.addNewTableCell().setText("");
         infoTableRowOne.addNewTableCell().setText("检查结果（正确打√）");
+
+        mergeCellsHorizontal(infoTable,0,3,4);
+        infoTable.getRow(0).getCell(3).getCTTc().addNewTcPr().addNewTcW()
+                .setW(BigInteger.valueOf((9072 / 6) * (4 - 3 + 1)));
+
         setCellTextAlign(infoTableRowOne.getCell(0));
         setCellTextAlign(infoTableRowOne.getCell(1));
         setCellTextAlign(infoTableRowOne.getCell(2));
@@ -546,9 +551,7 @@ public class ExportPwbhDocumentService {
         mergeCellsVertically(infoTable,2,0,1);
         mergeCellsVertically(infoTable,5,0,1);
 
-        mergeCellsHorizontal(infoTable,0,3,4);
-        infoTable.getRow(0).getCell(0).getCTTc().addNewTcPr().addNewTcW()
-                .setW(BigInteger.valueOf((9072 / 6) * (4 - 3 + 1)));
+
 
         for(PwbhJlZzsy pwbhJlZzsy:pwbhJlZzsys){
             XWPFTableRow infoTableRowLast = infoTable.createRow();
@@ -557,7 +560,7 @@ public class ExportPwbhDocumentService {
             infoTableRowLast.getCell(2).setText(returnString(pwbhJlZzsy.getDlq()));
             infoTableRowLast.getCell(3).setText(returnString(pwbhJlZzsy.getZzxh()));
             infoTableRowLast.getCell(4).setText(returnString(pwbhJlZzsy.getZzxs()));
-            infoTableRowLast.getCell(5).setText(switchJcjg("0",returnString(pwbhJlZzsy.getJcjg())));
+            infoTableRowLast.getCell(5).setText(switchJcjg("1",returnString(pwbhJlZzsy.getJcjg())));
             setCellTextAlign(infoTableRowLast.getCell(5));
         }
         createRemark(document,returnString(beizhu.getPwbhJlZzsy()));
@@ -576,7 +579,6 @@ public class ExportPwbhDocumentService {
         //表格第一行
         XWPFTableRow infoTableRowOne = infoTable.getRow(0);
         infoTableRowOne.getCell(0).setText("用途：保护");
-        setCellTextAlign(infoTableRowOne.getCell(0));
         infoTableRowOne.addNewTableCell().setText("");
         infoTableRowOne.addNewTableCell().setText("");
         mergeCellsHorizontal(infoTable,0,0,2);

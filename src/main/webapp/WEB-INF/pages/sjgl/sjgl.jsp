@@ -309,7 +309,7 @@
 	function upload2(array){
 		$.ajax({
 			type: "POST",
-			url: "pwbh/uploadJl",
+			url: "/uploadPwbhJl",
 			data: JSON.stringify(array),
 			contentType: "application/json;charsetset=UTF-8",
 			dataType: "json",
@@ -563,6 +563,19 @@
 							}
 						},
 						{field: 'LM', align: "left", title: '路名', width: 30},
+						{
+							field: 'UPLOAD',
+							align: "left",
+							title: '是否上传',
+							width: 30,
+							formatter: function (value, row, index) {
+								txt1 = "已上传";
+								if(value==0){
+									txt1 = "未上传";
+								}
+								return txt1;
+							}
+						},
 						{
 							field: 'trans',
 							align: "left",

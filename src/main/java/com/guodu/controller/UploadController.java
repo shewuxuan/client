@@ -5,8 +5,11 @@ import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import cn.hutool.log.StaticLog;
 import com.guodu.pojo.dtu.Jbxx;
+import com.guodu.pojo.pwbh.PwbhJbxx;
+import com.guodu.service.impl.HttpClientServiceImpl;
 import com.guodu.service.impl.dtu.JbxxServiceImpl;
 import com.guodu.service.impl.UploadServiceImpl;
+import com.guodu.service.impl.pwbh.PwbhJbxxServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -80,6 +83,40 @@ public class UploadController {
         }
         map.put("succeed", succeed);
         map.put("failed", failed);
+        return JSONUtil.toJsonStr(map);
+    }
+
+    @Autowired
+    PwbhJbxxServiceImpl pwbhJbxxServiceImpl;
+    @Value("${pwbhUploadJlUrl}")
+    String pwbhUploadJlUrl;
+
+    @RequestMapping("uploadPwbhJl")
+    public String uploadPwbhJl(@RequestBody List<String> ids) {
+        map.clear();
+        Map result ;
+        PwbhJbxx pwbhJbxx ;
+        try {
+            for (String tsid : ids) {
+                pwbhJbxx = pwbhJbxxServiceImpl.selectByPrimaryKey(tsid);
+                pwbhJbxx.setTssj(pwbhJbxx.getTssj().substring(0,10));
+                result = uploadServiceImpl.pwbhUploadJl(tsid);
+                if (result != null) {
+                    result.put("pwbhJbxx",JSONUtil.toJsonStr(pwbhJbxx));
+                    String post = HttpUtil.post(pwbhUploadJlUrl, JSONUtil.toJsonStr(result));
+                    JSONObject jsonObject = JSONUtil.parseObj(post);
+                    if ((int) jsonObject.get("code") == 0) {
+                        pwbhJbxx.setUpload("1");
+                        pwbhJbxxServiceImpl.edit(pwbhJbxx);
+                    }
+                }
+            }
+            map.put("code", 0);
+            map.put("msg", "上传记录完成！");
+        } catch (Exception e) {
+            map.put("code", -1);
+            map.put("msg", "上传记录异常！");
+        }
         return JSONUtil.toJsonStr(map);
     }
 }

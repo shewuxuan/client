@@ -66,6 +66,7 @@
 		<if test="ssqy!=null and ssqy!=''"> and ssqy=#{ssqy, jdbcType=VARCHAR}</if>
 		<if test="tssj!=null and tssj!=''"> and tssj=#{tssj, jdbcType=TIMESTAMP}</if>
 		<if test="azddDdh!=null and azddDdh!=''"> and azdd_ddh=#{azddDdh, jdbcType=VARCHAR}</if>
+		<if test="upload!=null and upload!=''"> and upload=#{upload, jdbcType=VARCHAR}</if>
 	</select>
 
 	<update id="update" parameterType="com.guodu.pojo.pwbh.PwbhJbxx">
@@ -81,6 +82,7 @@
 		, czsj=#{czsj, jdbcType=TIMESTAMP}
 		, beizhu=#{beizhu, jdbcType=VARCHAR}
 		, shr=#{shr, jdbcType=VARCHAR}
+		, upload=#{upload, jdbcType=VARCHAR}
 		where  tsid=#{tsid}
 	</update>
 
@@ -95,7 +97,8 @@
 		j.TSSJ,
 		j.AZDD_DDH,
 		j.SSXL,
-		j.LM
+		j.LM,
+		j.UPLOAD
 		from pwbh_jbxx j
 		left join sys_ssxl s on j.ssxl = s.id
 		where 1=1
@@ -114,7 +117,7 @@
 		/*挖坑操作*/
 		<if test='xlmc!=null and xlmc!=""'> and j.ssxl = #{xlmc}</if>
 		<if test='bdz!=null and bdz!=""'> and   s.bdz = #{bdz}</if>
-
+		<if test='upload!=null and upload!="-1"'> and upload=#{upload}</if>
 		order by TSSJ desc
 	</select>
 

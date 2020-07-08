@@ -3,8 +3,11 @@ package com.guodu.service.impl;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONUtil;
 import com.guodu.pojo.dtu.*;
+import com.guodu.pojo.pwbh.*;
 import com.guodu.service.dtu.JbxxGjdzService;
 import com.guodu.service.impl.dtu.*;
+import com.guodu.service.pwbh.*;
+import com.guodu.service.sys.SysSsxlService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -165,5 +168,115 @@ public class UploadServiceImpl {
             imgList.add(file);
         }
        HttpUtil.post(changeJbxxFilesUrl, JSONUtil.toJsonStr(imgList));
+    }
+
+    /** 配网保护上传 **/
+    @Autowired
+    PwbhJlBhctbhService pwbhJlBhctbhService;
+    @Autowired
+    PwbhJlBhcthlService pwbhJlBhcthlServiceImpl;
+    @Autowired
+    PwbhJlBhctjxService pwbhJlBhctjxServiceImpl;
+    @Autowired
+    PwbhJlDzdjcService pwbhJlDzdjcServiceImpl;
+    @Autowired
+    PwbhJlDzjcService pwbhJlDzjcServiceImpl;
+    @Autowired
+    PwbhJlJdjyService pwbhJlJdjyServiceImpl;
+    @Autowired
+    PwbhJlJxdxService pwbhJlJxdxServiceImpl;
+    @Autowired
+    PwbhJlJycsService pwbhJlJycsServiceImpl;
+    @Autowired
+    PwbhJlLpjyService pwbhJlLpjyServiceImpl;
+    @Autowired
+    PwbhJlSgjcService pwbhJlSgjcServiceImpl;
+    @Autowired
+    PwbhJlWgjcService pwbhJlWgjcServiceImpl;
+    @Autowired
+    PwbhJlYqybService pwbhJlYqybServiceImpl;
+    @Autowired
+    PwbhJlZzsyService pwbhJlZzsyServiceImpl;
+    @Autowired
+    PwbhJbxxBeizhuService pwbhJbxxBeizhuServiceImpl;
+    @Autowired
+    PwbhDzService pwbhDzServiceImpl;
+
+    public Map pwbhUploadJl(String tsid) {
+        Map data = new HashMap();
+        PwbhJlBhctbh pwbhJlBhctbh = new PwbhJlBhctbh();
+        pwbhJlBhctbh.setTsid(tsid);
+        List<PwbhJlBhctbh> bhctbhs = pwbhJlBhctbhService.selectByAll(pwbhJlBhctbh);
+        data.put("bhctbhs",JSONUtil.toJsonStr(bhctbhs));//保护CT变化
+
+        PwbhJlBhcthl pwbhJlBhcthl = new PwbhJlBhcthl();
+        pwbhJlBhcthl.setTsid(tsid);
+        List<PwbhJlBhcthl> bhcthls = pwbhJlBhcthlServiceImpl.selectByAll(pwbhJlBhcthl);
+        data.put("bhcthls",JSONUtil.toJsonStr(bhcthls));
+
+        PwbhJlBhctjx pwbhJlBhctjx = new PwbhJlBhctjx();
+        pwbhJlBhctjx.setTsid(tsid);
+        List<PwbhJlBhctjx> bhctjxs = pwbhJlBhctjxServiceImpl.selectByAll(pwbhJlBhctjx);
+        data.put("bhctjxs",JSONUtil.toJsonStr(bhctjxs));
+
+        PwbhJlDzdjc pwbhJlDzdjc = new PwbhJlDzdjc();
+        pwbhJlDzdjc.setTsid(tsid);
+        List<PwbhJlDzdjc> dzdjcs = pwbhJlDzdjcServiceImpl.selectByAll(pwbhJlDzdjc);
+        data.put("dzdjcs",JSONUtil.toJsonStr(dzdjcs));
+
+        PwbhJlDzjc pwbhJlDzjc = new PwbhJlDzjc();
+        pwbhJlDzjc.setTsid(tsid);
+        List<PwbhJlDzjc> dzjcs = pwbhJlDzjcServiceImpl.selectByAll(pwbhJlDzjc);
+        data.put("dzjcs",JSONUtil.toJsonStr(dzjcs));
+
+        PwbhJlJdjy pwbhJlJdjy = new PwbhJlJdjy();
+        pwbhJlJdjy.setTsid(tsid);
+        List<PwbhJlJdjy> jdjys = pwbhJlJdjyServiceImpl.selectByAll(pwbhJlJdjy);
+        data.put("jdjys",JSONUtil.toJsonStr(jdjys));
+
+        PwbhJlJxdx pwbhJlJxdx = new PwbhJlJxdx();
+        pwbhJlJxdx.setTsid(tsid);
+        List<PwbhJlJxdx> jxdxs = pwbhJlJxdxServiceImpl.selectByAll(pwbhJlJxdx);
+        data.put("jxdxs",JSONUtil.toJsonStr(jxdxs));
+
+        PwbhJlJycs pwbhJlJycs = new PwbhJlJycs();
+        pwbhJlJycs.setTsid(tsid);
+        List<PwbhJlJycs> jycss = pwbhJlJycsServiceImpl.selectByAll(pwbhJlJycs);
+        data.put("jycss",JSONUtil.toJsonStr(jycss));
+
+        PwbhJlLpjy pwbhJlLpjy = new PwbhJlLpjy();
+        pwbhJlLpjy.setTsid(tsid);
+        List<PwbhJlLpjy> lpjys = pwbhJlLpjyServiceImpl.selectByAll(pwbhJlLpjy);
+        data.put("lpjys",JSONUtil.toJsonStr(lpjys));
+
+        PwbhJlSgjc pwbhJlSgjc = new PwbhJlSgjc();
+        pwbhJlSgjc.setTsid(tsid);
+        List<PwbhJlSgjc> sgjcs = pwbhJlSgjcServiceImpl.selectByAll(pwbhJlSgjc);
+        data.put("sgjcs",JSONUtil.toJsonStr(sgjcs));
+
+        PwbhJlWgjc pwbhJlWgjc = new PwbhJlWgjc();
+        pwbhJlWgjc.setTsid(tsid);
+        List<PwbhJlWgjc> wgjcs = pwbhJlWgjcServiceImpl.selectByAll(pwbhJlWgjc);
+        data.put("wgjcs",JSONUtil.toJsonStr(wgjcs));
+
+        PwbhJlYqyb pwbhJlYqyb = new PwbhJlYqyb();
+        pwbhJlYqyb.setTsid(tsid);
+        List<PwbhJlYqyb> yqybs = pwbhJlYqybServiceImpl.selectByAll(pwbhJlYqyb);
+        data.put("yqybs",JSONUtil.toJsonStr(yqybs));
+
+        PwbhJlZzsy pwbhJlZzsy = new PwbhJlZzsy();
+        pwbhJlZzsy.setTsid(tsid);
+        List<PwbhJlZzsy> zzsys = pwbhJlZzsyServiceImpl.selectByAll(pwbhJlZzsy);
+        data.put("zzsys",JSONUtil.toJsonStr(zzsys));
+
+        PwbhJbxxBeizhu beizhu = pwbhJbxxBeizhuServiceImpl.selectByPrimaryKey(tsid);
+        data.put("beizhu",JSONUtil.toJsonStr(beizhu));
+
+        PwbhDz pwbhDz = new PwbhDz();
+        pwbhDz.setTsid(tsid);
+        List<PwbhDz> dzs = pwbhDzServiceImpl.selectByAll(pwbhDz);
+        data.put("dzs",JSONUtil.toJsonStr(dzs));
+
+        return data;
     }
 }
