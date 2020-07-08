@@ -19,9 +19,10 @@
         <label for="g1">（1）过流Ⅰ段定值 <input id="g1" style="text-align: center" type="text"/>，</label>
         <label for="g2">过流Ⅱ段定值<input id="g2" style="text-align: center" type="text"/>。</label>
         <br>
-        <label for="g11">过流Ⅰ段时间<input id="g11" style="text-align: center" type="text"/>秒，</label>
+        <label for="g11" style="margin-left: 36px;">过流Ⅰ段时间<input id="g11" style="text-align: center" type="text"/>秒，</label>
         <label for="g12">通电<input id="g12" style="text-align: center" type="text"/>秒。</label>
-        <label for="g21">过流ⅠI段时间<input id="g21" style="text-align: center" type="text"/>秒，</label>
+        <br>
+        <label for="g21" style="margin-left: 36px;">过流ⅠI段时间<input id="g21" style="text-align: center" type="text"/>秒，</label>
         <label for="g22">通电<input id="g22" style="text-align: center" type="text"/>秒。</label>
         <table id="dzjcgl" lay-filter="dzjcgl"></table>
 
@@ -30,9 +31,10 @@
         <label for="l1">（2）零序Ⅰ段定值 <input id="l1" style="text-align: center" type="text"/>，</label>
         <label for="l2">零序Ⅱ段定值<input id="l2" style="text-align: center" type="text"/>。</label>
         <br>
-        <label for="l11">零序Ⅰ段时间<input id="l11" style="text-align: center" type="text"/>秒，</label>
+        <label for="l11" style="margin-left: 36px;">零序Ⅰ段时间<input id="l11" style="text-align: center" type="text"/>秒，</label>
         <label for="l12">通电<input id="l12" style="text-align: center" type="text"/>秒。</label>
-        <label for="l21">零序ⅠI段时间<input id="l21" style="text-align: center" type="text"/>秒，</label>
+        <br>
+        <label for="l21" style="margin-left: 36px;">零序ⅠI段时间<input id="l21" style="text-align: center" type="text"/>秒，</label>
         <label for="l22">通电<input id="l22" style="text-align: center" type="text"/>秒。</label>
         <table id="dzjclx" lay-filter="dzjclx"></table>
 

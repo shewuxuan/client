@@ -72,9 +72,9 @@
                     </tr>
                     <tr>
                         <td height="33" colspan="4" bgcolor="#f5f2ea">
-                            <input type="button" name="button" value="提 交" onclick="change()" class="iput_m"
-                                   style="height:25px;"/>
-                            <input type="button" onclick="javascript:window.close();" name="button" value="取 消"
+<%--                            <input type="button" name="button" value="提 交" onclick="change()" class="iput_m"--%>
+<%--                                   style="height:25px;"/>--%>
+                            <input type="button" onclick="window.close();" name="button" value="关闭"
                                    class="iput_m" style="height:25px;"/>
                         </td>
                     </tr>
@@ -84,6 +84,9 @@
         </form>
     </div>
 </div>
+
+<%@include file="seeTsjl.jsp" %>
+
 <script type="text/javascript">
     // 变电站
     $("#bdz").append("<option value=''>全部</option>");

@@ -62,6 +62,7 @@ public class PwbhJlYqybController {
             map.put("code", 0);
             map.put("msg", "查询完成");
             map.put("data", jlYqybs);
+            map.put("rows", jlYqybs);
         } catch (Exception e) {
             e.printStackTrace();
             map.put("code", -1);
