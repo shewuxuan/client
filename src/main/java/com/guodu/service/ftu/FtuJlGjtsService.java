@@ -18,10 +18,6 @@ public interface FtuJlGjtsService {
 
     int insert(FtuJlGjts record);
 
-    int insertOrUpdate(FtuJlGjts record);
-
-    int insertOrUpdateSelective(FtuJlGjts record);
-
     int insertSelective(FtuJlGjts record);
 
     FtuJlGjts selectByPrimaryKey(String id);

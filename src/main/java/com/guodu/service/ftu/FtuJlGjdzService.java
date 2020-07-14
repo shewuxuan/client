@@ -2,13 +2,14 @@ package com.guodu.service.ftu;
 
 import java.util.List;
 import com.guodu.pojo.ftu.FtuJlGjdz;
-    /**
+
+/**
  * @ClassName: FtuJlGjdzService
  * @Description: TODO
  * @Author: 2Uli
  * @Date: 2020/5/12 2:05 下午
  */
-public interface FtuJlGjdzService{
+public interface FtuJlGjdzService {
 
 
     int deleteByPrimaryKey(String id);
@@ -16,10 +17,6 @@ public interface FtuJlGjdzService{
     int deleteByTsid(String tsid);
 
     int insert(FtuJlGjdz record);
-
-    int insertOrUpdate(FtuJlGjdz record);
-
-    int insertOrUpdateSelective(FtuJlGjdz record);
 
     int insertSelective(FtuJlGjdz record);
 
@@ -38,3 +35,4 @@ public interface FtuJlGjdzService{
     int batchInsert(List<FtuJlGjdz> list);
 
 }
+

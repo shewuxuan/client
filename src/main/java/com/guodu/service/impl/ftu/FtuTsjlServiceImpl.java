@@ -89,9 +89,11 @@ public class FtuTsjlServiceImpl implements FtuTsjlService {
         ftuBzGjts.setSsqy(ssqy);
         List<FtuBzGjts> ftuBzGjtss = ftuBzGjtsServiceImpl.selectByAll(ftuBzGjts);
         for (FtuBzGjts bzGjtss : ftuBzGjtss) {
-            FtuJlGjts ftuJlGjts = new FtuJlGjts(IDUtil.getStrId(), ssqy, bzGjtss.getCsx(), bzGjtss.getDz(), null, null, null, null, null, null, null, null, null, null, null, null, null, czr, new Date(), null);
+            FtuJlGjts ftuJlGjts = new FtuJlGjts(IDUtil.getStrId(), ssqy, bzGjtss.getCsx(), bzGjtss.getDz(), null, null, null, null, null, null, null, czr, new Date(), null);
             ftuJlGjtsServiceImpl.insert(ftuJlGjts);
         }
+
+
 
         FtuBzGncs ftuBzGncs = new FtuBzGncs();
         ftuBzGncs.setSsqy(ssqy);
@@ -142,7 +144,7 @@ public class FtuTsjlServiceImpl implements FtuTsjlService {
         FtuJlYkkg ftuJlYkkg = new FtuJlYkkg(IDUtil.getStrId(), tsid, ssqy, null, null, null, null, czr, new Date(), null);
         ftuJlYkkgServiceImpl.insert(ftuJlYkkg);
 
-        FtuJlGjdz ftuJlGjdz = new FtuJlGjdz(tsid, null, null, null, null, null, null, null, null, null, null, null, null);
+        FtuJlGjdz ftuJlGjdz = new FtuJlGjdz(tsid, null, null, null, null, null, null, null, null, null, null, null, null,null,null,null,null,null,null);
         ftuJlGjdzServiceImpl.insert(ftuJlGjdz);
 
         FtuJbxxBeizhu ftuBeizhu = new FtuJbxxBeizhu(tsid, null, null, null, null, null, null, null, null, null, null, null);
