@@ -10,5 +10,4 @@ public class FtuBzGjts implements Serializable {
     private String id;
     private String ssqy;//所属区域
     private String csx;//测试项
-    private String dz;//不动作/动作
 }

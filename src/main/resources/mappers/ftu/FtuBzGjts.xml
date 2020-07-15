@@ -56,19 +56,16 @@
         <id column="id" jdbcType="VARCHAR" property="id" />
         <result column="ssqy" jdbcType="VARCHAR" property="ssqy" />
         <result column="csx" jdbcType="VARCHAR" property="csx" />
-        <result column="dz" jdbcType="VARCHAR" property="dz" />
     </resultMap>
     <sql id="Base_Column_List">
         <!--@mbg.generated-->
-        id, ssqy, csx, dz
+        id, ssqy, csx
     </sql>
 
     <insert id="insert2" parameterType="com.guodu.pojo.ftu.FtuBzGjts">
         <!--@mbg.generated-->
-        insert into ftu_bz_gjts (id, ssqy, csx,
-        dz)
-        values (#{id,jdbcType=VARCHAR}, #{ssqy,jdbcType=VARCHAR}, #{csx,jdbcType=VARCHAR},
-        #{dz,jdbcType=VARCHAR})
+        insert into ftu_bz_gjts (id, ssqy, csx)
+        values (#{id,jdbcType=VARCHAR}, #{ssqy,jdbcType=VARCHAR}, #{csx,jdbcType=VARCHAR})
     </insert>
 
     <select id="selectByAll" resultMap="BaseResultMap">
@@ -85,9 +82,6 @@
             </if>
             <if test="csx != null and csx != ''">
                 and csx=#{csx,jdbcType=VARCHAR}
-            </if>
-            <if test="dz != null and dz != ''">
-                and dz=#{dz,jdbcType=VARCHAR}
             </if>
         </where>
     </select>
