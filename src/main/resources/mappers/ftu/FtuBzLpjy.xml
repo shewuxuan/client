@@ -18,7 +18,7 @@
     </sql>
 
     <insert id="insert" parameterType="com.guodu.pojo.ftu.FtuBzLpjy">
-        insert into ftu_bz_hbdy (
+        insert into ftu_bz_lpjy (
         <include refid="sqlColumn"/>
         ) values (
         <include refid="variableSql"/>

@@ -70,11 +70,12 @@
   				<div >
 					<div class="right_table" style="padding-left:10px;padding-right:10px;" >
 						<div class="tj">
-							<input type="button" name="button"  value="下载标准" class="iput_m" onclick="getStandard()"/>
 							<input type="button" name="button"  value="下载用户" class="iput_m" onclick="getUsers()">
 							<input type="button" name="button"  value="下载厂家" class="iput_m" onclick="getSccj()">
 							<input type="button" name="button"  value="下载所属线路" class="iput_m" onclick="getSsxl()" style="width: 75px;">
+							<input type="button" name="button"  value="下载DTU标准" class="iput_m" onclick="getStandard()"/>
 							<input type="button" name="button"  value="下载配网保护标准" class="iput_m" onclick="getPwbh()" style="width: 100px;">
+							<input type="button" name="button"  value="下载FTU标准" class="iput_m" onclick="getFtu()" >
 						</div>
 					</div>
 					<div id="light" class="white_content">
@@ -240,6 +241,34 @@
             });
         }
     }
+	/*下载FTU标准*/
+	function getFtu(){
+		if(confirm('确定重新下载FTU标准吗？')){
+			document.getElementById('light').style.display='block';
+			document.getElementById('fade').style.display='block';
+			var times=setInterval(clocks,1000);
+			$.ajax({
+				url : '/getFtuStandard.action',
+				type : 'POST',
+				async : false,
+				//data:getParam(),
+				processData : false,
+				contentType : false,
+				success : function(data) {
+					window.clearInterval(times);
+					document.getElementById('text1').innerHTML = data.message;
+					setTimeout(function(){
+								document.getElementById('light').style.display='none';
+								document.getElementById('fade').style.display='none';
+							}
+							,3000);
+				},
+				error : function() {
+					alert("下载错误！");
+				}
+			});
+		}
+	}
 	/*dtu上传*/
 	$(function(){
 		var formdata = new FormData(); // 模拟表单对象

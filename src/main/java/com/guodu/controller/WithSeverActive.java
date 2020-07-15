@@ -3,12 +3,14 @@ package com.guodu.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.guodu.pojo.dtu.*;
+import com.guodu.pojo.ftu.*;
 import com.guodu.pojo.pwbh.*;
 import com.guodu.pojo.sys.Auth;
 import com.guodu.pojo.sys.SysSccj;
 import com.guodu.pojo.sys.SysSsxl;
 import com.guodu.pojo.sys.UserInfo;
 import com.guodu.service.impl.HttpClientServiceImpl;
+import com.guodu.service.impl.ftu.*;
 import com.guodu.service.impl.pwbh.PwbhBzBhctServiceImpl;
 import com.guodu.service.impl.sys.SysSccjServiceImpl;
 import com.guodu.service.impl.sys.SysSsxlServiceImpl;
@@ -100,41 +102,6 @@ public class WithSeverActive {
     SysSccjServiceImpl sysSccjServiceImpl;
     @Autowired
     SysSsxlServiceImpl SysSsxlServiceImpl;
-
-    /** ftu **/
-   /* @Value("${ftuBzCyjdcsUrl}")
-    String ftuBzCyjdcsUrl;
-    @Value("${ftuBzCyjdUrl}")
-    String ftuBzCyjdUrl;
-    @Value("${ftuBzGjtsUrl}")
-    String ftuBzGjtsUrl;
-    @Value("${ftuBzGncsUrl}")
-    String ftuBzGncsUrl;
-    @Value("${ftuBzHbdyUrl}")
-    String ftuBzHbdyUrl;
-    @Value("${ftuBzLpjyUrl}")
-    String ftuBzLpjyUrl;
-    @Value("${ftuBzTyjcUrl}")
-    String ftuBzTyjcUrl;
-    @Value("${ftuBzTzybUrl}")
-    String ftuBzTzybUrl;
-
-    @Autowired
-    FtuBzCyjdcsServiceImpl ftuBzCyjdcsServiceImpl;
-    @Autowired
-    FtuBzCyjdServiceImpl ftuBzCyjdServiceImpl;
-    @Autowired
-    FtuBzGjtsServiceImpl ftuBzGjtsServiceImpl;
-    @Autowired
-    FtuBzGncsServiceImpl ftuBzGncsServiceImpl;
-    @Autowired
-    FtuBzHbdyServiceImpl ftuBzHbdyServiceImpl;
-    @Autowired
-    FtuBzLpjyServiceImpl ftuBzLpjyServiceImpl;
-    @Autowired
-    FtuBzTyjcServiceImpl ftuBzTyjcServiceImpl;
-    @Autowired
-    FtuBzTzybServiceImpl ftuBzTzybServiceImpl;*/
 
     @RequestMapping(value = {"toTablesView.action", "/"}, produces = {"application/json;charset=UTF-8"})
     public ModelAndView toTablesView() {
@@ -333,73 +300,103 @@ public class WithSeverActive {
         return map;
     }
 
+    /** ftu **/
+    @Value("${ftuUrl}")
+    String ftuUrl;
+
+    @Autowired
+    FtuBzCyjdcsServiceImpl ftuBzCyjdcsServiceImpl;
+    @Autowired
+    FtuBzCyjdServiceImpl ftuBzCyjdServiceImpl;
+    @Autowired
+    FtuBzGjtsServiceImpl ftuBzGjtsServiceImpl;
+    @Autowired
+    FtuBzGncsServiceImpl ftuBzGncsServiceImpl;
+    @Autowired
+    FtuBzHbdyServiceImpl ftuBzHbdyServiceImpl;
+    @Autowired
+    FtuBzLpjyServiceImpl ftuBzLpjyServiceImpl;
+    @Autowired
+    FtuBzTyjcServiceImpl ftuBzTyjcServiceImpl;
+    @Autowired
+    FtuBzTzybServiceImpl ftuBzTzybServiceImpl;
+
     /***
      * 下载ftu标准
      * @param
      * @return
      */
-    /*@RequestMapping(value = {"getFtuStandard.action"}, produces = {"application/json;charset=UTF-8"})
-    public Map getFtuStandard(String ssqy) {
-        Map map = new HashMap();
-        map.put("ssqy", ssqy);
-        if (isConnect(bzctgyUrl).equals("false")) {
-            map.put("code", "-1");
-            map.put("message", "连接服务器错误！");
-        } else {
-
-            ftuBzCyjdcsServiceImpl.delete("-1");
-            String ftuBzCyjdcsStr = httpClientService.doPost(ftuBzCyjdcsUrl, map);
-            List<FtuBzCyjdcs> ftuBzCyjdcsList = JSON.parseObject(ftuBzCyjdcsStr, new TypeReference<List<FtuBzCyjdcs>>() {
-            });
-            for (FtuBzCyjdcs ftuBzCyjdcs : ftuBzCyjdcsList) ftuBzCyjdcsServiceImpl.add(ftuBzCyjdcs);
-
-            ftuBzCyjdServiceImpl.delete("-1");
-            String ftuBzCyjdStr = httpClientService.doPost(ftuBzCyjdUrl, map);
-            List<FtuBzCyjd> ftuBzCyjdList = JSON.parseObject(ftuBzCyjdStr, new TypeReference<List<FtuBzCyjd>>() {
-            });
-            for (FtuBzCyjd ftuBzCyjd : ftuBzCyjdList) ftuBzCyjdServiceImpl.add(ftuBzCyjd);
-
-            ftuBzGjtsServiceImpl.delete("-1");
-            String ftuBzGjtsStr = httpClientService.doPost(ftuBzGjtsUrl, map);
-            List<FtuBzGjts> ftuBzGjtsList = JSON.parseObject(ftuBzGjtsStr, new TypeReference<List<FtuBzGjts>>() {
-            });
-            for (FtuBzGjts ftuBzGjts : ftuBzGjtsList) ftuBzGjtsServiceImpl.add(ftuBzGjts);
-
-            ftuBzGncsServiceImpl.delete("-1");
-            String ftuBzGncsStr = httpClientService.doPost(ftuBzGncsUrl, map);
-            List<FtuBzGncs> ftuBzGncsList = JSON.parseObject(ftuBzGncsStr, new TypeReference<List<FtuBzGncs>>() {
-            });
-            for (FtuBzGncs ftuBzGncs : ftuBzGncsList) ftuBzGncsServiceImpl.add(ftuBzGncs);
-
-            ftuBzHbdyServiceImpl.delete("-1");
-            String ftuBzHbdyStr = httpClientService.doPost(ftuBzHbdyUrl, map);
-            List<FtuBzHbdy> ftuBzHbdyList = JSON.parseObject(ftuBzHbdyStr,jb new TypeReference<List<FtuBzHbdy>>() {
-            });
-            for (FtuBzHbdy ftuBzHbdy : ftuBzHbdyList) ftuBzHbdyServiceImpl.add(ftuBzHbdy);
-
-            ftuBzLpjyServiceImpl.delete("-1");
-            String ftuBzLpjyStr = httpClientService.doPost(ftuBzLpjyUrl, map);
-            List<FtuBzLpjy> ftuBzLpjyList = JSON.parseObject(ftuBzLpjyStr, new TypeReference<List<FtuBzLpjy>>() {
-            });
-            for (FtuBzLpjy ftuBzLpjy : ftuBzLpjyList) ftuBzLpjyServiceImpl.add(ftuBzLpjy);
-
-            ftuBzTyjcServiceImpl.delete("-1");
-            String ftuBzTyjcStr = httpClientService.doPost(ftuBzTyjcUrl, map);
-            List<FtuBzTyjc> fftuBzTyjcList = JSON.parseObject(ftuBzTyjcStr, new TypeReference<List<FtuBzTyjc>>() {
-            });
-            for (FtuBzTyjc ftuBzTyjc : fftuBzTyjcList) ftuBzTyjcServiceImpl.add(ftuBzTyjc);
-
-            ftuBzTzybServiceImpl.delete("-1");
-            String ftuBzTzybStr = httpClientService.doPost(ftuBzTzybUrl, map);
-            List<FtuBzTzyb> ftuBzTzybList = JSON.parseObject(ftuBzTzybStr, new TypeReference<List<FtuBzTzyb>>() {
-            });
-            for (FtuBzTzyb ftuBzTzyb : ftuBzTzybList) ftuBzTzybServiceImpl.add(ftuBzTzyb);
-
-            map.put("code", "0");
-            map.put("message", "下载成功！");
+    @RequestMapping(value = {"getFtuStandard.action"}, produces = {"application/json;charset=UTF-8"})
+    public Object getFtuStandard(){
+        Map res = new HashMap<>();
+        res.put("code", "0");
+        res.put("message", "下载成功！");
+        try {
+            String json = httpClientService.doGet(ftuUrl, null);
+            if(!json.equals("-1")){
+                Map<String,String> param = JSON.parseObject(json, new TypeReference<Map<String,String>>() {});
+                extFtu(param);
+            }else{
+                res.put("code", "-1");
+                res.put("message", "连接服务器错误！");
+            }
+        } catch (Exception e) {
+            res.put("code", "-1");
+            res.put("message", "下载错误！");
+            e.printStackTrace();
         }
-        return map;
-    }*/
+        return res;
+    }
+
+    public void extFtu(Map<String,String> param) throws Exception{
+        List<FtuBzCyjdcs> bzCyjdcsList = JSON.parseObject(param.get("bzCyjdcs"), new TypeReference< List<FtuBzCyjdcs>>() {});
+        ftuBzCyjdcsServiceImpl.delete("-1");
+        for(FtuBzCyjdcs bzCyjdcs:bzCyjdcsList){
+            ftuBzCyjdcsServiceImpl.add(bzCyjdcs);
+        }
+
+        List<FtuBzCyjd> bzCyjdList = JSON.parseObject(param.get("bzCyjd"), new TypeReference< List<FtuBzCyjd>>() {});
+        ftuBzCyjdServiceImpl.delete("-1");
+        for(FtuBzCyjd bzCyjd:bzCyjdList){
+            ftuBzCyjdServiceImpl.add(bzCyjd);
+        }
+
+        List<FtuBzGjts> bzGjtsList = JSON.parseObject(param.get("bzGjts"), new TypeReference< List<FtuBzGjts>>() {});
+        ftuBzGjtsServiceImpl.delete("-1");
+        for(FtuBzGjts bzGjts:bzGjtsList){
+            ftuBzGjtsServiceImpl.add(bzGjts);
+        }
+
+        List<FtuBzGncs> bzGncsList = JSON.parseObject(param.get("bzGncs"), new TypeReference< List<FtuBzGncs>>() {});
+        ftuBzGncsServiceImpl.delete("-1");
+        for(FtuBzGncs bzGncs:bzGncsList){
+            ftuBzGncsServiceImpl.add(bzGncs);
+        }
+
+        List<FtuBzHbdy> bzHbdyList = JSON.parseObject(param.get("bzHbdy"), new TypeReference< List<FtuBzHbdy>>() {});
+        ftuBzHbdyServiceImpl.delete("-1");
+        for(FtuBzHbdy bzHbdy:bzHbdyList){
+            ftuBzHbdyServiceImpl.add(bzHbdy);
+        }
+
+        List<FtuBzLpjy> bzLpjyList = JSON.parseObject(param.get("bzLpjy"), new TypeReference< List<FtuBzLpjy>>() {});
+        ftuBzLpjyServiceImpl.delete("-1");
+        for(FtuBzLpjy bzLpjy:bzLpjyList){
+            ftuBzLpjyServiceImpl.add(bzLpjy);
+        }
+
+        List<FtuBzTyjc> bzTyjcList = JSON.parseObject(param.get("bzTyjc"), new TypeReference< List<FtuBzTyjc>>() {});
+        ftuBzTyjcServiceImpl.delete("-1");
+        for(FtuBzTyjc bzTyjc:bzTyjcList){
+            ftuBzTyjcServiceImpl.add(bzTyjc);
+        }
+
+        List<FtuBzTzyb> bzTzybList = JSON.parseObject(param.get("bzTzyb"), new TypeReference< List<FtuBzTzyb>>() {});
+        ftuBzTzybServiceImpl.delete("-1");
+        for(FtuBzTzyb bzTzyb:bzTzybList){
+            ftuBzTzybServiceImpl.add(bzTzyb);
+        }
+    }
 
     public String isConnect(String url) {
         String json = httpClientService.doGet(url, null);
