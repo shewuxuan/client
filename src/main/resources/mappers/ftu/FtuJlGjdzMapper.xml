@@ -580,6 +580,6 @@
     </foreach>
   </insert>
   <delete id="deleteByTsid">
-    delete from ftu_jl_gjdz where tsid = #{tsid,jdbcType=VARCHAR}
+    delete from ftu_jl_gjdz where id = #{tsid,jdbcType=VARCHAR}
   </delete>
 </mapper>

@@ -1,9 +1,11 @@
 package com.guodu.pojo.ftu;
 
+import com.guodu.pojo.dtu.JbxxPhoto;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class FtuJbxx implements Serializable {
@@ -58,4 +60,8 @@ public class FtuJbxx implements Serializable {
     private Date czsj;//操作时间
     private String beizhu;//备注
     private String upload;//是否上传 0未上传1上传
+
+    private String flagArrayStr;//删除的照片pid
+    private String[] imgName;//重置照片名称
+    private List<FtuJbxxPhoto> photo;
 }

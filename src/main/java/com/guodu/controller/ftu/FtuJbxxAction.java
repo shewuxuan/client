@@ -2,13 +2,19 @@ package com.guodu.controller.ftu;
 
 import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson.JSON;
+import com.guodu.pojo.dtu.Jbxx;
+import com.guodu.pojo.dtu.JbxxPhoto;
+import com.guodu.pojo.ftu.FtuJbxxPhoto;
 import com.guodu.pojo.sys.Auth;
 import com.guodu.pojo.ftu.FtuJbxx;
+import com.guodu.service.impl.ftu.FtuJbxxPhotoServiceImpl;
 import com.guodu.service.impl.ftu.FtuJbxxServiceImpl;
+import com.guodu.util.FileHandleUtils;
 import com.guodu.util.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +23,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -25,15 +32,19 @@ public class FtuJbxxAction {
 	private static Logger log = Logger.getLogger(FtuJbxxAction.class);
 	@Autowired
 	FtuJbxxServiceImpl ftuJbxxServiceImpl;
+	@Value("${imgSavePath}")
+	String imgSavePath;
+	@Autowired
+	FtuJbxxPhotoServiceImpl ftuJbxxPhotoServiceImpl;
 
-	@RequestMapping(value = {"toFtuJbxxView.action",  "/" }, produces = { "application/json;charset=UTF-8" })
+	@RequestMapping(value = {"toFtuJbxxView.action"}, produces = { "application/json;charset=UTF-8" })
 	public ModelAndView toFtuJbxxView(HttpServletRequest request) {
 		ModelAndView view = new ModelAndView("ftuJbxx/ftuJbxxList");
 		//view.addObject("funcMap",Auth.getAuth(request).getRoleFunc());
 		return view;
 	}
 
-	@RequestMapping(value = {"selectListFtuJbxx.action",  "/" }, produces = { "application/json;charset=UTF-8" },method=RequestMethod.POST)
+	@RequestMapping(value = {"selectListFtuJbxx.action"}, produces = { "application/json;charset=UTF-8" },method=RequestMethod.POST)
 	public Object selectListFtuJbxx(@RequestParam Map<String, Object> form,HttpServletRequest request) {
 		Map res = new HashMap<String , Object>();
 		try{
@@ -47,20 +58,26 @@ public class FtuJbxxAction {
 
 	}
 
-	@RequestMapping(value = {"toAddFtuJbxxView.action",  "/" }, produces = { "application/json;charset=UTF-8" })
+	@RequestMapping(value = {"toAddFtuJbxxView.action"}, produces = { "application/json;charset=UTF-8" })
 	public ModelAndView toAddFtuJbxxView(HttpServletRequest request) {
 		ModelAndView view = new ModelAndView("ftuJbxx/addFtuJbxx");
-		String tsid = request.getParameter("tsid") == null ? "":request.getParameter("tsid").toString();
-		if(!tsid.equals("")){
-			Map<String,Object> vo = new HashMap<String,Object>();
-			vo.put("tsid", tsid);
-			FtuJbxx ftuJbxx = this.ftuJbxxServiceImpl.selectList(vo).get(0);
-			view.addObject("ftuJbxx",ftuJbxx);
-		}
 		return view;
 	}
 
-	@RequestMapping(value = {"addFtuJbxx.action",  "/" }, produces = { "application/json;charset=UTF-8" },method=RequestMethod.POST)
+	@RequestMapping(value = {"toEditFtuJbxxView.action"}, produces = { "application/json;charset=UTF-8" })
+	public ModelAndView toEditFtuJbxxView(HttpServletRequest request) {
+		ModelAndView view = new ModelAndView("ftuJbxx/editFtuJbxx");
+		String tsid = request.getParameter("tsid");
+		Map<String,Object> vo = new HashMap<String,Object>();
+		vo.put("tsid", tsid);
+		FtuJbxx ftuJbxx = this.ftuJbxxServiceImpl.selectList(vo).get(0);
+		List<FtuJbxxPhoto> jbxxPhoto = ftuJbxxPhotoServiceImpl.selectList(vo);
+		view.addObject("jbxxPhoto", jbxxPhoto);
+		view.addObject("ftuJbxx",ftuJbxx);
+		return view;
+	}
+
+	@RequestMapping(value = {"addFtuJbxx.action"}, produces = { "application/json;charset=UTF-8" },method=RequestMethod.POST)
 	public Object addFtuJbxx(FtuJbxx ftuJbxx,HttpServletRequest request) {
 		Map<String , Object> res = new HashMap<String , Object>();
 		res.put("code", "0");
@@ -76,7 +93,7 @@ public class FtuJbxxAction {
 				ftuJbxx.setCzsj(createDate);
 				ftuJbxx.setUpload("0");
 			}
-			this.ftuJbxxServiceImpl.add(ftuJbxx);
+			this.ftuJbxxServiceImpl.txAddJbxxAndPhoto(request,ftuJbxx,imgSavePath);
 		} catch (Exception e) {
 			res.put("code", "-1");
 			res.put("message", "操作失败");
@@ -85,7 +102,7 @@ public class FtuJbxxAction {
 		return JSON.toJSONString(res);
 	}
 
-	@RequestMapping(value = {"updateFtuJbxx.action",  "/" }, produces = {"application/json;charset=UTF-8"},method=RequestMethod.POST)
+	@RequestMapping(value = {"updateFtuJbxx.action"}, produces = {"application/json;charset=UTF-8"},method=RequestMethod.POST)
 	public Object updateFtuJbxx(FtuJbxx ftuJbxx, HttpServletRequest request) {
 		Map<String , Object> res = new HashMap<String , Object>();
 		res.put("code", "0");
@@ -94,7 +111,7 @@ public class FtuJbxxAction {
 			ftuJbxx.setSsqy(Auth.getAuth(request).getSsqy());
 			ftuJbxx.setCzr(Auth.getAuth(request).getLoginname());
 			ftuJbxx.setCzsj(new Date());
-			this.ftuJbxxServiceImpl.edit(ftuJbxx);
+			this.ftuJbxxServiceImpl.txUpdateJbxxAndPhoto(request,ftuJbxx,imgSavePath);
 		}catch(Exception e){
 			res.put("code", "-1");
 			res.put("message", "修改失败");
@@ -103,14 +120,14 @@ public class FtuJbxxAction {
 		return JSON.toJSONString(res);
 	}
 
-	@RequestMapping(value = {"delFtuJbxx.action",  "/" }, produces = { "application/json;charset=UTF-8" },method=RequestMethod.POST)
+	@RequestMapping(value = {"delFtuJbxx.action"}, produces = { "application/json;charset=UTF-8" },method=RequestMethod.POST)
 	public Object delFtuJbxx(@RequestParam Map<String, Object> form) {
 		Map<String , Object> res = new HashMap<String , Object>();
 		res.put("code", "0");
 		res.put("message", "删除成功");
 		String tsid = (String)form.get("tsid");
 		try{
-			this.ftuJbxxServiceImpl.delete(tsid);
+			this.ftuJbxxServiceImpl.txDeleteJbxxAndPhoto(tsid);
 		}catch(Exception e){
 			res.put("code", "-1");
 			res.put("message", "删除失败");
@@ -125,7 +142,7 @@ public class FtuJbxxAction {
 	 * @param request
 	 * @param response
 	 */
-	@RequestMapping(value = {"exportToWordByFtuJbxx.action",  "/" }, produces = { "application/json;charset=UTF-8" })
+	@RequestMapping(value = {"exportToWordByFtuJbxx.action"}, produces = { "application/json;charset=UTF-8" })
 	public void exportToWordByFtuJbxx(HttpServletRequest request, HttpServletResponse response) {
 		String tsid = request.getParameter("tsid");
 		XWPFDocument doc = null;
@@ -158,5 +175,16 @@ public class FtuJbxxAction {
 	public String selectByPrimaryKey(@PathVariable String id) {
 		FtuJbxx ftuJbxx = ftuJbxxServiceImpl.selectByPrimaryKey(id);
 		return JSONUtil.toJsonStr(ftuJbxx);
+	}
+
+	/***
+	 * 调试信息照片预览
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping("/getFtuJbxxPhotoView.action")
+	public void getJbxxPhotoView(HttpServletRequest request, HttpServletResponse response) {
+		FtuJbxxPhoto ftuJbxxPhoto = ftuJbxxPhotoServiceImpl.selectById(request.getParameter("pid"));
+		FileHandleUtils.previewImage(request,response,ftuJbxxPhoto.getPPath());
 	}
 }

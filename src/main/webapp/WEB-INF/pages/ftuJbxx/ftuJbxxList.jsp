@@ -115,7 +115,7 @@ function searchList(){
 function editFtuJbxx(tsid){
 	var w=window.screen.width/2-950/2;
 	var t=window.screen.height/2-600/2-35;
-	window.open("${ctx}/ftuJbxx/toAddFtuJbxxView.action?tsid="+tsid,null," height=500,width=1000,top="+t+",left="+w+",toolbar=no,menubar=no,localtion=no,scrollbars=no");
+	window.open("${ctx}/ftuJbxx/toEditFtuJbxxView.action?tsid="+tsid,"_blank");
 }
 function delFtuJbxx(tsid){
 	var formdata = new FormData();
@@ -203,7 +203,7 @@ $(function(){
 function g1(){
 	var w=window.screen.width/2-950/2;
 	var t=window.screen.height/2-600/2-35;
-	window.open("/ftuJbxx/toAddFtuJbxxView.action","_blank"," height=500,width=1000,top="+t+",left="+w+",toolbar=no,menubar=no,localtion=no,scrollbars=no");
+	window.open("/ftuJbxx/toAddFtuJbxxView.action","_blank");
 }
 </script>
 </body>

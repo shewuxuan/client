@@ -112,6 +112,27 @@
 		<if test="ssqy!=null and ssqy!=''"> , SSQY=#{ssqy, jdbcType=VARCHAR}</if>
 		<if test="tssj!=null"> , TSSJ = str_to_date(#{tssj},'%Y-%m-%d')</if>
 		<if test="ddbh!=null and ddbh!=''"> , ddbh=#{ddbh, jdbcType=VARCHAR}</if>
+		<if test="xlmc!=null and xlmc!=''"> , xlmc=#{xlmc, jdbcType=VARCHAR}</if>
+		<if test="ftuBm!=null and ftuBm!=''"> , ftu_bm=#{ftuBm, jdbcType=VARCHAR}</if>
+		<if test="ysry!=null and ysry!=''"> , ysry=#{ysry, jdbcType=VARCHAR}</if>
+		<if test="ysrq!=null"> , ysrq = str_to_date(#{ysrq},'%Y-%m-%d')</if>
+		<if test="ysdw!=null and ysdw!=''"> , ysdw=#{ysdw, jdbcType=VARCHAR}</if>
+		<if test="kgCj!=null and kgCj!=''"> , kg_cj=#{kgCj, jdbcType=VARCHAR}</if>
+		<if test="kgXh!=null and kgXh!=''"> , kg_xh=#{kgXh, jdbcType=VARCHAR}</if>
+		<if test="kgScrq!=null"> , kg_scrq = str_to_date(#{kgScrq},'%Y-%m-%d')</if>
+		<if test="ftuCj!=null and ftuCj!=''"> , ftu_cj=#{ftuCj, jdbcType=VARCHAR}</if>
+		<if test="ftuXh!=null and ftuXh!=''"> , ftu_xh=#{ftuXh, jdbcType=VARCHAR}</if>
+		<if test="ftuScrq!=null"> , ftu_scrq = str_to_date(#{ftuScrq},'%Y-%m-%d')</if>
+		<if test="txsbCj!=null and txsbCj!=''"> , txsb_cj=#{txsbCj, jdbcType=VARCHAR}</if>
+		<if test="txsbXh!=null and txsbXh!=''"> , txsb_xh=#{txsbXh, jdbcType=VARCHAR}</if>
+		<if test="txsbScrq!=null"> , txsb_scrq = str_to_date(#{txsbScrq},'%Y-%m-%d')</if>
+		<if test="wxkh!=null and wxkh!=''"> , wxkh=#{wxkh, jdbcType=VARCHAR}</if>
+		<if test="ipdz!=null and ipdz!=''"> , ipdz=#{ipdz, jdbcType=VARCHAR}</if>
+		<if test="zzlx!=null and zzlx!=''"> , zzlx=#{zzlx, jdbcType=VARCHAR}</if>
+		<if test="tsryxm!=null and tsryxm!=''"> , tsryxm=#{tsryxm, jdbcType=VARCHAR}</if>
+		<if test="czr!=null and czr!=''"> , CZR=#{czr, jdbcType=VARCHAR}</if>
+		<if test="czsj!=null"> , CZSJ=#{czsj, jdbcType=TIMESTAMP	}</if>
+		<if test="beizhu!=null and beizhu!=''"> , BEIZHU=#{beizhu, jdbcType=VARCHAR}</if>
 		where  tsid=#{tsid}
 	</update>
 

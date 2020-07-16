@@ -5,144 +5,129 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>基本信息——添加</title>
-    <link rel="stylesheet" type="text/css" href="/style/wholemain.css"/>
+    <title>基本信息——修改</title>
+    <link rel="stylesheet" type="text/css" href="/static/style/wholemain.css"/>
     <script src="/js/jquery.js"></script>
-    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
     <script type="text/javascript" src="/js/WdatePicker.js"></script>
-    <link rel="stylesheet" type="text/css" href="/easyui/themes/default/easyui.css"/>
-    <script type="text/javascript" src="/js/jquery.easyui.min.js"></script>
-    <script type="text/javascript" src="/js/easyui-lang-zh_CN.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/easyui/themes/default/easyui.css"/>
+    <script type="text/javascript" src="/static/js/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="/static/js/easyui-lang-zh_CN.js"></script>
 </head>
-<script>
-    $(function () {
-        var curr_time = new Date();
-        var strDate = curr_time.getFullYear() + "-";
-        strDate += curr_time.getMonth() + 1 + "-";
-        strDate += curr_time.getDate() + " ";
-        var tssj = '${jbxx}';
-        if (tssj == '' || tssj == null) {
-            $('#tssj').datebox('setValue', strDate);
-            $('#ysrq').datebox('setValue', strDate);
-            $('#kgScrq').datebox('setValue', strDate);
-            $('#ftuScrq').datebox('setValue', strDate);
-            $('#txsbScrq').datebox('setValue', strDate);
-        }
-    });
-</script>
 <body>
 <div class="right_main">
     <div class="right_table" style="width:96%;">
         <form name="myForm" id="myForm" method="post">
-            <table width="100%" cellpadding="0" cellspacing="1" bgcolor="#c6c6c6" id="testTab">
+            <table width="100%" cellpadding="0" cellspacing="1" id="testTab" bgcolor="#c6c6c6">
                 <tbody>
                     <tr>
-                        <th colspan="4" align="center" bgcolor="#f5f2ea">添加</th>
+                        <th colspan="4" align="center" bgcolor="#f5f2ea">修改</th>
                     </tr>
                     <tr>
                         <th bgcolor="#FFFFFF">调试时间</th>
                         <td bgcolor="#FFFFFF" style="text-align:left; ">
-                            <input class="easyui-datebox" name="tssj" id="tssj"
+                            <input class="easyui-datebox" name="tssj" id="tssj" value="${ftuJbxx.tssj}"
                                    data-options="required:true" style="width:120px"/>
                         </td>
                         <th bgcolor="#FFFFFF"><p>调度编号</p></th>
                         <td bgcolor="#FFFFFF" style="text-align:left; ">
-                            <input type="text" name="ddbh" id="ddbh" style="height:25px; border:1px solid #CCC;"/>
+                            <input type="hidden" name="tsid" id="tsid" value="${ftuJbxx.tsid}" />
+                            <input type="text" name="ddbh" id="ddbh" value="${ftuJbxx.ddbh}" style="height:25px; border:1px solid #CCC;"/>
                         </td>
                     </tr>
                     <tr>
                         <th bgcolor="#FFFFFF"><p>线路名称</p></th>
                         <td bgcolor="#FFFFFF" style="text-align:left; ">
-                            <input type="text" name="xlmc" id="xlmc" style="height:25px; border:1px solid #CCC;"/>
+                            <input type="text" name="xlmc" id="xlmc" value="${ftuJbxx.xlmc}" style="height:25px; border:1px solid #CCC;"/>
                         </td>
                         <th bgcolor="#FFFFFF"><p>FTU编码</p></th>
                         <td bgcolor="#FFFFFF" style="text-align:left; ">
-                            <input type="text" name="ftuBm" id="ftuBm" style="height:25px; border:1px solid #CCC;"/>
+                            <input type="text" name="ftuBm" id="ftuBm" value="${ftuJbxx.ftuBm}" style="height:25px; border:1px solid #CCC;"/>
                         </td>
                     </tr>
                     <tr>
                         <th bgcolor="#FFFFFF"><p>验收人员</p></th>
                         <td bgcolor="#FFFFFF" style="text-align:left; ">
-                            <input type="text" name="ysry" id="ysry" style="height:25px; border:1px solid #CCC;"/>
+                            <input type="text" name="ysry" id="ysry" value="${ftuJbxx.ysry}" style="height:25px; border:1px solid #CCC;"/>
                         </td>
                         <th bgcolor="#FFFFFF"><p>验收日期</p></th>
                         <td bgcolor="#FFFFFF" style="text-align:left; ">
-                            <input class="easyui-datebox" name="ysrq" id="ysrq"
+                            <input class="easyui-datebox" name="ysrq" value="${ftuJbxx.ysrq}" id="ysrq"
                                    data-options="required:true" style="width:120px"/>
                         </td>
                     </tr>
                     <tr>
                         <th bgcolor="#FFFFFF"><p>验收单位</p></th>
                         <td bgcolor="#FFFFFF" style="text-align:left; ">
-                            <input type="text" name="ysdw" id="ysdw" style="height:25px; border:1px solid #CCC;"/>
+                            <input type="text" name="ysdw" id="ysdw" value="${ftuJbxx.ysdw}" style="height:25px; border:1px solid #CCC;"/>
                         </td>
                         <th bgcolor="#FFFFFF"><p>开关本体厂家</p></th>
                         <td bgcolor="#FFFFFF" style="text-align:left; ">
-                            <input type="text" name="kgCj" id="kgCj" style="height:25px; border:1px solid #CCC;"/>
+                            <input type="text" name="kgCj" id="kgCj" value="${ftuJbxx.kgCj}" style="height:25px; border:1px solid #CCC;"/>
                         </td>
                     </tr>
                     <tr>
                         <th bgcolor="#FFFFFF"><p>开关本体型号</p></th>
                         <td bgcolor="#FFFFFF" style="text-align:left; ">
-                            <input type="text" name="kgXh" id="kgXh" style="height:25px; border:1px solid #CCC;"/>
+                            <input type="text" name="kgXh" id="kgXh" value="${ftuJbxx.kgXh}" style="height:25px; border:1px solid #CCC;"/>
                         </td>
                         <th bgcolor="#FFFFFF"><p>开关本体生产日期</p></th>
                         <td bgcolor="#FFFFFF" style="text-align:left; ">
-                            <input class="easyui-datebox" name="kgScrq" id="kgScrq"
+                            <input class="easyui-datebox" name="kgScrq" id="kgScrq" value="${ftuJbxx.kgScrq}"
                                    data-options="required:true" style="width:120px"/>
                         </td>
                     </tr>
                     <tr>
                         <th bgcolor="#FFFFFF"><p>FTU厂家</p></th>
                         <td bgcolor="#FFFFFF" style="text-align:left; ">
-                            <input type="text" name="ftuCj" id="ftuCj" style="height:25px; border:1px solid #CCC;"/>
+                            <input type="text" name="ftuCj" id="ftuCj" value="${ftuJbxx.ftuCj}" style="height:25px; border:1px solid #CCC;"/>
                         </td>
                         <th bgcolor="#FFFFFF"><p>FTU型号</p></th>
                         <td bgcolor="#FFFFFF" style="text-align:left; ">
-                            <input type="text" name="ftuXh" id="ftuXh" style="height:25px; border:1px solid #CCC;"/>
+                            <input type="text" name="ftuXh" id="ftuXh" value="${ftuJbxx.ftuXh}" style="height:25px; border:1px solid #CCC;"/>
                         </td>
                     </tr>
                     <tr>
                         <th bgcolor="#FFFFFF"><p>FTU生产日期</p></th>
                         <td bgcolor="#FFFFFF" style="text-align:left; ">
-                            <input class="easyui-datebox" name="ftuScrq" id="ftuScrq"
+                            <input class="easyui-datebox" name="ftuScrq" id="ftuScrq" value="${ftuJbxx.ftuScrq}"
                                    data-options="required:true" style="width:120px"/>
                         </td>
                         <th bgcolor="#FFFFFF"><p>通讯设备厂家</p></th>
                         <td bgcolor="#FFFFFF" style="text-align:left; ">
-                            <input type="text" name="txsbCj" id="txsbCj" style="height:25px; border:1px solid #CCC;"/>
+                            <input type="text" name="txsbCj" id="txsbCj" value="${ftuJbxx.txsbCj}" style="height:25px; border:1px solid #CCC;"/>
                         </td>
                     </tr>
                     <tr>
                         <th bgcolor="#FFFFFF"><p>通讯设备型号</p></th>
                         <td bgcolor="#FFFFFF" style="text-align:left; ">
-                            <input type="text" name="txsbXh" id="txsbXh" style="height:25px; border:1px solid #CCC;"/>
+                            <input type="text" name="txsbXh" id="txsbXh"  value="${ftuJbxx.txsbXh}" style="height:25px; border:1px solid #CCC;"/>
                         </td>
                         <th bgcolor="#FFFFFF"><p>通讯设备生产日期</p></th>
                         <td bgcolor="#FFFFFF" style="text-align:left; ">
-                            <input class="easyui-datebox" name="txsbScrq" id="txsbScrq"
+                            <input class="easyui-datebox" name="txsbScrq" id="txsbScrq"  value="${ftuJbxx.txsbScrq}"
                                    data-options="required:true" style="width:120px"/>
                         </td>
                     </tr>
                     <tr>
                         <th bgcolor="#FFFFFF"><p>无线卡号</p></th>
                         <td bgcolor="#FFFFFF" style="text-align:left; ">
-                            <input type="text" name="wxkh" id="wxkh" style="height:25px; border:1px solid #CCC;"/>
+                            <input type="text" name="wxkh" id="wxkh" value="${ftuJbxx.wxkh}" style="height:25px; border:1px solid #CCC;"/>
                         </td>
                         <th bgcolor="#FFFFFF"><p>IP地址</p></th>
                         <td bgcolor="#FFFFFF" style="text-align:left; ">
-                            <input type="text" name="ipdz" id="ipdz" style="height:25px; border:1px solid #CCC;"/>
+                            <input type="text" name="ipdz" id="ipdz" value="${ftuJbxx.ipdz}" style="height:25px; border:1px solid #CCC;"/>
                         </td>
                     </tr>
                     <tr>
                         <th bgcolor="#FFFFFF"><p>装置类型</p></th>
                         <td bgcolor="#FFFFFF" style="text-align:left; ">
-                            <select name="zzlx" id="zzlx" style="height:25px; border:1px solid #CCC;">
+                            <select name="zzlx" id="zzlx" value="${ftuJbxx.tsryxm}" style="height:25px; border:1px solid #CCC;">
                             </select>
                         </td>
                         <th bgcolor="#FFFFFF"><p>调试人员姓名</p></th>
                         <td bgcolor="#FFFFFF" style="text-align:left; ">
-                            <input type="text" name="tsryxm" id="tsryxm" style="height:25px; border:1px solid #CCC;"/>
+                            <input type="text" name="tsryxm" id="tsryxm" value="${ftuJbxx.tsryxm}" style="height:25px; border:1px solid #CCC;"/>
                         </td>
                     </tr>
                     <tr>
@@ -151,15 +136,33 @@
                             <input type="button" value="添加"  onclick="addTr(12);" class="iput_m" />
                         </td>
                     </tr>
+                    <c:forEach items="${jbxxPhoto}" var="file" varStatus="status">
+                        <tr id='ftr${status.index}'>
+                            <td bgcolor="#FFFFFF" style="text-align: left;">
+                                <p style='font-size: 12px;font-weight: bold;color: #333;font-family: \"宋体\";'>图片名称</p>
+                                <input type="hidden"   name='fileId${status.index}' id='fileId${status.index}'  value="${file.PID}"/>
+                            </td>
+                            <td bgcolor="#FFFFFF" style="text-align: left;">
+                                <input type="hidden"   name='photo[${status.index}].pid'  value="${file.PID}"/>
+                                <input type="hidden"   name='photo[${status.index}].tsid'  value="${file.TSID}"/>
+                                <input type='text' name='photo[${status.index}].pName' value="${file.P_NAME}" style='height:25px; border:1px solid #CCC;float: left;'/>
+                            </td>
+                            <td bgcolor="#FFFFFF" style="text-align: left;" colspan="2">
+                                <div style='height:100px;float: left;margin-left: 60px;' > <img height="100px" src="/ftuJbxx/getFtuJbxxPhotoView.action?pid=${file.PID}" class="pimg"></div><button class='iput_m'onclick="moveTr2(${status.index});" style='float: right;margin-left:-50px;margin-top: 60px;'>移除</button>
+                            </td>
+
+                        </tr>
+                    </c:forEach>
                     <tr>
                         <th bgcolor="#FFFFFF"><p>备注</p></th>
                         <td bgcolor="#FFFFFF" style="text-align:left; " colspan="3">
-                            <textarea name="beizhu" id="beizhu" cols="100" rows="5" style="border:1px solid #CCC;"></textarea>
+                            <textarea name="beizhu" id="beizhu" cols="100" rows="5" style="border:1px solid #CCC;">${ftuJbxx.beizhu}</textarea>
+                            <input type="hidden" id="flagArrayStr" name="flagArrayStr">
                         </td>
                     </tr>
                     <tr>
                         <td height="33" colspan="4" bgcolor="#f5f2ea">
-                            <input type="button" name="button" value="提 交" onclick="commit()" class="iput_m"
+                            <input type="button" name="button" value="提 交" onclick="change()" class="iput_m"
                                    style="height:25px;"/>
                             <input type="button" onclick="javascript:window.close();" name="button" value="取 消"
                                    class="iput_m" style="height:25px;"/>
@@ -177,48 +180,63 @@
 </div>
 <script>
     //放大图片
+    $(function(){
+        $(".pimg").click(function(){
+            var _this = $(this);//将当前的pimg元素作为_this传入函数
+            var src = _this.attr("src");//获取当前点击的pimg元素中的src属性
+            imgShow("#outerdiv", "#innerdiv", "#bigimg", src);
+        });
+    });
     function imgMaxView(e) {
-        var _this = $(e);
-        var src = _this.attr("src");
+        var _this = $(e);//将当前的pimg元素作为_this传入函数
+        var src = _this.attr("src");//获取当前点击的pimg元素中的src属性
         imgShow("#outerdiv", "#innerdiv", "#bigimg", src);
     }
-
+    function divImgView(imgId) {
+        var src = '/jbxx/getJbxxPhotoView.action?pid='+imgId;
+        imgShow("#outerdiv", "#innerdiv", "#bigimg", src);
+    }
     function imgShow(outerdiv, innerdiv, bigimg, src){
-        $(bigimg).attr("src", src);
+        $(bigimg).attr("src", src);//设置#bigimg元素的src属性
+        /*获取当前点击图片的真实大小，并显示弹出层及大图*/
         $("<img/>").attr("src", src).load(function(){
-            var windowW = $(window).width();
-            var windowH = $(window).height();
-            var realWidth = this.width;
-            var realHeight = this.height;
+            var windowW = $(window).width();//获取当前窗口宽度
+            var windowH = $(window).height();//获取当前窗口高度
+            var realWidth = this.width;//获取图片真实宽度
+            var realHeight = this.height;//获取图片真实高度
             var imgWidth, imgHeight;
-            var scale = 0.8;
+            var scale = 0.8;//缩放尺寸，当图片真实宽度和高度大于窗口宽度和高度时进行缩放
 
-            if(realHeight>windowH*scale) {
-                imgHeight = windowH*scale;
-                imgWidth = imgHeight/realHeight*realWidth;
-                if(imgWidth>windowW*scale) {
-                    imgWidth = windowW*scale;
+            if(realHeight>windowH*scale) {//判断图片高度
+                imgHeight = windowH*scale;//如大于窗口高度，图片高度进行缩放
+                imgWidth = imgHeight/realHeight*realWidth;//等比例缩放宽度
+                if(imgWidth>windowW*scale) {//如宽度扔大于窗口宽度
+                    imgWidth = windowW*scale;//再对宽度进行缩放
                 }
-            } else if(realWidth>windowW*scale) {
-                imgWidth = windowW*scale;
-                imgHeight = imgWidth/realWidth*realHeight;
-            } else {
+            } else if(realWidth>windowW*scale) {//如图片高度合适，判断图片宽度
+                imgWidth = windowW*scale;//如大于窗口宽度，图片宽度进行缩放
+                imgHeight = imgWidth/realWidth*realHeight;//等比例缩放高度
+            } else {//如果图片真实高度和宽度都符合要求，高宽不变
                 imgWidth = realWidth;
                 imgHeight = realHeight;
             }
-            $(bigimg).css("width",imgWidth);
+            $(bigimg).css("width",imgWidth);//以最终的宽度对图片缩放
 
-            var w = (windowW-imgWidth)/2;
-            var h = (windowH-imgHeight)/2;
+            var w = (windowW-imgWidth)/2;//计算图片与窗口左边距
+            var h = (windowH-imgHeight)/2;//计算图片与窗口上边距
             $(innerdiv).css({"top":h, "left":w});//设置#innerdiv的top和left属性
-            $(outerdiv).fadeIn("fast");
+            $(outerdiv).fadeIn("fast");//淡入显示#outerdiv及.pimg
         });
 
-        $(outerdiv).click(function(){
+        $(outerdiv).click(function(){//再次点击淡出消失弹出层
             $(this).fadeOut("fast");
         });
     }
+    //图片预览
     function previewImage(file, prvid,imgName) {
+        /* file：file控件
+         * prvid: 图片预览容器
+         */
         var tip = "请选择图片格式的文件!"; // 设定提示信息
         var filters = {
             "jpeg" : "/9j/4",
@@ -264,12 +282,15 @@
             img.src = src;
             img.height = 100;
             prvbox.appendChild(img);
+            var fileNames = file.value;
             $(img).bind("click",function(){
                 imgMaxView(this);
             });
         }
     }
-    //添加照片
+    //添加删除照片
+    var flagArray = new Array();
+
     var id=1;
     function addTr(index) {
         var tb=document.getElementById('testTab');
@@ -289,6 +310,15 @@
     function moveTr(id){
         var tb=document.getElementById('testTab');
         var tr=document.getElementById('tr'+id);
+        tb.deleteRow(tr.rowIndex);
+    }
+    function moveTr2(id){
+        var trId = 'ftr'+id;
+        var tb=document.getElementById('testTab');
+        var tr=document.getElementById(trId);
+        var textId = '#fileId'+id;
+        flagArray.push($(textId).val());
+        $("#flagArrayStr").val(flagArray);
         tb.deleteRow(tr.rowIndex);
     }
 </script>
