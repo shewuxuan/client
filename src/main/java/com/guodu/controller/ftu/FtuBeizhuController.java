@@ -1,10 +1,10 @@
-package com.guodu.controller.dtu;
+package com.guodu.controller.ftu;
 
 import cn.hutool.json.JSONUtil;
-import com.guodu.pojo.ftu.FtuJbxxBeizhu;
 import com.guodu.pojo.dtu.JbxxBeizhu;
-import com.guodu.service.ftu.FtuJbxxBeizhuService;
+import com.guodu.pojo.ftu.FtuJbxxBeizhu;
 import com.guodu.service.dtu.JbxxBeizhuService;
+import com.guodu.service.ftu.FtuJbxxBeizhuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,41 +17,42 @@ import java.util.Map;
  * @Author: 2Uli
  * @Date: 2020/4/29 12:33 下午
  */
-@RequestMapping("beizhu/")
+@RequestMapping("ftu_beizhu/")
 @RestController
-public class BeizhuController {
+public class FtuBeizhuController {
 
     @Autowired
-    private JbxxBeizhuService jbxxBeizhuServiceImpl;
+    private FtuJbxxBeizhuService ftuJbxxBeizhuServiceImpl;
     private final Map<String, Object> map = new HashMap<>(16);
 
     /**
-     * @MethodName: selectBeizhuByPrimaryKey
-     * @Description: TODO 查询DTU备注
+     * @MethodName: selectFtuBeizhuByPrimaryKey
+     * @Description: TODO 查询FTU备注
      * @Param: [tsid]
      * @Return: java.lang.String
      * @Author: 2uli
-     * @Date: 2020/5/13 1:17 下午
+     * @Date: 2020/5/13 11:28 上午
      */
-    @GetMapping("selectBeizhuByPrimaryKey/{tsid}")
-    public String selectBeizhuByPrimaryKey(@PathVariable String tsid) {
-        JbxxBeizhu jbxxBeizhu = jbxxBeizhuServiceImpl.selectByPrimaryKey(tsid);
-        return JSONUtil.toJsonStr(jbxxBeizhu);
+    @GetMapping("selectFtuBeizhuByPrimaryKey/{tsid}")
+    public String selectFtuBeizhuByPrimaryKey(@PathVariable String tsid) {
+        FtuJbxxBeizhu ftuBeizhu = ftuJbxxBeizhuServiceImpl.selectByPrimaryKey(tsid);
+        return JSONUtil.toJsonStr(ftuBeizhu);
     }
 
+
     /**
-     * @MethodName: updateByPrimaryKey
-     * @Description: TODO 修改DTU备注
+     * @MethodName: updateFtuBeizhuByPrimaryKey
+     * @Description: TODO 修改FTU备注
      * @Param: [record]
      * @Return: java.lang.String
      * @Author: 2uli
-     * @Date: 2020/5/13 1:17 下午
+     * @Date: 2020/5/13 11:29 上午
      */
-    @PostMapping("updateByPrimaryKey")
-    public String updateByPrimaryKey(@RequestBody JbxxBeizhu record) {
+    @PostMapping("updateFtuBeizhuByPrimaryKey")
+    public String updateFtuBeizhuByPrimaryKey(@RequestBody FtuJbxxBeizhu record) {
         map.clear();
         try {
-            int i = jbxxBeizhuServiceImpl.updateByPrimaryKeySelective(record);
+            int i = ftuJbxxBeizhuServiceImpl.updateByPrimaryKeySelective(record);
             map.put("code", 0);
             map.put("msg", "修改成功！");
             map.put("data", i);

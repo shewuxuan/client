@@ -66,6 +66,7 @@
                 let resdata = res.data;
                 // 开启自动保存（自动保存记录/备注）
                 autosave = setInterval(function () {
+                    editbz();
                     $.ajax({
                         type: "POST",
                         url: "${basePath}/ftu_jl_kgdz/updateBatch",              // 改
@@ -73,15 +74,12 @@
                         contentType: "application/json;charsetset=UTF-8",//必须
                         dataType: "json",//必须
                         success: function (data) {
-                            if (data.code === 0) {
-                                console.log("kgdz automatically saved successfully!");
-                            } else {
+                            if (data.code !== 0) {
                                 console.log("kgdz automatically saved failed!");
                             }
                         }
                     });
-                    editbz();
-                }, 30000);
+                }, 10000);
                 record = resdata;
 
                 for (let i = 0, length = resdata.length; i < length; i++) {
@@ -115,7 +113,7 @@
             };
             $.ajax({
                 type: "POST",
-                url: "${basePath}/beizhu/updateFtuBeizhuByPrimaryKey",
+                url: "${basePath}/ftu_beizhu/updateFtuBeizhuByPrimaryKey",
                 data: JSON.stringify(beizhu),//必须
                 contentType: "application/json;charsetset=UTF-8",//必须
                 dataType: "json",//必须
@@ -127,16 +125,6 @@
 //监听事件
         table.on('toolbar(kgdz)', function (obj) {      // 改
             switch (obj.event) {
-                // 刷新
-                case 'REFRESH':
-                    tableReload.reload();
-                    record = [];
-                    // 刷新备注
-                    $.get("${basePath}/beizhu/selectBeizhuByPrimaryKey/" + tsid, function (data) {
-                        $("#kgdzbeizhu").val($.parseJSON(data).jlKgdz);
-                    });
-                    layer.msg('刷新完成', {time: 1000, icon: 6});
-                    break;
                 // 提交
                 case 'SUBMIT':
                     $.ajax({

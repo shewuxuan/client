@@ -131,37 +131,37 @@
     <!--@mbg.generated-->
     update ftu_jbxx_beizhu
     <set>
-      <if test="jlCyjd != null and jlCyjd != ''">
+      <if test="jlCyjd != null">
         jl_cyjd = #{jlCyjd,jdbcType=VARCHAR},
       </if>
-      <if test="jlCyjdcs != null and jlCyjdcs != ''">
+      <if test="jlCyjdcs != null">
         jl_cyjdcs = #{jlCyjdcs,jdbcType=VARCHAR},
       </if>
-      <if test="jlGjts != null and jlGjts != ''">
+      <if test="jlGjts != null">
         jl_gjts = #{jlGjts,jdbcType=VARCHAR},
       </if>
-      <if test="jlGncs != null and jlGncs != ''">
+      <if test="jlGncs != null">
         jl_gncs = #{jlGncs,jdbcType=VARCHAR},
       </if>
-      <if test="jlHbdy != null and jlHbdy != ''">
+      <if test="jlHbdy != null">
         jl_hbdy = #{jlHbdy,jdbcType=VARCHAR},
       </if>
-      <if test="jlKgdz != null and jlKgdz != ''">
+      <if test="jlKgdz != null">
         jl_kgdz = #{jlKgdz,jdbcType=VARCHAR},
       </if>
-      <if test="jlLpjy != null and jlLpjy != ''">
+      <if test="jlLpjy != null">
         jl_lpjy = #{jlLpjy,jdbcType=VARCHAR},
       </if>
-      <if test="jlTyjc != null and jlTyjc != ''">
+      <if test="jlTyjc != null">
         jl_tyjc = #{jlTyjc,jdbcType=VARCHAR},
       </if>
-      <if test="jlTzyb != null and jlTzyb != ''">
+      <if test="jlTzyb != null">
         jl_tzyb = #{jlTzyb,jdbcType=VARCHAR},
       </if>
-      <if test="jlYkcd != null and jlYkcd != ''">
+      <if test="jlYkcd != null">
         jl_ykcd = #{jlYkcd,jdbcType=VARCHAR},
       </if>
-      <if test="jlYkkg != null and jlYkkg != ''">
+      <if test="jlYkkg != null">
         jl_ykkg = #{jlYkkg,jdbcType=VARCHAR},
       </if>
     </set>

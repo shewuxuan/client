@@ -108,8 +108,8 @@ function searchList(){
 		} else {
 			fulls += ",resizable"; // 对于不支持screen属性的浏览器，可以手工进行最大化。 manually
 		}
-		window.open("${basePath}/ftuJbxx/ftuTsjl/ts/" + tsid,"",fulls);
-		<%--window.open("${basePath}/ftuJbxx/ftuTsjl/ts/" + tsid,"_blank");--%>
+		<%--window.open("${basePath}/ftuJbxx/ftuTsjl/ts/" + tsid,"",fulls);--%>
+		window.open("${basePath}/ftuJbxx/ftuTsjl/ts/" + tsid,"_blank");
 	}
 
 function editFtuJbxx(tsid){
