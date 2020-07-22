@@ -73,7 +73,7 @@ public class FtuTsjlServiceImpl implements FtuTsjlService {
         ftuBzCyjd.setSsqy(ssqy);
         List<FtuBzCyjd> ftuBzCyjds = ftuBzCyjdServiceImpl.selectByAll(ftuBzCyjd);
         for (FtuBzCyjd bzCyjd : ftuBzCyjds) {
-            FtuJlCyjd ftuJlCyjd = new FtuJlCyjd(IDUtil.getStrId(), tsid, ssqy, bzCyjd.getClx(), null, null, null, null, null, null, czr, new Date(), null);
+            FtuJlCyjd ftuJlCyjd = new FtuJlCyjd(IDUtil.getStrId(), tsid, ssqy, bzCyjd.getClx(), null, null, null, null, null, "1", czr, new Date(), null);
             ftuJlCyjdServiceImpl.insert(ftuJlCyjd);
         }
 
@@ -81,7 +81,7 @@ public class FtuTsjlServiceImpl implements FtuTsjlService {
         ftuBzCyjdcs.setSsqy(ssqy);
         List<FtuBzCyjdcs> ftuBzCyjdcss = ftuBzCyjdcsServiceImpl.selectByAll(ftuBzCyjdcs);
         for (FtuBzCyjdcs bzCyjdcss : ftuBzCyjdcss) {
-            FtuJlCyjdcs ftuJlCyjdcs = new FtuJlCyjdcs(IDUtil.getStrId(), tsid, ssqy, bzCyjdcss.getClx(), null, null, null, null, czr, new Date(), null);
+            FtuJlCyjdcs ftuJlCyjdcs = new FtuJlCyjdcs(IDUtil.getStrId(), tsid, ssqy, bzCyjdcss.getClx(), null, null, null, "1", czr, new Date(), null);
             ftuJlCyjdcsServiceImpl.insert(ftuJlCyjdcs);
         }
 
@@ -98,7 +98,7 @@ public class FtuTsjlServiceImpl implements FtuTsjlService {
         ftuBzGncs.setSsqy(ssqy);
         List<FtuBzGncs> ftuBzGncss = ftuBzGncsServiceImpl.selectByAll(ftuBzGncs);
         for (FtuBzGncs bzGncss : ftuBzGncss) {
-            FtuJlGncs ftuJlGncs = new FtuJlGncs(IDUtil.getStrId(), tsid, ssqy, bzGncss.getCsgn(), bzGncss.getJsbz(), null, czr, new Date(), null);
+            FtuJlGncs ftuJlGncs = new FtuJlGncs(IDUtil.getStrId(), tsid, ssqy, bzGncss.getCsgn(), bzGncss.getJsbz(), "1", czr, new Date(), null);
             ftuJlGncsServiceImpl.insert(ftuJlGncs);
         }
 
@@ -106,7 +106,7 @@ public class FtuTsjlServiceImpl implements FtuTsjlService {
         ftuBzHbdy.setSsqy(ssqy);
         List<FtuBzHbdy> ftuBzHbdys = ftuBzHbdyServiceImpl.selectByAll(ftuBzHbdy);
         for (FtuBzHbdy bzHbdy : ftuBzHbdys) {
-            FtuJlHbdy ftuJlHbdy = new FtuJlHbdy(IDUtil.getStrId(), tsid, ssqy, bzHbdy.getJcnr(), null, czr, new Date(), null);
+            FtuJlHbdy ftuJlHbdy = new FtuJlHbdy(IDUtil.getStrId(), tsid, ssqy, bzHbdy.getJcnr(), "1", czr, new Date(), null);
             ftuJlHbdyServiceImpl.insert(ftuJlHbdy);
         }
 
@@ -114,7 +114,7 @@ public class FtuTsjlServiceImpl implements FtuTsjlService {
         ftuBzLpjy.setSsqy(ssqy);
         List<FtuBzLpjy> ftuBzLpjys = ftuBzLpjyServiceImpl.selectByAll(ftuBzLpjy);
         for (FtuBzLpjy bzLpjy : ftuBzLpjys) {
-            FtuJlLpjy ftuJlLpjy = new FtuJlLpjy(IDUtil.getStrId(), tsid, ssqy, bzLpjy.getHl(), null, null, czr, new Date(), null);
+            FtuJlLpjy ftuJlLpjy = new FtuJlLpjy(IDUtil.getStrId(), tsid, ssqy, bzLpjy.getHl(), null, "1", czr, new Date(), null);
             ftuJlLpjyServiceImpl.insert(ftuJlLpjy);
         }
 
@@ -122,7 +122,7 @@ public class FtuTsjlServiceImpl implements FtuTsjlService {
         ftuBzTyjc.setSsqy(ssqy);
         List<FtuBzTyjc> ftuBzTyjcs = ftuBzTyjcServiceImpl.selectByAll(ftuBzTyjc);
         for (FtuBzTyjc bzTyjc : ftuBzTyjcs) {
-            FtuJlTyjc ftuJlTyjc = new FtuJlTyjc(IDUtil.getStrId(), tsid, ssqy, bzTyjc.getJcxm(), null, czr, new Date(), null);
+            FtuJlTyjc ftuJlTyjc = new FtuJlTyjc(IDUtil.getStrId(), tsid, ssqy, bzTyjc.getJcxm(), "1", czr, new Date(), null);
             ftuJlTyjcServiceImpl.insert(ftuJlTyjc);
         }
 
@@ -137,10 +137,10 @@ public class FtuTsjlServiceImpl implements FtuTsjlService {
         FtuJlKgdz ftuJlKgdz = new FtuJlKgdz(IDUtil.getStrId(), tsid, ssqy, null, null, null, null, null, null, null, null, null, czr, new Date(), null);
         ftuJlKgdzServiceImpl.insert(ftuJlKgdz);
 
-        FtuJlYkcd ftuJlYkcd = new FtuJlYkcd(IDUtil.getStrId(), tsid, ssqy, null, null, null, null, czr, new Date(), null);
+        FtuJlYkcd ftuJlYkcd = new FtuJlYkcd(IDUtil.getStrId(), tsid, ssqy, "1", null, "1", null, czr, new Date(), null);
         ftuJlYkcdServiceImpl.insert(ftuJlYkcd);
 
-        FtuJlYkkg ftuJlYkkg = new FtuJlYkkg(IDUtil.getStrId(), tsid, ssqy, null, null, null, null, czr, new Date(), null);
+        FtuJlYkkg ftuJlYkkg = new FtuJlYkkg(IDUtil.getStrId(), tsid, ssqy, "1", null, "1", null, czr, new Date(), null);
         ftuJlYkkgServiceImpl.insert(ftuJlYkkg);
 
         FtuJlGjdz ftuJlGjdz = new FtuJlGjdz(tsid, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);

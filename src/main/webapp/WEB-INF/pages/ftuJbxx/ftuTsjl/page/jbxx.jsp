@@ -135,7 +135,7 @@
         $.ajaxSettings.async = true;            // 取消同步， ajax改成异步
 
         <%--// 查询备注信息--%>
-        $.get("${basePath}/beizhu/selectFtuBeizhuByPrimaryKey/" + tsid, function (data) {
+        $.get("${basePath}/ftu_beizhu/selectFtuBeizhuByPrimaryKey/" + tsid, function (data) {
             let beizhu = $.parseJSON(data);
             $("#kgdzbeizhu").val(beizhu.jlKgdz);
             $("#hbdybeizhu").val(beizhu.jlHbdy);
@@ -151,21 +151,22 @@
         });
 
         <%--// 查询告警定值--%>
-        $.get("${basePath}/ftu_jl_gjdz/selectByPrimaryKey/" + tsid, function (data) {
-            let gjdz = $.parseJSON(data);
-            $("#gl1ddz").val(gjdz.gl1ddz);
-            $("#gl1dsj").val(gjdz.gl1dsj);
-            $("#gl1dtd").val(gjdz.gl1dtd);
-            $("#gl2ddz").val(gjdz.gl2ddz);
-            $("#gl2dsj").val(gjdz.gl2dsj);
-            $("#gl2dtd").val(gjdz.gl2dtd);
-            $("#lx1ddz").val(gjdz.lx1ddz);
-            $("#lx1dsj").val(gjdz.lx1dsj);
-            $("#lx1dtd").val(gjdz.lx1dtd);
-            $("#lx2ddz").val(gjdz.lx2ddz);
-            $("#lx2dsj").val(gjdz.lx2dsj);
-            $("#lx2dtd").val(gjdz.lx2dtd);
-        });
+        <%--$.get("${basePath}/ftu_jl_gjdz/selectByPrimaryKey/" + tsid, function (data) {--%>
+        <%--    let gjdz = $.parseJSON(data);--%>
+        <%--    console.log(gjdz.gl1ddz)--%>
+        <%--    $("#gl1ddz").val(gjdz.gl1ddz);--%>
+        <%--    $("#gl1dsj").val(gjdz.gl1dsj);--%>
+        <%--    $("#gl1dtd").val(gjdz.gl1dtd);--%>
+        <%--    $("#gl2ddz").val(gjdz.gl2ddz);--%>
+        <%--    $("#gl2dsj").val(gjdz.gl2dsj);--%>
+        <%--    $("#gl2dtd").val(gjdz.gl2dtd);--%>
+        <%--    $("#lx1ddz").val(gjdz.lx1ddz);--%>
+        <%--    $("#lx1dsj").val(gjdz.lx1dsj);--%>
+        <%--    $("#lx1dtd").val(gjdz.lx1dtd);--%>
+        <%--    $("#lx2ddz").val(gjdz.lx2ddz);--%>
+        <%--    $("#lx2dsj").val(gjdz.lx2dsj);--%>
+        <%--    $("#lx2dtd").val(gjdz.lx2dtd);--%>
+        <%--});--%>
     });
 </script>
 </body>

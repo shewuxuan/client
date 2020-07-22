@@ -182,58 +182,58 @@
     <!--@mbg.generated-->
     update ftu_jl_gjdz
     <set>
-      <if test="gl1ddz != null and gl1ddz != ''">
+      <if test="gl1ddz != null">
         gl1ddz = #{gl1ddz,jdbcType=VARCHAR},
       </if>
-      <if test="gl1dsj != null and gl1dsj != ''">
+      <if test="gl1dsj != null">
         gl1dsj = #{gl1dsj,jdbcType=VARCHAR},
       </if>
-      <if test="gl1dtd != null and gl1dtd != ''">
+      <if test="gl1dtd != null">
         gl1dtd = #{gl1dtd,jdbcType=VARCHAR},
       </if>
-      <if test="gl2ddz != null and gl2ddz != ''">
+      <if test="gl2ddz != null">
         gl2ddz = #{gl2ddz,jdbcType=VARCHAR},
       </if>
-      <if test="gl2dsj != null and gl2dsj != ''">
+      <if test="gl2dsj != null">
         gl2dsj = #{gl2dsj,jdbcType=VARCHAR},
       </if>
-      <if test="gl2dtd != null and gl2dtd != ''">
+      <if test="gl2dtd != null">
         gl2dtd = #{gl2dtd,jdbcType=VARCHAR},
       </if>
-      <if test="lx1ddz != null and lx1ddz != ''">
+      <if test="lx1ddz != null">
         lx1ddz = #{lx1ddz,jdbcType=VARCHAR},
       </if>
-      <if test="lx1dsj != null and lx1dsj != ''">
+      <if test="lx1dsj != null">
         lx1dsj = #{lx1dsj,jdbcType=VARCHAR},
       </if>
-      <if test="lx1dtd != null and lx1dtd != ''">
+      <if test="lx1dtd != null">
         lx1dtd = #{lx1dtd,jdbcType=VARCHAR},
       </if>
-      <if test="lx2ddz != null and lx2ddz != ''">
+      <if test="lx2ddz != null">
         lx2ddz = #{lx2ddz,jdbcType=VARCHAR},
       </if>
-      <if test="lx2dsj != null and lx2dsj != ''">
+      <if test="lx2dsj != null">
         lx2dsj = #{lx2dsj,jdbcType=VARCHAR},
       </if>
-      <if test="lx22 != null and lx22 != ''">
+      <if test="lx22 != null">
         lx22 = #{lx22,jdbcType=VARCHAR},
       </if>
-      <if test="lx21 != null and lx21 != ''">
+      <if test="lx21 != null">
         lx21 = #{lx21,jdbcType=VARCHAR},
       </if>
-      <if test="lx2 != null and lx2 != ''">
+      <if test="lx2 != null">
         lx2 = #{lx2,jdbcType=VARCHAR},
       </if>
-      <if test="lx12 != null and lx12 != ''">
+      <if test="lx12 != null">
         lx12 = #{lx12,jdbcType=VARCHAR},
       </if>
-      <if test="lx11 != null and lx11 != ''">
+      <if test="lx11 != null">
         lx11 = #{lx11,jdbcType=VARCHAR},
       </if>
-      <if test="lx1 != null and lx1 != ''">
+      <if test="lx1 != null">
         lx1 = #{lx1,jdbcType=VARCHAR},
       </if>
-      <if test="lx2dtd != null and lx2dtd != ''">
+      <if test="lx2dtd != null">
         lx2dtd = #{lx2dtd,jdbcType=VARCHAR},
       </if>
     </set>

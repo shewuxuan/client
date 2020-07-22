@@ -199,12 +199,10 @@
 <%-- 结果状态列(正常/异常)--%>
 <script type="text/html" id="gncsjg">
     <select name='select4gncs' lay-ignore lay-search=''>
-        <option value="-1" {{ d.jg== -1 ?
-        'selected' : '' }}></option>
-        <option value="1" {{ d.jg== 1 ?
-        'selected' : '' }}>是</option>
-        <option value="0" {{ d.jg== 0 ?
-        'selected' : '' }}>否</option>
+        <option value="-1" {{ d.jg== -1 ? 'selected' : '' }}></option>
+        <option value="1" {{ d.jg== 1 ? 'selected' : '' }}>是</option>
+        <option value="0" {{ d.jg== 0 ? 'selected' : '' }}>否</option>
+        <option value="2" {{ d.jg== 2 ? 'selected' : '' }}>N/A</option>
     </select>
 </script>
 </body>

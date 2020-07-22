@@ -17,7 +17,7 @@
 <body>
 <form class="layui-form layui-form-pane" action="">
     <div class="layui-form-item layui-form-text">
-        <label class="layui-form-label">测试项</label>
+        <label class="layui-form-label">相别</label>
         <div class="layui-input-block">
             <textarea name="csx" placeholder="请输入内容" class="layui-textarea"></textarea>
         </div>

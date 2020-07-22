@@ -72,23 +72,24 @@
             , done: function (res, curr, count) {
                 let resdata = res.data;
                 // 开启自动保存（自动保存记录/备注）
-                autosave = setInterval(function () {
-                    $.ajax({
-                        type: "POST",
-                        url: "${basePath}/ftu_jl_cyjd/updateBatch",              // 改
-                        data: JSON.stringify(record),//必须
-                        contentType: "application/json;charsetset=UTF-8",//必须
-                        dataType: "json",//必须
-                        success: function (data) {
-                            if (data.code === 0) {
-                                console.log("cyjd automatically saved successfully!");
-                            } else {
-                                console.log("cyjd automatically saved failed!");
-                            }
-                        }
-                    });
-                    editbz();
-                }, 30000);
+                <%--autosave = setInterval(function () {--%>
+                <%--    editbz();--%>
+                <%--    if (record.length === 0) {--%>
+                <%--        return;--%>
+                <%--    }--%>
+                <%--    $.ajax({--%>
+                <%--        type: "POST",--%>
+                <%--        url: "${basePath}/ftu_jl_cyjd/updateBatch",              // 改--%>
+                <%--        data: JSON.stringify(record),//必须--%>
+                <%--        contentType: "application/json;charsetset=UTF-8",//必须--%>
+                <%--        dataType: "json",//必须--%>
+                <%--        success: function (data) {--%>
+                <%--            if (data.code !== 0) {--%>
+                <%--                console.log("cyjd automatically saved failed!");--%>
+                <%--            }--%>
+                <%--        }--%>
+                <%--    });--%>
+                <%--}, 10000);--%>
                 record = resdata;
                 $("[name='select4cyjd']").change(function () {
                     let elem = $(this).parents('tr');
@@ -118,11 +119,6 @@
 
         // 编辑
         table.on('edit(cyjd)', function (obj) {         // 改
-            // 验证只能输入数值的列
-            let array = ['uab','uac','ia', 'ic', 'io'];
-            if ($.inArray(obj.field, array) >= 0 && $(this).val() !== '' && $(this).val() != null) {
-                checkNum(obj, $(this).prev());
-            }
             let data = obj.data;
             $.each(record, function (i) {
                 if (record[i].id === data.id) {
@@ -142,7 +138,7 @@
             };
             $.ajax({
                 type: "POST",
-                url: "${basePath}/beizhu/updateFtuBeizhuByPrimaryKey",
+                url: "${basePath}/ftu_beizhu/updateFtuBeizhuByPrimaryKey",
                 data: JSON.stringify(beizhu),//必须
                 contentType: "application/json;charsetset=UTF-8",//必须
                 dataType: "json",//必须
@@ -151,12 +147,40 @@
             });
         }
 
+        // 提交记录(添加/删除前)
+        function submitJl(record) {
+            // 表格没有数据
+            if (record.length === 0) {
+                return true;
+            }
+            let data = null;
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: "${basePath}/ftu_jl_cyjd/updateBatch",              // 改
+                data: JSON.stringify(record),//必须
+                contentType: "application/json;charsetset=UTF-8",//必须
+                dataType: "json",//必须
+                success: function (result) {
+                    clearTimeout(autosave);
+                    tableReload.reload();
+                    record = [];
+                    data = result;
+                }
+            });
+            return data.code === 0;
+        }
+
 //监听事件
         table.on('toolbar(cyjd)', function (obj) {      // 改
             switch (obj.event) {
                 // 添加
                 case 'ADD':
-                    if (${requestScope.userType == 0}) {
+                    if (${requestScope.userType != 0}) {
+                        layer.msg("权限不足！", {time: 1500, icon: 4});
+                        return;
+                    }
+                    if (submitJl(record)) {
                         layer.open({
                             type: 2,
                             title: '添加 --> 采样精度测试（二次值）',
@@ -164,25 +188,21 @@
                             area: ['800px', '520px'],
                             content: '${basePath}/ftuJbxx/ftuTsjl/add/addCyjd/' + tsid + '/' + ssqy
                             , end: function () {
+                                clearTimeout(autosave);
                                 tableReload.reload();
                             }
                         });
                     } else {
-                        layer.msg("没权限, 你加不了", {time: 1500, icon: 4});
+                        layer.msg("添加前提交失败，请刷新重试！", {time: 2000, icon: 5});
                     }
-                    break;
-                // 刷新
-                case 'REFRESH':
-                    tableReload.reload();
-                    record = [];
-                    // 刷新备注
-                    $.get("${basePath}/beizhu/selectFtuBeizhuByPrimaryKey/" + tsid, function (data) {
-                        $("#cyjdbeizhu").val($.parseJSON(data).jlCyjd);
-                    });
-                    layer.msg('刷新完成', {time: 1000, icon: 6});
                     break;
                 // 提交
                 case 'SUBMIT':
+                    editbz();
+                    if (record.length === 0) {
+                        layer.msg("无数据提交", {time: 1000, icon: 3});
+                        return;
+                    }
                     $.ajax({
                         type: "POST",
                         url: "${basePath}/ftu_jl_cyjd/updateBatch",              // 改
@@ -191,35 +211,40 @@
                         dataType: "json",//必须
                         success: function (data) {
                             if (data.code === 0) {
+                                clearTimeout(autosave);
                                 tableReload.reload();
                                 record = [];
-                                clearTimeout(autosave);
-                                layer.msg(data.msg, {
-                                    offset: 't',
-                                    time: 1000,
-                                    icon: 6
-                                });
+                                layer.msg(data.msg, {time: 1000, icon: 6});
                             } else {
                                 layer.msg(data.msg, {time: 2000, icon: 5})
                             }
                         }
                     });
-
-                    // 修改备注
-                    editbz();
                     break;
             }
         });
 
         //监听行操作
         table.on('tool(cyjd)', function (obj) {
-            let data = obj.data;
+            let that = obj.data;
             if (obj.event === 'del') {
                 layer.confirm('真的删除吗？', function () {
-                    $.get("${basePath}/ftu_jl_cyjd/deleteByPrimaryKey/" + data.id, function (result) {
-                        layer.msg(JSON.parse(result).msg, {time: 1500, icon: 1});
-                        tableReload.reload();
-                    });
+                    // 删除前提交
+                    if (submitJl(record)) {
+                        // 删除
+                        $.get("${basePath}/ftu_jl_cyjd/deleteByPrimaryKey/" + that.id, function (result) {
+                            clearTimeout(autosave);
+                            tableReload.reload();
+                            result = JSON.parse(result);
+                            if (result.code === 0) {
+                                layer.msg(result.msg, {time: 1500, icon: 1});
+                            } else {
+                                layer.msg(result.msg, {time: 2000, icon: 5});
+                            }
+                        });
+                    } else {
+                        layer.msg("删除前提交失败，请刷新重试！", {time: 2000, icon: 5});
+                    }
                 });
             }
         });
@@ -229,14 +254,10 @@
 <%-- 结果状态列(正常/异常)--%>
 <script type="text/html" id="cyjdjg">
     <select name='select4cyjd' lay-ignore lay-filter="wgpz" lay-search=''>
-        <option value="-1" {{ d.csjg== -1 ?
-        'selected' : '' }}></option>
-        <option value="1" {{ d.csjg== 1 ?
-        'selected' : '' }}>正常</option>
-        <option value="0" {{ d.csjg== 0 ?
-        'selected' : '' }}>超标</option>
-        <option value="2" {{ d.csjg== 2 ?
-        'selected' : '' }}>N/A</option>
+        <option value="-1" {{ d.csjg== -1 ? 'selected' : '' }}></option>
+        <option value="1" {{ d.csjg== 1 ? 'selected' : '' }}>正常</option>
+        <option value="0" {{ d.csjg== 0 ? 'selected' : '' }}>超标</option>
+        <option value="2" {{ d.csjg== 2 ? 'selected' : '' }}>N/A</option>
     </select>
 </script>
 </body>
