@@ -11,6 +11,7 @@ import com.guodu.service.ftu.FtuJbxxBeizhuService;
 import com.guodu.service.impl.BaseServiceImpl;
 import com.guodu.service.impl.dtu.ExportDocumentService;
 import com.guodu.util.FileHandleUtils;
+import com.guodu.util.QRCodeUtil;
 import com.guodu.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
+import java.awt.image.BufferedImage;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -127,5 +129,21 @@ public class FtuJbxxServiceImpl extends BaseServiceImpl<FtuJbxx> {
         ftuJbxxBeizhuServiceImpl.deleteByPrimaryKey(tsid);//删除备注表
         ftuTsjlServiceImpl.deleteFtuTsjl(tsid);//删除所有调试记录
         this.delete(tsid);
+    }
+
+    /***
+     * 根据调试id生成二维码
+     * @param request
+     * @param ftuJbxx
+     * @return
+     * @throws Exception
+     */
+    public BufferedImage createQRCodeByJbxxInfo(HttpServletRequest request, FtuJbxx ftuJbxx) throws Exception {
+        //反向地址解析  与标注相反location	lat<纬度>,lng<经度>	必选
+        String url="http://api.map.baidu.com/marker?location="+ftuJbxx.getWd()+","+ftuJbxx.getJd()+"&title="+ftuJbxx.getXxwz()
+                +"&content="
+                +"&output=html&src=webapp.baidu.openAPIdemo";
+        BufferedImage img = QRCodeUtil.encode(url,"","",true);
+        return img;
     }
 }

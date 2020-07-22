@@ -17,8 +17,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Date;
@@ -178,6 +181,17 @@ public class FtuJbxxAction {
 	}
 
 	/***
+	 * 查询调试信息所有超片
+	 * @param form
+	 * @return
+	 */
+	@RequestMapping("/getJbxxPhotos.action")
+	public Object getJbxxPhotos(@RequestParam Map<String,Object> form) {
+		List<FtuJbxxPhoto> phootos = ftuJbxxPhotoServiceImpl.selectList(form);
+		return JSONUtil.toJsonStr(phootos);
+	}
+
+	/***
 	 * 调试信息照片预览
 	 * @param request
 	 * @param response
@@ -186,5 +200,28 @@ public class FtuJbxxAction {
 	public void getJbxxPhotoView(HttpServletRequest request, HttpServletResponse response) {
 		FtuJbxxPhoto ftuJbxxPhoto = ftuJbxxPhotoServiceImpl.selectById(request.getParameter("pid"));
 		FileHandleUtils.previewImage(request,response,ftuJbxxPhoto.getPPath());
+	}
+
+	/***
+	 * 生成jbxx二维码
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping("/createQRCodeByJbxxInfo.action")
+	public void createQRCodeByJbxxInfo(HttpServletRequest request, HttpServletResponse response) {
+		FtuJbxx ftuJbxx = ftuJbxxServiceImpl.selectById(request.getParameter("tsid"));
+		BufferedImage image = null;
+		response.setContentType("image/jpg");
+		//禁止图像缓存。
+		response.setHeader("Pragma", "no-cache");
+		response.setHeader("Cache-Control", "no-cache");
+		response.setDateHeader("Expires", 0);
+		try {
+			image = ftuJbxxServiceImpl.createQRCodeByJbxxInfo(request,ftuJbxx);
+			// 输出图象到页面
+			ImageIO.write(image, "jpg", response.getOutputStream());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

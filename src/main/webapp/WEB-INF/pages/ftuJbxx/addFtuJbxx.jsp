@@ -13,7 +13,42 @@
     <link rel="stylesheet" type="text/css" href="/easyui/themes/default/easyui.css"/>
     <script type="text/javascript" src="/js/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="/js/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=KU3KGvuGAZBLbLai55AuWrQikAsqmC2g"></script>
+    <script type="text/javascript" src="/js/sccj.js"></script>
 </head>
+<style>
+    #searchresult
+    {
+        position: absolute;
+        z-index: 1;
+        overflow: hidden;
+        background: #f0f0f0;
+        border-top: none;
+    }
+    .sccs
+    {
+        width: 170px;
+        font-size:15px;
+        height:20px;
+    }
+    .line
+    {
+        font-size: 12px;
+        background: #E0E0E0;
+        width: 140px;
+    }
+    .hover
+    {
+        background: #007ab8;
+        width: 140px;
+        color: #fff;
+    }
+    .std
+    {
+        width: 165px;
+        height: 20px;
+    }
+</style>
 <script>
     $(function () {
         var curr_time = new Date();
@@ -45,93 +80,9 @@
                             <input class="easyui-datebox" name="tssj" id="tssj"
                                    data-options="required:true" style="width:120px"/>
                         </td>
-                        <th bgcolor="#FFFFFF"><p>调度编号</p></th>
-                        <td bgcolor="#FFFFFF" style="text-align:left; ">
-                            <input type="text" name="ddbh" id="ddbh" style="height:25px; border:1px solid #CCC;"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th bgcolor="#FFFFFF"><p>线路名称</p></th>
-                        <td bgcolor="#FFFFFF" style="text-align:left; ">
-                            <input type="text" name="xlmc" id="xlmc" style="height:25px; border:1px solid #CCC;"/>
-                        </td>
-                        <th bgcolor="#FFFFFF"><p>FTU编码</p></th>
-                        <td bgcolor="#FFFFFF" style="text-align:left; ">
-                            <input type="text" name="ftuBm" id="ftuBm" style="height:25px; border:1px solid #CCC;"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th bgcolor="#FFFFFF"><p>验收人员</p></th>
-                        <td bgcolor="#FFFFFF" style="text-align:left; ">
-                            <input type="text" name="ysry" id="ysry" style="height:25px; border:1px solid #CCC;"/>
-                        </td>
-                        <th bgcolor="#FFFFFF"><p>验收日期</p></th>
-                        <td bgcolor="#FFFFFF" style="text-align:left; ">
-                            <input class="easyui-datebox" name="ysrq" id="ysrq"
-                                   data-options="required:true" style="width:120px"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th bgcolor="#FFFFFF"><p>验收单位</p></th>
-                        <td bgcolor="#FFFFFF" style="text-align:left; ">
-                            <input type="text" name="ysdw" id="ysdw" style="height:25px; border:1px solid #CCC;"/>
-                        </td>
-                        <th bgcolor="#FFFFFF"><p>开关本体厂家</p></th>
-                        <td bgcolor="#FFFFFF" style="text-align:left; ">
-                            <input type="text" name="kgCj" id="kgCj" style="height:25px; border:1px solid #CCC;"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th bgcolor="#FFFFFF"><p>开关本体型号</p></th>
-                        <td bgcolor="#FFFFFF" style="text-align:left; ">
-                            <input type="text" name="kgXh" id="kgXh" style="height:25px; border:1px solid #CCC;"/>
-                        </td>
-                        <th bgcolor="#FFFFFF"><p>开关本体生产日期</p></th>
-                        <td bgcolor="#FFFFFF" style="text-align:left; ">
-                            <input class="easyui-datebox" name="kgScrq" id="kgScrq"
-                                   data-options="required:true" style="width:120px"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th bgcolor="#FFFFFF"><p>FTU厂家</p></th>
-                        <td bgcolor="#FFFFFF" style="text-align:left; ">
-                            <input type="text" name="ftuCj" id="ftuCj" style="height:25px; border:1px solid #CCC;"/>
-                        </td>
                         <th bgcolor="#FFFFFF"><p>FTU型号</p></th>
                         <td bgcolor="#FFFFFF" style="text-align:left; ">
-                            <input type="text" name="ftuXh" id="ftuXh" style="height:25px; border:1px solid #CCC;"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th bgcolor="#FFFFFF"><p>FTU生产日期</p></th>
-                        <td bgcolor="#FFFFFF" style="text-align:left; ">
-                            <input class="easyui-datebox" name="ftuScrq" id="ftuScrq"
-                                   data-options="required:true" style="width:120px"/>
-                        </td>
-                        <th bgcolor="#FFFFFF"><p>通讯设备厂家</p></th>
-                        <td bgcolor="#FFFFFF" style="text-align:left; ">
-                            <input type="text" name="txsbCj" id="txsbCj" style="height:25px; border:1px solid #CCC;"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th bgcolor="#FFFFFF"><p>通讯设备型号</p></th>
-                        <td bgcolor="#FFFFFF" style="text-align:left; ">
-                            <input type="text" name="txsbXh" id="txsbXh" style="height:25px; border:1px solid #CCC;"/>
-                        </td>
-                        <th bgcolor="#FFFFFF"><p>通讯设备生产日期</p></th>
-                        <td bgcolor="#FFFFFF" style="text-align:left; ">
-                            <input class="easyui-datebox" name="txsbScrq" id="txsbScrq"
-                                   data-options="required:true" style="width:120px"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th bgcolor="#FFFFFF"><p>无线卡号</p></th>
-                        <td bgcolor="#FFFFFF" style="text-align:left; ">
-                            <input type="text" name="wxkh" id="wxkh" style="height:25px; border:1px solid #CCC;"/>
-                        </td>
-                        <th bgcolor="#FFFFFF"><p>IP地址</p></th>
-                        <td bgcolor="#FFFFFF" style="text-align:left; ">
-                            <input type="text" name="ipdz" id="ipdz" style="height:25px; border:1px solid #CCC;"/>
+                            <input type="text" name="ftuXh" id="ftuXh" ondblclick="defaultClick(this)" style="height:25px; border:1px solid #CCC;"/>
                         </td>
                     </tr>
                     <tr>
@@ -140,16 +91,131 @@
                             <select name="zzlx" id="zzlx" style="height:25px; border:1px solid #CCC;">
                             </select>
                         </td>
+                        <th bgcolor="#FFFFFF"><p>FTU编码</p></th>
+                        <td bgcolor="#FFFFFF" style="text-align:left; ">
+                            <input type="text" name="ftuBm" id="ftuBm" ondblclick="defaultClick(this)" style="height:25px; border:1px solid #CCC;"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th bgcolor="#FFFFFF"><p>调度编号</p></th>
+                        <td bgcolor="#FFFFFF" style="text-align:left; ">
+                            <input type="text" name="ddbh" id="ddbh"  ondblclick="defaultClick(this)" style="height:25px; border:1px solid #CCC;"/>
+                        </td>
+                        <th bgcolor="#FFFFFF"><p>FTU厂家</p></th>
+                        <td bgcolor="#FFFFFF" style="text-align:left; ">
+                            <input type="text" name="ftuCj" id="txmkcj" class="sccs" onclick="defaultClick(this)" style="height:25px; border:1px solid #CCC;"/>
+                            <div id="searchresult" style="display: none;margin-top:10px;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th bgcolor="#FFFFFF"><p>线路名称</p></th>
+                        <td bgcolor="#FFFFFF" style="text-align:left; ">
+                            <input type="text" name="xlmc" id="xlmc" ondblclick="defaultClick(this)" style="height:25px; border:1px solid #CCC;"/>
+                        </td>
+                        <th bgcolor="#FFFFFF"><p>FTU生产日期</p></th>
+                        <td bgcolor="#FFFFFF" style="text-align:left; ">
+                            <input class="easyui-datebox" name="ftuScrq" id="ftuScrq"
+                                   data-options="required:true" style="width:120px"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th bgcolor="#FFFFFF"><p>无线卡号</p></th>
+                        <td bgcolor="#FFFFFF" style="text-align:left; ">
+                            <input type="text" name="wxkh" id="wxkh" ondblclick="defaultClick(this)" style="height:25px; border:1px solid #CCC;"/>
+                        </td>
+                        <th bgcolor="#FFFFFF"><p>开关本体型号</p></th>
+                        <td bgcolor="#FFFFFF" style="text-align:left; ">
+                            <input type="text" name="kgXh" id="kgXh" ondblclick="defaultClick(this)" style="height:25px; border:1px solid #CCC;"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th bgcolor="#FFFFFF"><p>IP地址</p></th>
+                        <td bgcolor="#FFFFFF" style="text-align:left; ">
+                            <input type="text" name="ipdz" id="ipdz" ondblclick="defaultClick(this)" style="height:25px; border:1px solid #CCC;"/>
+                        </td>
+                        <th bgcolor="#FFFFFF"><p>开关本体厂家</p></th>
+                        <td bgcolor="#FFFFFF" style="text-align:left; ">
+                            <input type="text" name="kgCj" id="sccs" ondblclick="defaultClick(this)" class="sccs" style="height:25px; border:1px solid #CCC;"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th bgcolor="#FFFFFF"><p>验收人员</p></th>
+                        <td bgcolor="#FFFFFF" style="text-align:left; ">
+                            <input type="text" name="ysry" id="ysry" ondblclick="defaultClick(this)" style="height:25px; border:1px solid #CCC;"/>
+                        </td>
+                        <th bgcolor="#FFFFFF"><p>开关本体生产日期</p></th>
+                        <td bgcolor="#FFFFFF" style="text-align:left; ">
+                            <input class="easyui-datebox" name="kgScrq" id="kgScrq"
+                                   data-options="required:true" style="width:120px"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th bgcolor="#FFFFFF"><p>验收单位</p></th>
+                        <td bgcolor="#FFFFFF" style="text-align:left; ">
+                            <input type="text" name="ysdw" id="ysdw" ondblclick="defaultClick(this)" style="height:25px; border:1px solid #CCC;"/>
+                        </td>
+                        <th bgcolor="#FFFFFF"><p>通讯设备型号</p></th>
+                        <td bgcolor="#FFFFFF" style="text-align:left; ">
+                            <input type="text" name="txsbXh" id="txsbXh" ondblclick="defaultClick(this)" style="height:25px; border:1px solid #CCC;"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th bgcolor="#FFFFFF"><p>验收日期</p></th>
+                        <td bgcolor="#FFFFFF" style="text-align:left; ">
+                            <input class="easyui-datebox" name="ysrq" id="ysrq" ondblclick="defaultClick(this)"
+                                   data-options="required:true" style="width:120px"/>
+                        </td>
+                        <th bgcolor="#FFFFFF"><p>通讯设备厂家</p></th>
+                        <td bgcolor="#FFFFFF" style="text-align:left; ">
+                            <input type="text" name="txsbCj" id="sccsYcg" ondblclick="defaultClick(this)" class="sccs" style="height:25px; border:1px solid #CCC;"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th bgcolor="#FFFFFF"><p>相间CT变比</p></th>
+                        <td bgcolor="#FFFFFF" style="text-align:left; ">
+                            <input type="text" name="kgXjbb" id="kgXjbb" ondblclick="defaultClick(this)" style="height:25px; border:1px solid #CCC;"/>
+                        </td>
+                        <th bgcolor="#FFFFFF"><p>通讯设备生产日期</p></th>
+                        <td bgcolor="#FFFFFF" style="text-align:left; ">
+                            <input class="easyui-datebox" name="txsbScrq" id="txsbScrq"
+                                   data-options="required:true" style="width:120px"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th bgcolor="#FFFFFF"><p>零序CT变比</p></th>
+                        <td bgcolor="#FFFFFF" style="text-align:left; ">
+                            <input type="text" name="kgLxbb" id="kgLxbb" ondblclick="defaultClick(this)" style="height:25px; border:1px solid #CCC;"/>
+                        </td>
                         <th bgcolor="#FFFFFF"><p>调试人员姓名</p></th>
                         <td bgcolor="#FFFFFF" style="text-align:left; ">
-                            <input type="text" name="tsryxm" id="tsryxm" style="height:25px; border:1px solid #CCC;"/>
+                            <input type="text" name="tsryxm" id="tsryxm" ondblclick="defaultClick(this)" style="height:25px; border:1px solid #CCC;"/>
                         </td>
                     </tr>
                     <tr>
                         <th bgcolor="#FFFFFF">添加照片</th>
                         <td bgcolor="#FFFFFF" colspan="3" style="text-align: left;">&nbsp;
-                            <input type="button" value="添加"  onclick="addTr(12);" class="iput_m" />
+                            <input type="button" value="添加"  onclick="addTr(13);" class="iput_m" />
                         </td>
+                    </tr>
+                    <tr>
+                        <th bgcolor="#FFFFFF" style="width: 20%"><p>百度经纬度</p></th>
+                        <td bgcolor="#FFFFFF" style="text-align:left; " colspan="3">
+                            <span class="label">腾讯地图经度</span>
+                            <input type="text" name="t_jd" id="t_jd" style="height:25px; border:1px solid #CCC;"/>
+                            <span class="label">腾讯地图纬度</span>
+                            <input type="text" name="t_wd" id="t_wd" style="height:25px; border:1px solid #CCC;"/>
+                            <input type="button" onclick="switchXY()" value="确 定" class="iput_m"
+                                   style="height:25px;"/>
+                            <br/> <br/>
+                            <span class="label">百度地图经度</span>
+                            <input type="text" name="jd" id="jd" style="height:25px; border:1px solid #CCC;"/>
+                            <span class="label">百度地图纬度</span>
+                            <input type="text" name="wd" id="wd" style="height:25px; border:1px solid #CCC;"/>
+                            <span class="label">详细位置</span>
+                            <input type='text' name='xxwz' id='xxwz' size="30" style="height:25px; border:1px solid #CCC;">
+                            <div class="main-div" style="height: 426px;width: 800px;margin-top: 5px;">
+                                <div id='allmap' style='width:  75%; height:400px; position: absolute;'></div>
+                            </div>
                     </tr>
                     <tr>
                         <th bgcolor="#FFFFFF"><p>备注</p></th>
@@ -176,6 +242,9 @@
     </div>
 </div>
 <script>
+    function defaultClick(e){
+        e.value="N/A";
+    }
     //放大图片
     function imgMaxView(e) {
         var _this = $(e);
@@ -325,6 +394,15 @@
     });
 
     function commit() {
+        //验证必填字段
+        if($("#ddbh").val() == ""){
+            alert("调度编号不能为空！");
+            return;
+        }
+        if($("#zzlx").val() == ""){
+            alert("装置类型不能为空！");
+            return;
+        }
         $.ajax({
             url: '/ftuJbxx/addFtuJbxx.action',
             type: 'POST',
@@ -370,6 +448,131 @@
                 alert("页面加载错误！");
             }
         });
+    }
+
+    //调用百度api
+    var map = new BMap.Map("allmap");
+    var geoc = new BMap.Geocoder();  //地址解析对象
+    var markersArray = [];
+    var geolocation = new BMap.Geolocation();
+    var point = new BMap.Point(116.331398, 39.897445);
+    map.centerAndZoom(point, 15); // 中心点
+    geolocation.getCurrentPosition(function (r) {
+        if (this.getStatus() == BMAP_STATUS_SUCCESS) {
+            var mk = new BMap.Marker(r.point);
+            // map.addOverlay(mk);
+            //map.panTo(r.point);
+            map.enableScrollWheelZoom(true);
+        }
+        else {
+            alert('failed' + this.getStatus());
+        }
+    }, {enableHighAccuracy: true})
+    map.addEventListener("click", showInfo);
+    //清除标识
+    function clearOverlays() {
+        if (markersArray) {
+            for (i in markersArray) {
+                map.removeOverlay(markersArray[i])
+            }
+        }
+    }
+    //地图上标注
+    function addMarker(point) {
+        var marker = new BMap.Marker(point);
+        markersArray.push(marker);
+        clearOverlays();
+        map.addOverlay(marker);
+    }
+    //点击地图时间处理
+    function showInfo(e) {
+        document.getElementById('jd').value = e.point.lng;
+        document.getElementById('wd').value = e.point.lat;
+        geoc.getLocation(e.point, function (rs) {
+            var addComp = rs.addressComponents;
+            var address = addComp.province + addComp.city + addComp.district + addComp.street + addComp.streetNumber;
+            document.getElementById('xxwz').value = address;
+        });
+        addMarker(e.point);
+    }
+
+    //缩放按钮
+    var top_left_control = new BMap.ScaleControl({anchor: BMAP_ANCHOR_TOP_LEFT});// 左上角，添加比例尺
+    var top_left_navigation = new BMap.NavigationControl();  //左上角，添加默认缩放平移控件
+    var top_right_navigation = new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_RIGHT, type: BMAP_NAVIGATION_CONTROL_SMALL}); //右上角，仅包含平移和缩放按钮
+    //缩放控件type有四种类型:
+    map.addControl(top_left_control);
+    map.addControl(top_left_navigation);
+    map.addControl(top_right_navigation);
+
+    // 添加定位控件
+    var geolocationControl = new BMap.GeolocationControl();
+    geolocationControl.addEventListener("locationSuccess", function(e){
+        // 定位成功事件
+        var address = '';
+        address += e.addressComponent.province;
+        address += e.addressComponent.city;
+        address += e.addressComponent.district;
+        address += e.addressComponent.street;
+        address += e.addressComponent.streetNumber;
+
+        document.getElementById('jd').value = e.point.lng;
+        document.getElementById('wd').value = e.point.lat;
+        document.getElementById('xxwz').value = address;
+        //alert("当前定位地址为：" + address);
+    });
+    geolocationControl.addEventListener("locationError",function(e){
+        // 定位失败事件
+        alert(e.message);
+    });
+    //添加定位到地图
+    map.addControl(geolocationControl);
+
+    //中国正常GCJ02坐标---->百度地图BD09坐标
+    function convertGCJ02ToBD09($lat, $lng)
+    {
+        $xPi   = 3.14159265358979324 * 3000.0 / 180.0;
+        $x     = $lng;
+        $y     = $lat;
+        $z     = Math.sqrt($x * $x + $y * $y) + 0.00002 * Math.sin($y * $xPi);
+        $theta = Math.atan2($y, $x) + 0.000003 * Math.cos($x * $xPi);
+        $lng   = $z * Math.cos($theta) + 0.0065;
+        $lat   = $z * Math.sin($theta) + 0.006;
+
+        $arr = [];
+        $arr['lng'] = $lng;
+        $arr['lat'] = $lat;
+
+        return $arr;
+    }
+    function switchXY() {
+        var inputJd = $("#t_jd").val();
+        var inputWd = $("#t_wd").val();
+
+        if(inputJd!='' && inputWd!=''){
+            $arr = [];
+            $arr = convertGCJ02ToBD09(inputWd,inputJd);
+            deletePoint();
+            map.clearOverlays();
+            var point = new BMap.Point($arr.lng,$arr.lat);
+            map.centerAndZoom(point, 15);
+            addMarker(point);
+            $("#jd").val($arr.lng);
+            $("#wd").val($arr.lat);
+            $("#xxwz").val("");
+        }
+    }
+    // $("#jd").blur(function () {switchXY();});
+    //$("#wd").blur(function () {switchXY();});
+
+    //删除标注
+    function deletePoint(){
+        var allOverlay = map.getOverlays();
+        for (var i = 0; i < allOverlay.length -1; i++){
+            //if(allOverlay[i].getLabel().content == "我是id=1"){
+            map.removeOverlay(allOverlay[i]);
+            //}
+        }
     }
 </script>
 </body>
