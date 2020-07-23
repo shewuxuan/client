@@ -72,24 +72,24 @@
             , done: function (res, curr, count) {
                 let resdata = res.data;
                 // 开启自动保存（自动保存记录/备注）
-                <%--autosave = setInterval(function () {--%>
-                <%--    editbz();--%>
-                <%--    if (record.length === 0) {--%>
-                <%--        return;--%>
-                <%--    }--%>
-                <%--    $.ajax({--%>
-                <%--        type: "POST",--%>
-                <%--        url: "${basePath}/ftu_jl_cyjd/updateBatch",              // 改--%>
-                <%--        data: JSON.stringify(record),//必须--%>
-                <%--        contentType: "application/json;charsetset=UTF-8",//必须--%>
-                <%--        dataType: "json",//必须--%>
-                <%--        success: function (data) {--%>
-                <%--            if (data.code !== 0) {--%>
-                <%--                console.log("cyjd automatically saved failed!");--%>
-                <%--            }--%>
-                <%--        }--%>
-                <%--    });--%>
-                <%--}, 10000);--%>
+                autosave = setInterval(function () {
+                    editbz();
+                    if (record.length === 0) {
+                        return;
+                    }
+                    $.ajax({
+                        type: "POST",
+                        url: "${basePath}/ftu_jl_cyjd/updateBatch",              // 改
+                        data: JSON.stringify(record),//必须
+                        contentType: "application/json;charsetset=UTF-8",//必须
+                        dataType: "json",//必须
+                        success: function (data) {
+                            if (data.code !== 0) {
+                                console.log("cyjd automatically saved failed!");
+                            }
+                        }
+                    });
+                }, 10000);
                 record = resdata;
                 $("[name='select4cyjd']").change(function () {
                     let elem = $(this).parents('tr');
