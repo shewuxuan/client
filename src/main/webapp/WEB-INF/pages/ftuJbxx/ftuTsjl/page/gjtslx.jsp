@@ -73,13 +73,12 @@
                         }
                     });
                 }, 10000);
-                // record = resdata;
-                if (record.l1 == null || record.l1 === ""
-                || record.l11 == null || record.l11 === ""
-                || record.l12 == null || record.l12 === ""
-                || record.l2 == null || record.l2 === ""
-                || record.l21 == null || record.l21 === ""
-                || record.l22 == null || record.l22 === ""){
+                if (record.lx1 == null || record.lx1 === ""
+                || record.lx11 == null || record.lx11 === ""
+                || record.lx12 == null || record.lx12 === ""
+                || record.lx2 == null || record.lx2 === ""
+                || record.lx21 == null || record.lx21 === ""
+                || record.lx22 == null || record.lx22 === ""){
                     gjtslx = false;
                     bgcolor(gjtsgl, gjtslx, tzyb);
                     return;

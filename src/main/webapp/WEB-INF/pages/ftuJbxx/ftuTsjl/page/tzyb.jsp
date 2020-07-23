@@ -117,33 +117,23 @@
                     });
                 });
                 // 背景
-                for (let i = 0, length = resdata.length; i < length; i++) {
-                    if (
-                        resdata[i].mndl == null || resdata[i].mndl === ""
-                        || resdata[i].zzxh == null || resdata[i].zzxh === ""
-                        || resdata[i].zzxs == null || resdata[i].zzxs === ""
-                        || resdata[i].jcjg == null || resdata[i].jcjg === "" || resdata[i].jcjg == -1
-                    ) {
+                $.each(resdata, function (i, value) {
+                    if (value.mndl == null || value.mndl === "" || value.mndl == -1
+                        || value.zzxh == null || value.zzxh === "" || value.zzxh == -1
+                        || value.zzxs == null || value.zzxs === "" || value.zzxs == -1
+                        || value.jcjg == null || value.jcjg === "" || value.jcjg == -1){
                         tzyb = false;
                         bgcolor(gjtsgl, gjtslx, tzyb);
-                        return;
+                        return false;
                     }
                     tzyb = true;
                     bgcolor(gjtsgl, gjtslx, tzyb);
-                }
+                })
             }
         });
 
         // 编辑
         table.on('edit(tzyb)', function (obj) {         // 改
-            let data = obj.data;
-            // $.each(record, function (i) {
-            //     if (record[i].id === data.id) {
-            //         record[i].mndl = data.mndl;
-            //         record[i].zzxh = data.zzxh;
-            //         record[i].zzxs = data.zzxs;
-            //     }
-            // });
         });
 
         function editbz() {
