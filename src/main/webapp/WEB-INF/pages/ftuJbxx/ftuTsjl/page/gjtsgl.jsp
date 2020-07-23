@@ -55,26 +55,24 @@
             , done: function (res) {
                 let resdata = res.data;
                 // 开启自动保存（自动保存记录/备注）
-                <%--autosave = setInterval(function () {--%>
-                <%--    editbz();--%>
-                <%--    // 自动保存X dz      ***--%>
-                <%--    submitDz();--%>
-                <%--    if (record.length === 0) {--%>
-                <%--        return;--%>
-                <%--    }--%>
-                <%--    $.ajax({--%>
-                <%--        type: "POST",--%>
-                <%--        url: "${basePath}/ftu_jl_gjts/updateBatch",              // 改--%>
-                <%--        data: JSON.stringify(record),//必须--%>
-                <%--        contentType: "application/json;charsetset=UTF-8",//必须--%>
-                <%--        dataType: "json",//必须--%>
-                <%--        success: function (data) {--%>
-                <%--            if (data.code !== 0) {--%>
-                <%--                console.log("gjtsgl automatically saved failed!");--%>
-                <%--            }--%>
-                <%--        }--%>
-                <%--    });--%>
-                <%--}, 10000);--%>
+                autosave = setInterval(function () {
+                    editbz();
+                    if (record.length === 0) {
+                        return;
+                    }
+                    $.ajax({
+                        type: "POST",
+                        url: "${basePath}/ftu_jl_gjts/updateBatch",              // 改
+                        data: JSON.stringify(record),//必须
+                        contentType: "application/json;charset=UTF-8",//必须
+                        dataType: "json",//必须
+                        success: function (data) {
+                            if (data.code !== 0) {
+                                console.log("gjtsgl automatically saved failed!");
+                            }
+                        }
+                    });
+                }, 10000);
                 record = resdata;
                 $.each(resdata, function (i, value) {
                     if (value.g1dz == null || value.g1dz === ""
@@ -84,11 +82,11 @@
                     || value.g1sjtd2 == null || value.g1sjtd2 === ""
                     || value.g2sjtd2 == null || value.g2sjtd2 === "") {
                         gjtsgl = false;
-                        bgcolor(gjtsgl, gjtslx);
+                        bgcolor(gjtsgl, gjtslx, tzyb);
                         return;
                     }
                     gjtsgl = true;
-                    bgcolor(gjtsgl, gjtslx);
+                    bgcolor(gjtsgl, gjtslx, tzyb);
                 })
             }
         });
@@ -110,7 +108,6 @@
 
         // 提交记录(删除前)
         function submitJl(record) {
-            submitDz();
             // 表格没有数据
             if (record.length === 0) {
                 return true;
@@ -121,7 +118,7 @@
                 async: false,
                 url: "${basePath}/ftu_jl_gjts/updateBatch",              // 改
                 data: JSON.stringify(record),//必须
-                contentType: "application/json;charsetset=UTF-8",//必须
+                contentType: "application/json;charset=UTF-8",//必须
                 dataType: "json",//必须
                 success: function (result) {
                     clearTimeout(autosave);
@@ -163,12 +160,11 @@
                 case 'SUBMIT':
                     // 修改备注
                     editbz();
-                    submitDz();
                     $.ajax({
                         type: "POST",
                         url: "${basePath}/ftu_jl_gjts/updateBatch",              // 改
                         data: JSON.stringify(record),//必须
-                        contentType: "application/json;charsetset=UTF-8",//必须
+                        contentType: "application/json;charset=UTF-8",//必须
                         dataType: "json",//必须
                         success: function (data) {
                             if (data.code === 0) {

@@ -182,6 +182,7 @@
     <!--@mbg.generated-->
     update ftu_jl_gjdz
     <set>
+      id = #{id,jdbcType=VARCHAR},
       <if test="gl1ddz != null">
         gl1ddz = #{gl1ddz,jdbcType=VARCHAR},
       </if>

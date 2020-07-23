@@ -103,7 +103,7 @@ public class PwbhTsjlServiceImpl implements PwbhTsjlService {
         pwbhBzJycs.setSsqy(ssqy);
         List<PwbhBzJycs> pwbhBzJycss = pwbhBzJycsServiceImpl.selectByAll(pwbhBzJycs);
         for (PwbhBzJycs bzJycss : pwbhBzJycss) {
-            PwbhJlJycs pwbhJlJycs = new PwbhJlJycs(IDUtil.getStrId(), tsid, ssqy, bzJycss.getJcnr(), bzJycss.getBz(), null, czr, new Date(), null);
+            PwbhJlJycs pwbhJlJycs = new PwbhJlJycs(IDUtil.getStrId(), tsid, ssqy, bzJycss.getJcnr(), bzJycss.getBz(), "1", czr, new Date(), null);
             pwbhJlJycsServiceImpl.insert(pwbhJlJycs);
         }
 

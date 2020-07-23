@@ -21,6 +21,7 @@
             elem: '#dzjclx'                           // 改
             , page: false
             , skin: 'row,line' //行边框风格
+            , size: 'sm'
             , even: false //开启隔行背景
             , url: '${basePath}/pwbh_dz/selectByAll?tsid=' + tsid //数据接口      改
             , toolbar: true
@@ -48,9 +49,18 @@
                 ]]
             , done: function (res) {
                 let resdata = res.data[0];
+                // 取出表格所需列(去掉无用列)
+                record = {
+                    tsid: res.data[0].tsid,
+                    lx1: res.data[0].lx1,
+                    lx11: res.data[0].lx11,
+                    lx12: res.data[0].lx12,
+                    lx2: res.data[0].lx2,
+                    lx21: res.data[0].lx21,
+                    lx22: res.data[0].lx22
+                }
                 // 开启自动保存（自动保存记录/备注）
                 autosave = setInterval(function () {
-                    submitDz();
                     $.ajax({
                         type: "POST",
                         url: "${basePath}/pwbh_dz/updateByPrimaryKey",              // 改
@@ -70,30 +80,13 @@
                 || record.l12 == null || record.l12 === ""
                 || record.l2 == null || record.l2 === ""
                 || record.l21 == null || record.l21 === ""
-                || record.l22 == null || record.l22 === ""
-                || record.lx1 == null || record.lx1 === ""
-                || record.lx11 == null || record.lx11 === ""
-                || record.lx12 == null || record.lx12 === ""
-                || record.lx2 == null || record.lx2 === ""
-                || record.lx21 == null || record.lx21 === ""
-                || record.lx22 == null || record.lx22 === "") {
+                || record.l22 == null || record.l22 === ""){
                     dzjclx = false;
                     bgcolor(dzjcgl,dzjclx);
                     return;
                 }
                 dzjclx = true;
                 bgcolor(dzjcgl, dzjclx);
-                // $.each(resdata, function (i) {
-                //     if (resdata[i].jcjg == null || resdata[i].jcjg === "" || resdata[i].jcjg == -1) {
-                //         dzjclx = false;
-                //         bgcolor(dzjcgl, dzjclx);
-                //         // $("#li_dzjc").css({"background-color": ""});
-                //         return;
-                //     }
-                //     dzjclx = true;
-                //     bgcolor(dzjcgl, dzjclx);
-                //     // $("#li_dzjc").css({"background-color": "#009688"});
-                // })
             }
         });
 
@@ -116,13 +109,8 @@
             switch (obj.event) {
                 // 提交
                 case 'SUBMIT':
-                    submitDz();
                     // 修改备注
                     editbz();
-                    // if (record.length === 0) {
-                    //     layer.msg("无数据提交", {time: 1000, icon: 3});
-                    //     return;
-                    // }
                     $.ajax({
                         type: "POST",
                         url: "${basePath}/pwbh_dz/updateByPrimaryKey",              // 改

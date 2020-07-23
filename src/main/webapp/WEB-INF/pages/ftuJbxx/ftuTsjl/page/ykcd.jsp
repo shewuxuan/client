@@ -55,22 +55,20 @@
                 let resdata = res.data;
                 // 开启自动保存（自动保存记录/备注）
                 autosave = setInterval(function () {
+                    editbz();
                     $.ajax({
                         type: "POST",
                         url: "${basePath}/ftu_jl_ykcd/updateBatch",              // 改
                         data: JSON.stringify(record),//必须
-                        contentType: "application/json;charsetset=UTF-8",//必须
+                        contentType: "application/json;charset=UTF-8",//必须
                         dataType: "json",//必须
                         success: function (data) {
-                            if (data.code === 0) {
-                                console.log("ykcd automatically saved successfully!");
-                            } else {
+                            if (data.code !== 0) {
                                 console.log("ykcd automatically saved failed!");
                             }
                         }
                     });
-                    editbz();
-                }, 30000);
+                }, 10000);
                 record = resdata;
                 $("[name='select4ykf']").change(function () {
                     let elem = $(this).parents('tr');
@@ -114,9 +112,9 @@
             };
             $.ajax({
                 type: "POST",
-                url: "${basePath}/beizhu/updateFtuBeizhuByPrimaryKey",
+                url: "${basePath}/ftu_beizhu/updateFtuBeizhuByPrimaryKey",
                 data: JSON.stringify(beizhu),//必须
-                contentType: "application/json;charsetset=UTF-8",//必须
+                contentType: "application/json;charset=UTF-8",//必须
                 dataType: "json",//必须
                 success: function (data) {
                 }
@@ -126,41 +124,26 @@
 //监听事件
         table.on('toolbar(ykcd)', function (obj) {      // 改
             switch (obj.event) {
-                // 刷新
-                case 'REFRESH':
-                    tableReload.reload();
-                    // 刷新备注
-                    $.get("${basePath}/beizhu/selectFtuBeizhuByPrimaryKey/" + tsid, function (data) {
-                        $("#ykcdbeizhu").val($.parseJSON(data).jlYkcd);
-                    });
-                    layer.msg('刷新完成', {time: 1000, icon: 6});
-                    break;
                 // 提交
                 case 'SUBMIT':
+                    editbz();
                     $.ajax({
                         type: "POST",
                         url: "${basePath}/ftu_jl_ykcd/updateBatch",              // 改
                         data: JSON.stringify(record.slice(-1)),//必须
-                        contentType: "application/json;charsetset=UTF-8",//必须
+                        contentType: "application/json;charset=UTF-8",//必须
                         dataType: "json",//必须
                         success: function (data) {
                             if (data.code === 0) {
+                                clearTimeout(autosave);
                                 tableReload.reload();
                                 record = [];
-                                clearTimeout(autosave);
-                                layer.msg(data.msg, {
-                                    offset: 't',
-                                    time: 1000,
-                                    icon: 6
-                                });
+                                layer.msg(data.msg, {time: 1000, icon: 6});
                             } else {
                                 layer.msg(data.msg, {time: 2000, icon: 5})
                             }
                         }
                     });
-
-                    // 修改备注
-                    editbz();
                     break;
             }
         });
@@ -179,12 +162,10 @@
 </script>
 <script type="text/html" id="ykhjg">
     <select name='select4ykh' lay-ignore lay-filter="wgpz" lay-search=''>
-        <option value="-1" {{ d.ykh== -1 ?
-        'selected' : '' }}></option>
-        <option value="1" {{ d.ykh== 1 ?
-        'selected' : '' }}>正确</option>
-        <option value="0" {{ d.ykh== 0 ?
-        'selected' : '' }}>错误</option>
+        <option value="-1" {{ d.ykh== -1 ? 'selected' : '' }}></option>
+        <option value="1" {{ d.ykh== 1 ? 'selected' : '' }}>正确</option>
+        <option value="0" {{ d.ykh== 0 ? 'selected' : '' }}>错误</option>
+        <option value="2" {{ d.ykh== 2 ? 'selected' : '' }}>N/A</option>
     </select>
 </script>
 </body>

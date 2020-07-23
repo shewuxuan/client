@@ -130,7 +130,7 @@ public class FtuTsjlServiceImpl implements FtuTsjlService {
         ftuBzTzyb.setSsqy(ssqy);
         List<FtuBzTzyb> ftuBzTzybs = ftuBzTzybServiceImpl.selectByAll(ftuBzTzyb);
         for (FtuBzTzyb bzTzyb : ftuBzTzybs) {
-            FtuJlTzyb ftuJlTzyb = new FtuJlTzyb(IDUtil.getStrId(), tsid, ssqy, bzTzyb.getJyxm(), bzTzyb.getGzmn(), null, null, null, null, czr, new Date(), null);
+            FtuJlTzyb ftuJlTzyb = new FtuJlTzyb(IDUtil.getStrId(), tsid, ssqy, bzTzyb.getJyxm(), bzTzyb.getGzmn(), "1", "1", "1", "1", czr, new Date(), null);
             ftuJlTzybServiceImpl.insert(ftuJlTzyb);
         }
 

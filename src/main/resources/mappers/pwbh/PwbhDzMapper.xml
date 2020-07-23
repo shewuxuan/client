@@ -182,6 +182,7 @@
     <!--@mbg.generated-->
     update pwbh_dz
     <set>
+      tsid = #{tsid,jdbcType=VARCHAR},
       <if test="g1 != null">
         g1 = #{g1,jdbcType=VARCHAR},
       </if>

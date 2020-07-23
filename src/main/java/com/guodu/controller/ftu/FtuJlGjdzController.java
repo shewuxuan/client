@@ -85,13 +85,13 @@ public class FtuJlGjdzController {
     public String updateByPrimaryKey(@RequestBody FtuJlGjdz record) {
         map.clear();
         try {
-            int i = jlGjdzServiceImpl.updateByPrimaryKey(record);
+            int i = jlGjdzServiceImpl.updateByPrimaryKeySelective(record);
             map.put("code", 0);
             map.put("msg", "修改成功!");
             map.put("data", i);
-            StaticLog.info("ftu_jl_gjdz表【修改】成功 -----> " + record.getId(), "INFO");
+//            StaticLog.info("ftu_jl_gjdz表【修改】成功 -----> " + record.getId(), "INFO");
         } catch (Exception e) {
-            StaticLog.error(e, "ftu_jl_gjdz表【修改】失败 -----> " + record.getId(), "ERROR");
+//            StaticLog.error(e, "ftu_jl_gjdz表【修改】失败 -----> " + record.getId(), "ERROR");
             map.put("code", -1);
             map.put("msg", "修改失败！");
         }

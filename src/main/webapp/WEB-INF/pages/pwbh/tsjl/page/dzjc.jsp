@@ -24,6 +24,7 @@
         <br>
         <label for="g21" style="margin-left: 36px;">过流ⅠI段时间<input id="g21" style="text-align: center" type="text"/>秒，</label>
         <label for="g22">通电<input id="g22" style="text-align: center" type="text"/>秒。</label>
+        <button id="" name="commit" type="button" class="layui-btn layui-btn-sm">提交</button>
         <table id="dzjcgl" lay-filter="dzjcgl"></table>
 
         <br>
@@ -36,6 +37,7 @@
         <br>
         <label for="l21" style="margin-left: 36px;">零序ⅠI段时间<input id="l21" style="text-align: center" type="text"/>秒，</label>
         <label for="l22">通电<input id="l22" style="text-align: center" type="text"/>秒。</label>
+        <button id="" name="commit" type="button" class="layui-btn layui-btn-sm">提交</button>
         <table id="dzjclx" lay-filter="dzjclx"></table>
 
         <%@include file="dzjcgl.jsp" %>
@@ -70,9 +72,41 @@
             $("#g21").val(data.g21);
             $("#g22").val(data.g22);
         });
+
+        //    告警定值自动保存
+        setInterval(function () {
+            let data = {
+                "tsid": tsid,
+                "l1": $("#l1").val(),
+                "l11": $("#l11").val(),
+                "l12": $("#l12").val(),
+                "l2": $("#l2").val(),
+                "l21": $("#l21").val(),
+                "l22": $("#l22").val(),
+                "g1": $("#g1").val(),
+                "g11": $("#g11").val(),
+                "g12": $("#g12").val(),
+                "g2": $("#g2").val(),
+                "g21": $("#g21").val(),
+                "g22": $("#g22").val()
+            }
+            $.ajax({
+                type: "POST",
+                url: "${basePath}/pwbh_dz/updateByPrimaryKey",
+                data: JSON.stringify(data),//必须
+                contentType: "application/json;charset=UTF-8",//必须
+                dataType: "json",//必须
+                success: function (data) {
+                    if (data.code !== 0) {
+                        console.log("dz automatically saved failed!");
+                    }
+                }
+            });
+        }, 10000);
     })
 
-    function submitDz() {
+    // 提交告警定值
+    $("button[name='commit']").click(function () {
         let data = {
             "tsid": tsid,
             "l1": $("#l1").val(),
@@ -93,15 +127,17 @@
             async: false,
             url: "${basePath}/pwbh_dz/updateByPrimaryKey",
             data: JSON.stringify(data),//必须
-            contentType: "application/json;charsetset=UTF-8",//必须
+            contentType: "application/json;charset=UTF-8",//必须
             dataType: "json",//必须
             success: function (data) {
-                if (data.code !== 0) {
-                    console.log("dz saved failed!");
+                if (data.code === 0) {
+                    layer.msg(data.msg, {time: 1000, icon: 6});
+                } else {
+                    layer.msg(data.msg, {time: 2000, icon: 5})
                 }
             }
         });
-    }
+    });
 
     function editbz() {
         let beizhu = {

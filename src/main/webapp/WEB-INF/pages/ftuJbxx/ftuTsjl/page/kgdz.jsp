@@ -50,9 +50,10 @@
                 }
             ]
             , cols: [
-                [{title: '柱 上 断 路 器', align: 'center', colspan: 9}],
+                [{title: '柱 上 断 路 器', align: 'center', colspan: 10}],
                 [ //表头
-                {field: 'dzdh', title: '定值单号', width: '20%', align: 'center', edit:'text'}
+                {field: 'id', title: 'ID', type: 'numbers', width: '5%', fixed: 'left'}
+                , {field: 'dzdh', title: '定值单号', width: '15%', align: 'center', edit:'text'}
                 , {field: 'g11', title: '过流Ｉ段', width: '10%', align: 'center', edit:'text'}
                 , {field: 'g12', title: '过流Ｉ段', width: '10%', align: 'center', edit:'text'}
                 , {field: 'g21', title: '过流II段', width: '10%', align: 'center', edit:'text'}
@@ -60,7 +61,7 @@
                 , {field: 'lx11', title: '零序Ｉ段', width: '10%', align: 'center', edit:'text'}
                 , {field: 'lx12', title: '零序Ｉ段', width: '10%', align: 'center', edit:'text'}
                 , {field: 'lx21', title: '零序II段', width: '10%', align: 'center', edit:'text'}
-                , {field: 'lx22', title: '零序II段', width: '10%', align: 'center', edit:'text'}
+                , {field: 'lx22', title: '零序II段', width: '9%', align: 'center', edit:'text'}
             ]]
             , done: function (res) {
                 let resdata = res.data;

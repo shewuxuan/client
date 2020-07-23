@@ -29,6 +29,7 @@
         <br>
         <label for="gl2dsj" style="margin-left: 36px;">过流ⅠI段时间<input id="gl2dsj" style="text-align: center" type="text"/>秒，</label>
         <label for="gl2dtd">通电<input id="gl2dtd" style="text-align: center" type="text"/>秒。</label>
+        <button id="" name="commit" type="button" class="layui-btn layui-btn-sm">提交</button>
         <table id="gjtsgl" lay-filter="gjtsgl"></table>
 
         <br>
@@ -41,6 +42,7 @@
         <br>
         <label for="lx2dsj" style="margin-left: 36px;">零序ⅠI段时间<input id="lx2dsj" style="text-align: center" type="text"/>秒，</label>
         <label for="lx2dtd">通电<input id="lx2dtd" style="text-align: center" type="text"/>秒。</label>
+        <button id="" name="commit" type="button" class="layui-btn layui-btn-sm">提交</button>
         <table id="gjtslx" lay-filter="gjtslx"></table>
 
         <%@include file="gjtsgl.jsp"%>
@@ -54,12 +56,15 @@
                 </div>
             </div>
         </form>
+
+        <%@include file="tzyb.jsp"%>
     </blockquote>
 </div>
 
 <script>
 
     $(function () {
+        // 告警定值赋值
         $.get("${basePath}/ftu_jl_gjdz/selectByPrimaryKey/" + tsid, function (data) {
             data = JSON.parse(data);
             $("#gl1ddz").val(data.gl1ddz);
@@ -75,9 +80,41 @@
             $("#lx2dsj").val(data.lx2dsj);
             $("#lx2dtd").val(data.lx2dtd);
         });
+
+    //    告警定值自动保存
+        setInterval(function () {
+            let data = {
+                "id": tsid,
+                "gl1ddz": $("#gl1ddz").val(),
+                "gl1dsj": $("#gl1dsj").val(),
+                "gl1dtd": $("#gl1dtd").val(),
+                "gl2ddz": $("#gl2ddz").val(),
+                "gl2dsj": $("#gl2dsj").val(),
+                "gl2dtd": $("#gl2dtd").val(),
+                "lx1ddz": $("#lx1ddz").val(),
+                "lx1dsj": $("#lx1dsj").val(),
+                "lx1dtd": $("#lx1dtd").val(),
+                "lx2ddz": $("#lx2ddz").val(),
+                "lx2dsj": $("#lx2dsj").val(),
+                "lx2dtd": $("#lx2dtd").val()
+            }
+            $.ajax({
+                type: "POST",
+                url: "${basePath}/ftu_jl_gjdz/updateByPrimaryKey",
+                data: JSON.stringify(data),//必须
+                contentType: "application/json;charset=UTF-8",//必须
+                dataType: "json",//必须
+                success: function (data) {
+                    if (data.code !== 0) {
+                        console.log("dz automatically saved failed!");
+                    }
+                }
+            });
+        }, 10000);
     })
 
-    function submitDz() {
+    // 提交告警定值
+    $("button[name='commit']").click(function () {
         let data = {
             "id": tsid,
             "gl1ddz": $("#gl1ddz").val(),
@@ -85,7 +122,7 @@
             "gl1dtd": $("#gl1dtd").val(),
             "gl2ddz": $("#gl2ddz").val(),
             "gl2dsj": $("#gl2dsj").val(),
-            "gl2ddtd": $("#gl2dtd").val(),
+            "gl2dtd": $("#gl2dtd").val(),
             "lx1ddz": $("#lx1ddz").val(),
             "lx1dsj": $("#lx1dsj").val(),
             "lx1dtd": $("#lx1dtd").val(),
@@ -98,16 +135,19 @@
             async: false,
             url: "${basePath}/ftu_jl_gjdz/updateByPrimaryKey",
             data: JSON.stringify(data),//必须
-            contentType: "application/json;charsetset=UTF-8",//必须
+            contentType: "application/json;charset=UTF-8",//必须
             dataType: "json",//必须
             success: function (data) {
-                if (data.code !== 0) {
-                    console.log("dz saved failed!");
+                if (data.code === 0) {
+                    layer.msg(data.msg, {time: 1000, icon: 6});
+                } else {
+                    layer.msg(data.msg, {time: 2000, icon: 5})
                 }
             }
         });
-    }
+    });
 
+    // 告警调试备注
     function editbz() {
         let beizhu = {
             tsid: tsid,
@@ -117,7 +157,7 @@
             type: "POST",
             url: "${basePath}/ftu_beizhu/updateFtuBeizhuByPrimaryKey",
             data: JSON.stringify(beizhu),//必须
-            contentType: "application/json;charsetset=UTF-8",//必须
+            contentType: "application/json;charset=UTF-8",//必须
             dataType: "json",//必须
             success: function (data) {
             }
@@ -125,10 +165,11 @@
     }
 </script>
 
+<%-- 告警调试导航栏背景--%>
 <script>
-    var gjtsgl, gjtslx = false;
-    function bgcolor(gjtsgl, gjtslx) {
-        if (gjtsgl && gjtslx) {
+    var gjtsgl, gjtslx, tzyb = false;
+    function bgcolor(gjtsgl, gjtslx, tzyb) {
+        if (gjtsgl && gjtslx && tzyb) {
             $("#li_gjts").css({"background-color": "#009688"});
             return;
         }

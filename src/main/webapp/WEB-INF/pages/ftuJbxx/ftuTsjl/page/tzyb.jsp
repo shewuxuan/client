@@ -49,36 +49,64 @@
                 {field: 'id', title: 'ID', type: 'numbers', width: '5%', fixed: 'left', sort: true, rowspan: 2}
                 , {field: 'jyxm', title: '检验项目', width: '20%', align: 'center', sort: true, rowspan: 2}
                 , {field: 'gzmn', title: '故障模拟', width: '15%', align: 'center', sort: true, rowspan: 2}
-                , {field: 'mndl', title: '模拟断路器<br>(或启动信号)', width: '20%', align: 'center', edit: 'text', rowspan: 2}
+                , {field: 'mndl', title: '模拟断路器<br>(或启动信号)', width: '20%', align: 'center', rowspan: 2, templet: '#mndljg'}
                 , {title: '模拟断路器动作情况<br>(或信号动作情况)', align: 'center', colspan: 2}
                 , {field: 'jcjg', title: '检查结果', width: '10%', align: 'center', templet: '#tzybjg', rowspan: 2}
                 , {title: '操作', width: '8%', align: 'center', toolbar: '#barDemo', rowspan: 2}
             ], [
-                {field: 'zzxh', title: '主站信号', width: '11%', align: 'center', edit: 'text'}
-                , {field: 'zzxs', title: '装置显示', width: '11%', align: 'center', edit: 'text'}
+                {field: 'zzxh', title: '主站信号', width: '11%', align: 'center', templet: '#zzxhjg'}
+                , {field: 'zzxs', title: '装置显示', width: '11%', align: 'center', templet: '#zzxsjg'}
             ]
             ]
             , done: function (res, curr, count) {
                 let resdata = res.data;
                 // 开启自动保存（自动保存记录/备注）
                 autosave = setInterval(function () {
+                    editbz();
+                    if (record.length === 0) {
+                        return;
+                    }
                     $.ajax({
                         type: "POST",
                         url: "${basePath}/ftu_jl_tzyb/updateBatch",              // 改
                         data: JSON.stringify(record),//必须
-                        contentType: "application/json;charsetset=UTF-8",//必须
+                        contentType: "application/json;charset=UTF-8",//必须
                         dataType: "json",//必须
                         success: function (data) {
-                            if (data.code === 0) {
-                                console.log("tzyb automatically saved successfully!");
-                            } else {
+                            if (data.code !== 0) {
                                 console.log("tzyb automatically saved failed!");
                             }
                         }
                     });
-                    editbz();
-                }, 30000);
+                }, 10000);
                 record = resdata;
+                $("[name='select4mndl']").change(function () {
+                    let elem = $(this).parents('tr');
+                    let dataindex = elem.attr("data-index");
+                    $.each(record, (i, value) => {
+                        if (value.LAY_TABLE_INDEX == dataindex) {
+                            record[i].mndl = $(this).val();
+                        }
+                    });
+                });
+                $("[name='select4zzxh']").change(function () {
+                    let elem = $(this).parents('tr');
+                    let dataindex = elem.attr("data-index");
+                    $.each(record, (i, value) => {
+                        if (value.LAY_TABLE_INDEX == dataindex) {
+                            record[i].zzxh = $(this).val();
+                        }
+                    });
+                });
+                $("[name='select4zzxs']").change(function () {
+                    let elem = $(this).parents('tr');
+                    let dataindex = elem.attr("data-index");
+                    $.each(record, (i, value) => {
+                        if (value.LAY_TABLE_INDEX == dataindex) {
+                            record[i].zzxs = $(this).val();
+                        }
+                    });
+                });
                 $("[name='select4tzyb']").change(function () {
                     let elem = $(this).parents('tr');
                     let dataindex = elem.attr("data-index");
@@ -97,11 +125,11 @@
                         || resdata[i].jcjg == null || resdata[i].jcjg === "" || resdata[i].jcjg == -1
                     ) {
                         tzyb = false;
-                        gjtsflag(gjts, tzyb);
+                        bgcolor(gjtsgl, gjtslx, tzyb);
                         return;
                     }
                     tzyb = true;
-                    gjtsflag(gjts, tzyb);
+                    bgcolor(gjtsgl, gjtslx, tzyb);
                 }
             }
         });
@@ -109,13 +137,13 @@
         // 编辑
         table.on('edit(tzyb)', function (obj) {         // 改
             let data = obj.data;
-            $.each(record, function (i) {
-                if (record[i].id === data.id) {
-                    record[i].mndl = data.mndl;
-                    record[i].zzxh = data.zzxh;
-                    record[i].zzxs = data.zzxs;
-                }
-            });
+            // $.each(record, function (i) {
+            //     if (record[i].id === data.id) {
+            //         record[i].mndl = data.mndl;
+            //         record[i].zzxh = data.zzxh;
+            //         record[i].zzxs = data.zzxs;
+            //     }
+            // });
         });
 
         function editbz() {
@@ -125,13 +153,37 @@
             };
             $.ajax({
                 type: "POST",
-                url: "${basePath}/beizhu/updateFtuBeizhuByPrimaryKey",
+                url: "${basePath}/ftu_beizhu/updateFtuBeizhuByPrimaryKey",
                 data: JSON.stringify(beizhu),//必须
-                contentType: "application/json;charsetset=UTF-8",//必须
+                contentType: "application/json;charset=UTF-8",//必须
                 dataType: "json",//必须
                 success: function (data) {
                 }
             });
+        }
+
+        // 提交记录(添加/删除前)
+        function submitJl(record) {
+            // 表格没有数据
+            if (record.length === 0) {
+                return true;
+            }
+            let data = null;
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: "${basePath}/ftu_jl_tzyb/updateBatch",              // 改
+                data: JSON.stringify(record),//必须
+                contentType: "application/json;charset=UTF-8",//必须
+                dataType: "json",//必须
+                success: function (result) {
+                    clearTimeout(autosave);
+                    tableReload.reload();
+                    record = [];
+                    data = result;
+                }
+            });
+            return data.code === 0;
         }
 
 //监听事件
@@ -139,7 +191,11 @@
             switch (obj.event) {
                 // 添加
                 case 'ADD':
-                    if (${requestScope.userType == 0}) {
+                    if (${requestScope.userType != 0}) {
+                        layer.msg("权限不足！", {time: 1500, icon: 4});
+                        return;
+                    }
+                    if (submitJl(record)) {
                         layer.open({
                             type: 2,
                             title: '添加 --> 跳闸压板',
@@ -147,52 +203,63 @@
                             area: ['800px', '520px'],
                             content: '${basePath}/ftuJbxx/ftuTsjl/add/addTzyb/' + tsid + '/' + ssqy
                             , end: function () {
+                                clearTimeout(autosave);
                                 tableReload.reload();
                             }
                         });
                     } else {
-                        layer.msg("没权限, 你加不了", {time: 1500, icon: 4});
+                        layer.msg("添加前提交失败，请刷新重试！", {time: 2000, icon: 5});
                     }
                     break;
                 // 提交
                 case 'SUBMIT':
+                    editbz();
+                    if (record.length === 0) {
+                        layer.msg("无数据提交", {time: 1000, icon: 3});
+                        return;
+                    }
                     $.ajax({
                         type: "POST",
                         url: "${basePath}/ftu_jl_tzyb/updateBatch",              // 改
                         data: JSON.stringify(record),//必须
-                        contentType: "application/json;charsetset=UTF-8",//必须
+                        contentType: "application/json;charset=UTF-8",//必须
                         dataType: "json",//必须
                         success: function (data) {
                             if (data.code === 0) {
+                                clearTimeout(autosave);
                                 tableReload.reload();
                                 record = [];
-                                clearTimeout(autosave);
-                                layer.msg(data.msg, {
-                                    offset: 't',
-                                    time: 1000,
-                                    icon: 6
-                                });
+                                layer.msg(data.msg, {time: 1000, icon: 6});
                             } else {
                                 layer.msg(data.msg, {time: 2000, icon: 5})
                             }
                         }
                     });
-
-                    // 修改备注
-                    editbz();
                     break;
             }
         });
 
         //监听行操作
         table.on('tool(tzyb)', function (obj) {
-            let data = obj.data;
+            let that = obj.data;
             if (obj.event === 'del') {
                 layer.confirm('真的删除吗？', function () {
-                    $.get("${basePath}/ftu_jl_tzyb/deleteByPrimaryKey/" + data.id, function (result) {
-                        layer.msg(JSON.parse(result).msg, {time: 1500, icon: 1});
-                        tableReload.reload();
-                    });
+                    // 删除前提交
+                    if (submitJl(record)) {
+                        // 删除
+                        $.get("${basePath}/ftu_jl_tzyb/deleteByPrimaryKey/" + that.id, function (result) {
+                            clearTimeout(autosave);
+                            tableReload.reload();
+                            result = JSON.parse(result);
+                            if (result.code === 0) {
+                                layer.msg(result.msg, {time: 1500, icon: 1});
+                            } else {
+                                layer.msg(result.msg, {time: 2000, icon: 5});
+                            }
+                        });
+                    } else {
+                        layer.msg("删除前提交失败，请刷新重试！", {time: 2000, icon: 5});
+                    }
                 });
             }
         });
@@ -202,12 +269,34 @@
 <%-- 结果状态列(正常/异常)--%>
 <script type="text/html" id="tzybjg">
     <select name='select4tzyb' lay-ignore lay-search=''>
-        <option value="-1" {{ d.jcjg== -1 ?
-        'selected' : '' }}></option>
-        <option value="1" {{ d.jcjg== 1 ?
-        'selected' : '' }}>是</option>
-        <option value="0" {{ d.jcjg== 0 ?
-        'selected' : '' }}>否</option>
+        <option value="-1" {{ d.jcjg== -1 ? 'selected' : '' }}></option>
+        <option value="1" {{ d.jcjg== 1 ? 'selected' : '' }}>正确</option>
+        <option value="0" {{ d.jcjg== 0 ? 'selected' : '' }}>错误</option>
+        <option value="2" {{ d.jcjg== 2 ? 'selected' : '' }}>N/A</option>
+    </select>
+</script>
+<script type="text/html" id="mndljg">
+    <select name='select4mndl' lay-ignore lay-search=''>
+        <option value="-1" {{ d.mndl== -1 ? 'selected' : '' }}></option>
+        <option value="1" {{ d.mndl== 1 ? 'selected' : '' }}>正确</option>
+        <option value="0" {{ d.mndl== 0 ? 'selected' : '' }}>错误</option>
+        <option value="2" {{ d.mndl== 2 ? 'selected' : '' }}>N/A</option>
+    </select>
+</script>
+<script type="text/html" id="zzxhjg">
+    <select name='select4zzxh' lay-ignore lay-search=''>
+        <option value="-1" {{ d.zzxh== -1 ? 'selected' : '' }}></option>
+        <option value="1" {{ d.zzxh== 1 ? 'selected' : '' }}>正确</option>
+        <option value="0" {{ d.zzxh== 0 ? 'selected' : '' }}>错误</option>
+        <option value="2" {{ d.zzxh== 2 ? 'selected' : '' }}>N/A</option>
+    </select>
+</script>
+<script type="text/html" id="zzxsjg">
+    <select name='select4zzxs' lay-ignore lay-search=''>
+        <option value="-1" {{ d.zzxs== -1 ? 'selected' : '' }}></option>
+        <option value="1" {{ d.zzxs== 1 ? 'selected' : '' }}>正确</option>
+        <option value="0" {{ d.zzxs== 0 ? 'selected' : '' }}>错误</option>
+        <option value="2" {{ d.zzxs== 2 ? 'selected' : '' }}>N/A</option>
     </select>
 </script>
 </body>

@@ -20,6 +20,7 @@
         let tableReload = table.render({
             elem: '#dzjcgl'                           // 改
             , page: false
+            , size: 'sm'
             , skin: 'row,line' //行边框风格
             , even: false //开启隔行背景
             , url: '${basePath}/pwbh_jl_dzjc/selectByAll?tsid=' + tsid //数据接口      改
@@ -56,8 +57,6 @@
                 // 开启自动保存（自动保存记录/备注）
                 autosave = setInterval(function () {
                     editbz();
-                    // 自动保存X dz      ***
-                    submitDz();
                     if (record.length === 0) {
                         return;
                     }
@@ -109,7 +108,6 @@
 
         // 提交记录(删除前)
         function submitJl(record) {
-            submitDz();
             // 表格没有数据
             if (record.length === 0) {
                 return true;
@@ -162,11 +160,10 @@
                 case 'SUBMIT':
                     // 修改备注
                     editbz();
-                    submitDz();
-                    // if (record.length === 0) {
-                    //     layer.msg("无数据提交", {time: 1000, icon: 3});
-                    //     return;
-                    // }
+                    if (record.length === 0) {
+                        layer.msg("无数据提交", {time: 1000, icon: 3});
+                        return;
+                    }
                     $.ajax({
                         type: "POST",
                         url: "${basePath}/pwbh_jl_dzjc/updateBatch",              // 改

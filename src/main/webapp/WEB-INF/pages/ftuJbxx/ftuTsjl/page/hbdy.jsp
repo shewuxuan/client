@@ -71,7 +71,7 @@
                         type: "POST",
                         url: "${basePath}/ftu_jl_hbdy/updateBatch",              // 改
                         data: JSON.stringify(record),//必须
-                        contentType: "application/json;charsetset=UTF-8",//必须
+                        contentType: "application/json;charset=UTF-8",//必须
                         dataType: "json",//必须
                         success: function (data) {
                             if (data.code !== 0) {
@@ -114,14 +114,14 @@
                 type: "POST",
                 url: "${basePath}/ftu_beizhu/updateFtuBeizhuByPrimaryKey",
                 data: JSON.stringify(beizhu),//必须
-                contentType: "application/json;charsetset=UTF-8",//必须
+                contentType: "application/json;charset=UTF-8",//必须
                 dataType: "json",//必须
                 success: function (data) {
                 }
             });
         }
 
-        // 提交记录(删除前)
+        // 提交记录(添加/删除前)
         function submitJl(record) {
             // 表格没有数据
             if (record.length === 0) {
@@ -133,7 +133,7 @@
                 async: false,
                 url: "${basePath}/ftu_jl_hbdy/updateBatch",              // 改
                 data: JSON.stringify(record),//必须
-                contentType: "application/json;charsetset=UTF-8",//必须
+                contentType: "application/json;charset=UTF-8",//必须
                 dataType: "json",//必须
                 success: function (result) {
                     clearTimeout(autosave);
@@ -181,7 +181,7 @@
                         type: "POST",
                         url: "${basePath}/ftu_jl_hbdy/updateBatch",              // 改
                         data: JSON.stringify(record),//必须
-                        contentType: "application/json;charsetset=UTF-8",//必须
+                        contentType: "application/json;charset=UTF-8",//必须
                         dataType: "json",//必须
                         success: function (data) {
                             if (data.code === 0) {

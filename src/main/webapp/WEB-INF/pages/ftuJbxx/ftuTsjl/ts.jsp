@@ -74,25 +74,25 @@
             <%-- 1、设备基本信息 --%>
             <%@include file="page/jbxx.jsp" %>
             <%-- 2、开关定值 --%>
-<%--            <%@include file="page/kgdz.jsp" %>--%>
+            <%@include file="page/kgdz.jsp" %>
             <%-- 3、后备电源 --%>
-<%--            <%@include file="page/hbdy.jsp" %>--%>
+            <%@include file="page/hbdy.jsp" %>
             <%-- 4、电流/电压零漂校验 --%>
-<%--            <%@include file="page/lpjy.jsp" %>--%>
+            <%@include file="page/lpjy.jsp" %>
             <%-- 5、采样精度测试（二次值） --%>
-<%--            <%@include file="page/cyjd.jsp" %>--%>
+            <%@include file="page/cyjd.jsp" %>
             <%-- 6、功能调试 --%>
-<%--            <%@include file="page/gncs.jsp" %>--%>
+            <%@include file="page/gncs.jsp" %>
             <%-- 7、跳闸、告警功能调试（通入二次值）--%>
             <%@include file="page/gjts.jsp" %>
             <%-- 8、遥控传动（带模拟开关）--%>
-<%--            <%@include file="page/ykcd.jsp" %>--%>
+            <%@include file="page/ykcd.jsp" %>
             <%-- 9、采样精度测试（一次值）--%>
-<%--            <%@include file="page/cyjdcs.jsp" %>--%>
+            <%@include file="page/cyjdcs.jsp" %>
             <%--10、带开关遥控--%>
-<%--            <%@include file="page/ykkg.jsp" %>--%>
+            <%@include file="page/ykkg.jsp" %>
             <%--11、投运前的检查--%>
-<%--            <%@include file="page/tyjc.jsp" %>--%>
+            <%@include file="page/tyjc.jsp" %>
         </div>
     </div><!-- 体end -->
 
