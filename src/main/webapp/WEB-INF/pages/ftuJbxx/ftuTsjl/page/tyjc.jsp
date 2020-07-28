@@ -228,8 +228,8 @@
 <script type="text/html" id="tyjcjg">
     <select name='select4tyjc' lay-ignore lay-search=''>
         <option value="-1" {{ d.jcjg== -1 ? 'selected' : '' }}></option>
-        <option value="1" {{ d.jcjg== 1 ? 'selected' : '' }}>是</option>
-        <option value="0" {{ d.jcjg== 0 ? 'selected' : '' }}>否</option>
+        <option value="1" {{ d.jcjg== 1 ? 'selected' : '' }}>正确</option>
+        <option value="0" {{ d.jcjg== 0 ? 'selected' : '' }}>错误</option>
         <option value="2" {{ d.jcjg== 2 ? 'selected' : '' }}>N/A</option>
     </select>
 </script>

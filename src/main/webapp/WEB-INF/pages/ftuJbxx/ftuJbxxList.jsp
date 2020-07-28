@@ -112,6 +112,12 @@ function searchList(){
 		window.open("${basePath}/ftuJbxx/ftuTsjl/ts/" + tsid,"_blank");
 	}
 
+	<!-- 查看详细信息 -->
+	function seeFtuJbxx(tsid){
+		var w=window.screen.width/2-950/2;
+		var t=window.screen.height/2-600/2-35;
+		window.open("${ctx}/ftuJbxx/seeTsjl/" + tsid,"_blank");
+	}
 function editFtuJbxx(tsid){
 	var w=window.screen.width/2-950/2;
 	var t=window.screen.height/2-600/2-35;
@@ -191,10 +197,11 @@ $(function(){
 					}},
 				{field:'trans',align:"left",title:'操作',width:80,formatter:function(value,row,index){
 						var txt = '<button href="javascript:void(0);" onclick="ts(\'' + row.TSID + '\')" class="iput_m" style="width: 40px; height: 20px;">' + '调试' + '</button>';
+						var txt1 = '&nbsp;&nbsp;&nbsp;<button href="javascript:void(0);" onclick="seeFtuJbxx(\'' + row.TSID + '\')" class="iput_m" style="width: 40px; height: 20px;">' + '查看' + '</button>';
 						var txt2 = '&nbsp;&nbsp;&nbsp;<button href="javascript:void(0);" onclick="editFtuJbxx(\'' + row.TSID + '\')" class="iput_m" style="width: 40px; height: 20px;">' + '编辑' + '</button>';
 						var txt3 = '&nbsp;&nbsp;&nbsp;<button href="javascript:void(0);" onclick="delFtuJbxx(\'' + row.TSID + '\')" class="iput_m" style="width: 40px; height: 20px;">' + '删除' + '</button>';
 						var txt4 = '&nbsp;&nbsp;&nbsp;<button href="javascript:void(0);" onclick="exportFtuJbxx(\'' + row.TSID + '\')" class="iput_m" style="width: 40px; height: 20px;">' + '导出' + '</button>';
-						return txt+txt2+txt3+txt4;
+						return txt+txt1+txt2+txt3+txt4;
 					}},
 		]],
 	});

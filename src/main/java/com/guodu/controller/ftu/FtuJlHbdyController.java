@@ -62,6 +62,7 @@ public class FtuJlHbdyController {
             map.put("code", 0);
             map.put("msg", "查询完成");
             map.put("data", jlHbdys);
+            map.put("rows", jlHbdys);
         } catch (Exception e) {
             e.printStackTrace();
             map.put("code", -1);

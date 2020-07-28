@@ -17,6 +17,11 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class FtuPageController {
 
+    @RequestMapping("ftuJbxx/{page}/{tsid}")
+    public String ftuJbxx(@PathVariable String page, @PathVariable String tsid, Model model) {
+        model.addAttribute("tsid", tsid);
+        return "ftuJbxx/" + page;
+    }
     /**
      * @MethodName: ftu
      * @Description: TODO ftu ---> ts.jsp

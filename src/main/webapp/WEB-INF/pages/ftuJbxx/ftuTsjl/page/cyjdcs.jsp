@@ -136,7 +136,7 @@
                 type: "POST",
                 url: "${basePath}/ftu_beizhu/updateFtuBeizhuByPrimaryKey",
                 data: JSON.stringify(beizhu),//必须
-                contentType: "application/json;charsetset=UTF-8",//必须
+                contentType: "application/json;charset=UTF-8",//必须
                 dataType: "json",//必须
                 success: function (data) {
                 }

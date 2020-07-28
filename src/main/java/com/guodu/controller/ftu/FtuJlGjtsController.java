@@ -62,6 +62,7 @@ public class FtuJlGjtsController {
             map.put("code", 0);
             map.put("msg", "查询完成");
             map.put("data", jlGjtss);
+            map.put("rows", jlGjtss);
         } catch (Exception e) {
             e.printStackTrace();
             map.put("code", -1);
